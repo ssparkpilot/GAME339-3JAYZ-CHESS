@@ -179,5 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bb8edeaf3376a469d92a5c96a417d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  rb: {fileID: 0}
+  rb: {fileID: 2560228358742029892}
   moveSpeed: 2
