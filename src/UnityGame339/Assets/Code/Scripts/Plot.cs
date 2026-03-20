@@ -49,8 +49,10 @@ public class Plot : MonoBehaviour
         
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         //make the audiosource play at half the volume
+        
         audioSource.volume = 0.5f;
         //play the place sound at the randomized pitch
+        
         audioSource.PlayOneShot(placeSound);
         
         LevelManager.main.SpendCurrency(towerToBuild.cost);
