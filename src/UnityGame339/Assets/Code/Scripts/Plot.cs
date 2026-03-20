@@ -34,7 +34,8 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(EventSystem.current.IsPointerOverGameObject()) return; // fix for preventing tower plotting when clicking on a UI button
+        if(EventSystem.current.IsPointerOverGameObject()) return;
+        // fix for preventing tower plotting when clicking on a UI button
 
         if (tower != null) return;
 
