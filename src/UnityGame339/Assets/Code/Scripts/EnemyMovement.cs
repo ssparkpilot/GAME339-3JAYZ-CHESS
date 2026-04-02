@@ -10,6 +10,9 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform target;
     private int pathIndex = 0;
+
+    private float baseSpeed;
+    
     [Header("Sprites")]
     [SerializeField] private Sprite UpSprite;
     [SerializeField] private Sprite DownSprite;
@@ -18,12 +21,11 @@ public class EnemyMovement : MonoBehaviour
 
     public AudioClip SpawnSound;
 
-    private void Start() {
+    private void Start()
+    {
+        baseSpeed = moveSpeed;
         target = LevelManager.main.path[pathIndex];
-
     }
-
-
     
     private void Update() {
         if (Vector2.Distance(target.position, transform.position) <= 0.1f) {
@@ -68,5 +70,15 @@ public class EnemyMovement : MonoBehaviour
 
         }
         
+    }
+    
+    public void UpdateSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+    public void ResetSpeed()
+    {
+        moveSpeed = baseSpeed;
     }
 }
