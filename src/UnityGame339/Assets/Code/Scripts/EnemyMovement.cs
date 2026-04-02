@@ -16,10 +16,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Sprite LeftSprite;
     [SerializeField] private Sprite RightSprite;
 
+    public AudioClip SpawnSound;
 
     private void Start() {
         target = LevelManager.main.path[pathIndex];
+
     }
+
+
     
     private void Update() {
         if (Vector2.Distance(target.position, transform.position) <= 0.1f) {

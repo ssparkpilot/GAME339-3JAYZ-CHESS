@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5659758003977023849}
   - component: {fileID: -7404800518361013175}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: EnemyFast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2662047777077525649, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}
+  m_Sprite: {fileID: 8327614535933649028, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -181,13 +181,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   rb: {fileID: 2560228358742029892}
-  moveSpeed: 2
-  UpSprite: {fileID: 1418665787400033816, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}
-  DownSprite: {fileID: 2662047777077525649, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}
-  LeftSprite: {fileID: 2164342190854341363, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}
-  RightSprite: {fileID: -7538735574868177705, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}
-  SpawnSound: {fileID: 8300000, guid: ba548a3bd7645e444bb42c49a581d58b, type: 3}
-  DeathSound: {fileID: 8300000, guid: ba548a3bd7645e444bb42c49a581d58b, type: 3}
+  moveSpeed: 5
+  UpSprite: {fileID: 6151586066969877457, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
+  DownSprite: {fileID: 8327614535933649028, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
+  LeftSprite: {fileID: -2109376434188357766, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
+  RightSprite: {fileID: -4355761810314988774, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
+  SpawnSound: {fileID: 8300000, guid: 9c4fcaf3c1595fa48a3332f7e6bef458, type: 3}
 --- !u!114 &-7404800518361013175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +200,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
-  hitPoints: 2
-  currencyWorth: 25
+  hitPoints: 1
+  currencyWorth: 35
   FloatingScorePrefab: {fileID: 8314382623674587284, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}

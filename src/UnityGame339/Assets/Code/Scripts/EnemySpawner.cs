@@ -58,6 +58,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void onEnemyDestroyed(){
         enemiesAlive--;
+        //play the enemy death sound at a random pitch
+        audioSource.pitch = Random.Range(minPitch, maxPitch);
+        //play the prefanb's death sound at the randomized pitch
+        audioSource.PlayOneShot(chudSound); 
+
     }
 
     private IEnumerator StartWave() {
@@ -90,7 +95,7 @@ public class EnemySpawner : MonoBehaviour
         //make the audiosource play at half the volume
         audioSource.volume = 0.75f;
         //play the place sound at the randomized pitch
-        audioSource.PlayOneShot(chudSound);
+        audioSource.PlayOneShot(prefabToSpawn.GetComponent<EnemyMovement>().SpawnSound);
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
 
