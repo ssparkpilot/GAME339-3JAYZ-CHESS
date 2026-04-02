@@ -1,7 +1,15 @@
 using UnityEngine;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Player Stats")]
+    public int playerHealth = 100;
+    private bool isGameOver = false;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text healthText;
+
     public static LevelManager main;
 
     public Transform startPoint;
@@ -35,5 +43,38 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Not enough money");
             return false;
         }
+    }
+
+    public void LoseHealth(int amount)
+    {
+        if (isGameOver)
+        {
+            return;
+        } 
+
+        playerHealth = Mathf.Max(playerHealth - amount, 0);
+
+        UpdateHealthUI();
+
+        Debug.Log("Player Health: " + playerHealth);
+
+        if (playerHealth <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    private void UpdateHealthUI()
+    {
+        if (healthText != null)
+        {
+            healthText.text = playerHealth.ToString();
+        }
+    }
+
+    private void GameOver()
+    {
+        isGameOver = true;
+        Debug.Log("Game Over!");
     }
 }
