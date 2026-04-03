@@ -4187,10 +4187,12 @@ MonoBehaviour:
   - {fileID: 5506774555555138625, guid: 20312ec0fc29ad24ab474202ba34e253, type: 3}
   - {fileID: 5506774555555138625, guid: 20312ec0fc29ad24ab474202ba34e253, type: 3}
   - {fileID: 5506774555555138625, guid: f6a802db164d73840bcec6b7c46e78f3, type: 3}
+  waveText: {fileID: 1675078592}
   baseEnemies: 8
   enemiesPerSecond: 0.5
   timeBetweenWaves: 5
   difficultyScalingFactor: 0.75
+  enemiesPerSecondCap: 15
   audioSource: {fileID: 798997880}
   chudSound: {fileID: 8300000, guid: 9385e00179fe1af499de6862cda7f4d7, type: 3}
   startSound: {fileID: 8300000, guid: 87b95e059cfba3f4582c112ad3157b71, type: 3}
@@ -10205,7 +10207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: N
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

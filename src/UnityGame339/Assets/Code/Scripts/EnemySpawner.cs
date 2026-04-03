@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private TMP_Text waveText;
 
     [Header("Attributes")]
     [SerializeField] private int baseEnemies = 8;
@@ -16,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
-
+    
     private int currentWave = 1;
     private float timeSinceLastSpawn;
     private int enemiesAlive;
@@ -62,6 +64,15 @@ public class EnemySpawner : MonoBehaviour
             EndWave();
         }
     }
+    
+    private void UpdateWaveUI()
+    {
+        if (waveText != null)
+        {
+            waveText.text = currentWave.ToString();
+            Debug.Log("Wave: " + currentWave);
+        }
+    }
 
     private void onEnemyDestroyed()
     {
@@ -93,13 +104,15 @@ public class EnemySpawner : MonoBehaviour
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;
-        StartCoroutine(StartWave());
+        UpdateWaveUI();
         
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         //make the audiosource play at half the volume
         audioSource.volume = 0.5f;
         //play the place sound at the randomized pitch
         audioSource.PlayOneShot(endSound);
+        
+        StartCoroutine(StartWave());
     }
 
     private void SpawnEnemy()

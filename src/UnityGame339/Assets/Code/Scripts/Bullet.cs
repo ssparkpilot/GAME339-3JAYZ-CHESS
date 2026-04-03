@@ -16,9 +16,13 @@ public class Bullet : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        if (!target) return;
+        if (!target)
+        {
+            // Destroy(gameObject); Use this if don't want projectiles to fly away
+            return;
+        }
+        
         Vector2 direction = (target.position - transform.position).normalized;
-
         rb.linearVelocity = direction * bulletSpeed;
     }
 
