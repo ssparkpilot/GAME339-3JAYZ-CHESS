@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
 
         rb.linearVelocity = direction * moveSpeed;
-        Debug.Log("direction X: " + direction.x + ", direction Y: " + direction.y);
+        //Debug.Log("direction X: " + direction.x + ", direction Y: " + direction.y);
 
         //change the sprite based on the direction
         if (Mathf.RoundToInt(direction.y) < 0&& Mathf.RoundToInt(direction.x) == 0)
