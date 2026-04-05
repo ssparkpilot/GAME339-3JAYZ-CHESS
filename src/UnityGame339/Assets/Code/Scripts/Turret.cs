@@ -24,6 +24,10 @@ public class Turret : MonoBehaviour
 
 
     private void Update(){
+        if (LevelManager.main.isGameOver){
+            return;
+        }
+        
         if(target == null){
             FindTarget();
             return;
