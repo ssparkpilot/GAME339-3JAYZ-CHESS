@@ -1,14 +1,16 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     [Header("Player Stats")]
     public int playerHealth = 100;
-    private bool isGameOver = false;
+    public bool isGameOver = false;
 
     [Header("UI")]
     [SerializeField] private TMP_Text healthText;
+    [SerializeField] private GameObject gameOverCanvas;
 
     public static LevelManager main;
 
@@ -76,5 +78,19 @@ public class LevelManager : MonoBehaviour
     {
         isGameOver = true;
         Debug.Log("Game Over!");
+        
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
+    }
+
+    // Had to get a little bit of help from chatGPT since I haven't worked with canvas switching stuff in a hto minute
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
