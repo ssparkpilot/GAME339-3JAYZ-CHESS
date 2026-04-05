@@ -25,16 +25,20 @@ public class Plot : MonoBehaviour
     
     private void OnMouseEnter()
     {
+        if (LevelManager.main.isGameOver) return;
         sr.color = hoverColor;
     }
 
     private void OnMouseExit()
     {
+        if (LevelManager.main.isGameOver) return;
         sr.color = startColor;
     }
 
     private void OnMouseDown()
     {
+        if (LevelManager.main.isGameOver) return;   
+
         if(EventSystem.current.IsPointerOverGameObject()) return;
         // fix for preventing tower plotting when clicking on a UI button
 

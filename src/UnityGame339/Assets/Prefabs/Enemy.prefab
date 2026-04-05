@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   rb: {fileID: 2560228358742029892}
   moveSpeed: 2
+  damage: 15
   UpSprite: {fileID: 1418665787400033816, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}
   DownSprite: {fileID: 2662047777077525649, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}
   LeftSprite: {fileID: 2164342190854341363, guid: 5aadd89d54d37334a80d13bb288d5047, type: 3}

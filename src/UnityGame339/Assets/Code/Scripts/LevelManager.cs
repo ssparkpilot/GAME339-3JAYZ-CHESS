@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TMP_Text healthText;
+    [SerializeField] private GameObject gameOverCanvas;
 
     public static LevelManager main;
 
@@ -76,6 +78,18 @@ public class LevelManager : MonoBehaviour
     {
         isGameOver = true;
         Debug.Log("Game Over!");
+        
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(true);
+        }
+
         Time.timeScale = 0f;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
