@@ -8,7 +8,8 @@ public class Plot : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
     
-    private GameObject tower;
+    public GameObject towerObj;
+    public Turret turret;
     private Color startColor;
     public AudioSource audioSource;
     public AudioClip placeSound;
@@ -37,12 +38,18 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //if (UIManager.main.IsHoveringUI()) return; // fix for preventing tower plotting when using upgrade UI
+        // not needed
+        
         if (LevelManager.main.isGameOver) return;   
 
-        if(EventSystem.current.IsPointerOverGameObject()) return;
-        // fix for preventing tower plotting when clicking on a UI button
+        if(EventSystem.current.IsPointerOverGameObject()) return; // fix for preventing tower plotting when clicking on a UI button
 
-        if (tower != null) return;
+        if (towerObj != null)
+        {
+            turret.OpenUpgradeUI();
+            return;
+        }
 
         Tower towerToBuild = BuildManager.main.GetSelectedTower();
 
@@ -69,6 +76,7 @@ public class Plot : MonoBehaviour
         
         LevelManager.main.SpendCurrency(towerToBuild.cost);
         
-        tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+        towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+        turret = towerObj.GetComponent<Turret>();
     }
 }
