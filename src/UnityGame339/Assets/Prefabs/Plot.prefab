@@ -157,6 +157,8 @@ MonoBehaviour:
   validColor: {r: 0, g: 1, b: 0, a: 0.5529412}
   invalidColor: {r: 1, g: 0, b: 0, a: 0.5529412}
   unaffordableColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5529412}
+  floatingTextPrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
+  floatingTextOffset: {x: 0, y: 0.5, z: 0}
   towerObj: {fileID: 0}
   turret: {fileID: 0}
   audioSource: {fileID: -3203710176511972389}

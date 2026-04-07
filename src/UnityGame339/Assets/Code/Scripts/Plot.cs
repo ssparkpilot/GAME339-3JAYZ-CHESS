@@ -13,6 +13,10 @@ public class Plot : MonoBehaviour
     [SerializeField] private Color invalidColor = Color.red;
     [SerializeField] private Color unaffordableColor = Color.gray;
     
+    [Header("Floating Text")]
+    [SerializeField] private FloatingText floatingTextPrefab;
+    [SerializeField] private Vector3 floatingTextOffset = new Vector3(0f, 0.5f, 0f);
+    
     public GameObject towerObj;
     public Turret turret;
     private Color startColor;
@@ -82,6 +86,8 @@ public class Plot : MonoBehaviour
 
             int refund = GetSellValue();
             LevelManager.main.AddCurrency(refund);
+            
+            SpawnFloatingText(refund);
 
             Destroy(towerObj);
             towerObj = null;
@@ -222,5 +228,19 @@ public class Plot : MonoBehaviour
             return 0;
 
         return baseTower.cost / 2; // returns half tower cost
+    }
+    
+    private void SpawnFloatingText(int amount)
+    {
+        if (floatingTextPrefab == null)
+            return;
+
+        FloatingText ft = Instantiate(
+            floatingTextPrefab,
+            transform.position + floatingTextOffset,
+            Quaternion.identity
+        );
+
+        ft.SetText(amount);
     }
 }
