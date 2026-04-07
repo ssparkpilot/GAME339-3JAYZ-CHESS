@@ -32,6 +32,18 @@ public class Plot : MonoBehaviour
     private void OnMouseEnter()
     {
         if (LevelManager.main.isGameOver) return;
+        
+        
+        if (BuildManager.main.CurrentMode == BuildMode.Shovel)
+        {
+            if (towerObj != null)
+                sr.color = unaffordableColor;
+            else
+                sr.color = startColor;
+
+            return;
+        }
+
 
         if (BuildManager.main.GetSelectedTower() == null)
         {
@@ -62,6 +74,25 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // shovel logic
+        if (BuildManager.main.CurrentMode == BuildMode.Shovel)
+        {
+            if (towerObj == null)
+                return;
+
+            int refund = GetSellValue();
+            LevelManager.main.AddCurrency(refund);
+
+            Destroy(towerObj);
+            towerObj = null;
+            turret = null;
+
+            audioSource.PlayOneShot(placeSound);
+
+            sr.color = startColor;
+            return;
+        }
+
         if (LevelManager.main.isGameOver) return;
         if (EventSystem.current.IsPointerOverGameObject()) return;
         
@@ -182,5 +213,14 @@ public class Plot : MonoBehaviour
     private void ResetPlotColor()
     {
         sr.color = startColor;
+    }
+    
+    private int GetSellValue()
+    {
+        Tower baseTower = BuildManager.main.GetTowerByIndex(turret.towerIndex);
+        if (baseTower == null)
+            return 0;
+
+        return baseTower.cost / 2; // returns half tower cost
     }
 }

@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum BuildMode
+{
+    None,
+    PlaceTower,
+    Shovel
+}
+
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager main;
@@ -22,19 +29,6 @@ public class BuildManager : MonoBehaviour
             return null;
 
         return towers[selectedTower];
-    }
-
-    public void SetSelectedTower(int index)
-    {
-        selectedTower = index;
-
-        // remove old ghost
-        if (previewTower != null)
-            Destroy(previewTower);
-
-        // create ghost
-        previewTower = Instantiate(towers[index].prefab);
-        DisablePreview(previewTower);
     }
 
     private void Update()
@@ -97,4 +91,39 @@ public class BuildManager : MonoBehaviour
 
         return towers[index];
     }
+    
+    public BuildMode CurrentMode { get; private set; } = BuildMode.None;
+    
+    
+    public void SetSelectedTower(int index)
+    {
+        ClearPreview();
+
+        selectedTower = index;
+        CurrentMode = BuildMode.PlaceTower;
+
+        previewTower = Instantiate(towers[index].prefab);
+        DisablePreview(previewTower);
+    }
+
+    public void SelectShovel()
+    {
+        ClearPreview();
+        selectedTower = -1;
+        CurrentMode = BuildMode.Shovel;
+    }
+    
+    public void ClearSelection()
+    {
+        ClearPreview();
+        selectedTower = -1;
+        CurrentMode = BuildMode.None;
+    }
+
+    private void ClearPreview()
+    {
+        if (previewTower != null)
+            Destroy(previewTower);
+    }
+
 }
