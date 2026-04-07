@@ -8,7 +8,13 @@ public class Plot : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
     
-    private GameObject tower;
+    [Header("Placement Colors")]
+    [SerializeField] private Color validColor = Color.green;
+    [SerializeField] private Color invalidColor = Color.red;
+    [SerializeField] private Color unaffordableColor = Color.gray;
+    
+    public GameObject towerObj;
+    public Turret turret;
     private Color startColor;
     public AudioSource audioSource;
     public AudioClip placeSound;
@@ -26,49 +32,195 @@ public class Plot : MonoBehaviour
     private void OnMouseEnter()
     {
         if (LevelManager.main.isGameOver) return;
-        sr.color = hoverColor;
+        
+        
+        if (BuildManager.main.CurrentMode == BuildMode.Shovel)
+        {
+            if (towerObj != null)
+                sr.color = unaffordableColor;
+            else
+                sr.color = startColor;
+
+            return;
+        }
+
+
+        if (BuildManager.main.GetSelectedTower() == null)
+        {
+            ResetPlotColor();
+            return;
+        }
+
+        if (!IsCorrectPlacementType())
+        {
+            sr.color = invalidColor; // invalid upgrade
+            return;
+        }
+
+        if (!CanAffordPlacement())
+        {
+            sr.color = unaffordableColor;
+            return;
+        }
+
+        sr.color = validColor;
     }
 
     private void OnMouseExit()
     {
         if (LevelManager.main.isGameOver) return;
-        sr.color = startColor;
+        ResetPlotColor();
     }
 
     private void OnMouseDown()
     {
-        if (LevelManager.main.isGameOver) return;   
-
-        if(EventSystem.current.IsPointerOverGameObject()) return;
-        // fix for preventing tower plotting when clicking on a UI button
-
-        if (tower != null) return;
-
-        Tower towerToBuild = BuildManager.main.GetSelectedTower();
-
-        if (towerToBuild.cost > LevelManager.main.currency)
+        // shovel logic
+        if (BuildManager.main.CurrentMode == BuildMode.Shovel)
         {
-            Debug.Log("You are a broke chud!");
-            audioSource.pitch = Random.Range(minPitch, maxPitch);
-        //make the audiosource play at half the volume
-        
-        audioSource.volume = 0.5f;
-        //play the place sound at the randomized pitch
-        
-        audioSource.PlayOneShot(cantplaceSound);
+            if (towerObj == null)
+                return;
+
+            int refund = GetSellValue();
+            LevelManager.main.AddCurrency(refund);
+
+            Destroy(towerObj);
+            towerObj = null;
+            turret = null;
+
+            audioSource.PlayOneShot(placeSound);
+
+            sr.color = startColor;
             return;
         }
+
+        if (LevelManager.main.isGameOver) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         
-        audioSource.pitch = Random.Range(minPitch, maxPitch);
-        //make the audiosource play at half the volume
-        
-        audioSource.volume = 0.5f;
-        //play the place sound at the randomized pitch
-        
+        if (BuildManager.main.GetSelectedTower() != null)
+        {
+            if (!IsCorrectPlacementType() || !CanAffordPlacement())
+            {
+                audioSource.PlayOneShot(cantplaceSound);
+                return;
+            }
+        }
+
+        Tower selectedTowerData = BuildManager.main.GetSelectedTower();
+
+        // If plot has tower already
+        if (towerObj != null)
+        {
+            // if no tower selected then open upgrade UI
+            if (selectedTowerData == null)
+            {
+                //turret.OpenUpgradeUI();
+                return;
+            }
+
+            int selectedIndex = BuildManager.main.SelectedTowerIndex;
+            int currentIndex = turret.towerIndex;
+
+            // if same tower then replace with upgraded tower
+            if (selectedIndex == currentIndex && currentIndex % 2 == 0)
+            {
+                int upgradeIndex = currentIndex + 1;
+
+                // check
+                if (upgradeIndex >= BuildManager.main.TowerCount)
+                    return;
+
+                Tower upgradeTower = BuildManager.main.GetTowerByIndex(upgradeIndex);
+                if (upgradeTower == null) return;
+
+                if (upgradeTower.cost > LevelManager.main.currency)
+                {
+                    audioSource.PlayOneShot(cantplaceSound);
+                    return;
+                }
+
+                LevelManager.main.SpendCurrency(upgradeTower.cost);
+
+                Destroy(towerObj);
+
+                BuildManager.main.SetSelectedTower(upgradeIndex);
+                towerObj = BuildManager.main.PlaceTower(transform.position);
+                turret = towerObj.GetComponent<Turret>();
+
+                audioSource.PlayOneShot(placeSound);
+                ResetPlotColor();
+            }
+
+            return;
+        }
+
+        // empty plot
+        if (selectedTowerData == null) return;
+
+        if (selectedTowerData.cost > LevelManager.main.currency)
+        {
+            audioSource.PlayOneShot(cantplaceSound);
+            return;
+        }
+
+        LevelManager.main.SpendCurrency(selectedTowerData.cost);
+
+        towerObj = BuildManager.main.PlaceTower(transform.position);
+        turret = towerObj.GetComponent<Turret>();
+
         audioSource.PlayOneShot(placeSound);
+        ResetPlotColor();
+    }
+    
+    private bool IsCorrectPlacementType()
+    {
+        Tower selectedTower = BuildManager.main.GetSelectedTower();
+        if (selectedTower == null)
+            return false;
         
-        LevelManager.main.SpendCurrency(towerToBuild.cost);
+        if (towerObj == null)
+            return true;
         
-        tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+        int selectedIndex = BuildManager.main.SelectedTowerIndex;
+        int currentIndex = turret.towerIndex;
+
+        return selectedIndex == currentIndex && currentIndex % 2 == 0;
+    }
+
+    private int GetRequiredCost()
+    {
+        Tower selectedTower = BuildManager.main.GetSelectedTower();
+        if (selectedTower == null)
+            return int.MaxValue;
+
+        // empty plot
+        if (towerObj == null)
+            return selectedTower.cost;
+
+        // upgrade tower
+        int upgradeIndex = turret.towerIndex + 1;
+        Tower upgradeTower = BuildManager.main.GetTowerByIndex(upgradeIndex);
+        if (upgradeTower == null)
+            return int.MaxValue;
+
+        return upgradeTower.cost;
+    }
+
+    private bool CanAffordPlacement()
+    {
+        return LevelManager.main.currency >= GetRequiredCost();
+    }
+    
+    private void ResetPlotColor()
+    {
+        sr.color = startColor;
+    }
+    
+    private int GetSellValue()
+    {
+        Tower baseTower = BuildManager.main.GetTowerByIndex(turret.towerIndex);
+        if (baseTower == null)
+            return 0;
+
+        return baseTower.cost / 2; // returns half tower cost
     }
 }

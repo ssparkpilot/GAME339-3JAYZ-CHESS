@@ -11,14 +11,20 @@ public class Bullet : MonoBehaviour
 
     private Transform target;
     
-    public void SetTarget(Transform _target){
+    public float DelayInSeconds = 10f;
+    
+    public void SetTarget(Transform _target)
+    {
         target = _target;
     }
 
-    private void FixedUpdate(){
+    private void FixedUpdate()
+    {
         if (!target)
         {
             // Destroy(gameObject); Use this if don't want projectiles to fly away
+            
+            Destroy(gameObject, DelayInSeconds);
             return;
         }
         

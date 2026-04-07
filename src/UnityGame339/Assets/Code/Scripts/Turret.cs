@@ -1,27 +1,51 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
-public class Turret : MonoBehaviour
+public class Turret : DeathEffectObject
 {
     [Header("References")]
-    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] public LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
 
     [Header("Attribute")]
-    [SerializeField] private float targetingRange = 3f;
+    [SerializeField] public float targetingRange = 3f;
     [SerializeField] private float bps = 1f; // bullets per second
+    [SerializeField] public float aps = 4f; // attacks per second
+    [SerializeField] public float mps = 4f; // money per second
+    [SerializeField] private int baseUpgradeCost = 100;
+    [SerializeField] private float targetingRangeBase;
 
+    public int towerIndex;
+    
+    private float bpsBase;
+    private float apsBase;
+    private float mpsBase;
+    
     private Transform target;
-    private float timeUntilFire;
+    public float timeUntilFire;
+
+    private int level = 1; // tower upgrade level
 
     public AudioSource audioSource;
     public AudioClip placeSound;
-
-
+    
     public float minPitch = 0.8f;
     public float maxPitch = 1.2f;
 
+    private void Start()
+    {
+        bpsBase = bps;
+        apsBase = aps;
+        mpsBase = mps;
+        
+        targetingRangeBase = targetingRange;
+        
+        upgradeButton.onClick.AddListener(Upgrade);
+    }
 
     private void Update(){
         if (LevelManager.main.isGameOver){
@@ -45,10 +69,12 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private void Shoot(){
+    private void Shoot()
+    {
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
+        
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         //make the audiosource play at half the volume
         audioSource.volume = 0.25f;
@@ -56,7 +82,8 @@ public class Turret : MonoBehaviour
         audioSource.PlayOneShot(placeSound);
     }
 
-    private void FindTarget(){
+    private void FindTarget()
+    {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, Vector2.zero, 0f, enemyMask);
 
         if (hits.Length > 0){
@@ -66,6 +93,63 @@ public class Turret : MonoBehaviour
 
     private bool CheckTargetIsInRange() {
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
+    }
+
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.SetActive(true);
+    }
+
+    public void CloseUpgradeUI()
+    {
+        upgradeUI.SetActive(false);
+        UIManager.main.SetHoveringState(false);
+    }
+
+    public void Upgrade()
+    {
+        if (CalculateCost() > LevelManager.main.currency) return;
+        
+        LevelManager.main.SpendCurrency(CalculateCost());
+
+        level++;
+
+        bps = CalculateBPS();
+        aps = CalculateAPS();
+        mps = CalculateMPS();
+        
+        targetingRange = CalculateRange();
+        
+        CloseUpgradeUI();
+        Debug.Log("New level: " + level);
+        Debug.Log("New BPS: " + bps);
+        Debug.Log("New targeting range: " + targetingRange);
+        Debug.Log("New cost: " + CalculateCost());
+    }
+
+    private int CalculateCost()
+    {
+        return Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(level, 0.8f));
+    }
+
+    private float CalculateBPS()
+    {
+        return bpsBase * Mathf.Pow(level, 0.6f);
+    }
+    
+    private float CalculateAPS()
+    {
+        return apsBase * Mathf.Pow(level, 0.6f);
+    }
+    
+    private float CalculateMPS()
+    {
+        return mpsBase * Mathf.Pow(level, 0.6f);
+    }
+
+    private float CalculateRange()
+    {
+        return targetingRangeBase * Mathf.Pow(level, 0.4f);
     }
 
     private void OnDrawGizmosSelected(){
