@@ -93,4 +93,9 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    
+    public void AddCurrency(int amount)
+    {
+        currency += amount;
+    }
 }

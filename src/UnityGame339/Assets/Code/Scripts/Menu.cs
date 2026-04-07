@@ -19,9 +19,9 @@ public class Menu : MonoBehaviour
     {
         currencyUI.text = LevelManager.main.currency.ToString();
     }
-
-    public void SetSelectedTower()
+    
+    public void OnShovelButton()
     {
-        
+        BuildManager.main.SelectShovel();
     }
 }
