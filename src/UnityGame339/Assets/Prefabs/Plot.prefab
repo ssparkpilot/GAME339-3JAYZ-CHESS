@@ -161,9 +161,11 @@ MonoBehaviour:
   turret: {fileID: 0}
   audioSource: {fileID: -3203710176511972389}
   placeSound: {fileID: 8300000, guid: 47cf293be2345a94eb8fdf7a59f7cd2e, type: 3}
+  digSound: {fileID: 8300000, guid: 85d59ae152e49eb4ea141c36e33b71db, type: 3}
   cantplaceSound: {fileID: 8300000, guid: b51b4d592b3cd124a980ff2033de3b6a, type: 3}
   minPitch: 0.8
   maxPitch: 1.2
+  DialoguePrefab: {fileID: 8314382623674587284, guid: a231c23a1331d2342a82e928e206f6e3, type: 3}
 --- !u!82 &-3203710176511972389
 AudioSource:
   m_ObjectHideFlags: 0

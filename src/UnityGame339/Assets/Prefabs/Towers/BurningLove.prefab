@@ -432,12 +432,14 @@ MonoBehaviour:
   firingPoint: {fileID: 8707586273053261682}
   upgradeUI: {fileID: 5315144331807464256}
   upgradeButton: {fileID: 2085787843895623269}
+  dialoguePrefab: {fileID: 8314382623674587284, guid: a231c23a1331d2342a82e928e206f6e3, type: 3}
   targetingRange: 6
   bps: 1
   aps: 4
   mps: 4
   baseUpgradeCost: 100
   targetingRangeBase: 0
+  towerIndex: 0
   timeUntilFire: 0
   audioSource: {fileID: -3606861136716726509}
   placeSound: {fileID: 8300000, guid: fbb5178c9f4c5f24fa82e45efca4abd3, type: 3}
