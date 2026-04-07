@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class EconomyTower : DeathEffectObject
+public class EconomyTower : Turret
 {
     [Header("Attribute")]
-    [SerializeField] private float mps = 4f; // money per second
     [SerializeField] private int currencyWorth = 10;
     
     public GameObject FloatingScorePrefab;
-    
-    private float timeUntilFire;
     
     void Update()
     {

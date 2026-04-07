@@ -4552,6 +4552,7 @@ GameObject:
   - component: {fileID: 798997878}
   - component: {fileID: 798997879}
   - component: {fileID: 798997880}
+  - component: {fileID: 798997881}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -4756,6 +4757,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &798997881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798997875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28f33ca8a6e264d7f9381ee4e421a2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
 --- !u!1001 &825826662
 PrefabInstance:
   m_ObjectHideFlags: 0
