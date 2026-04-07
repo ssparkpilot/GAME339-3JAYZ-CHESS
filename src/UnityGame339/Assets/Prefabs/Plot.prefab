@@ -154,6 +154,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   sr: {fileID: 7523227071624523042}
   hoverColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 0.19607843}
+  validColor: {r: 0, g: 1, b: 0, a: 0.5529412}
+  invalidColor: {r: 1, g: 0, b: 0, a: 0.5529412}
+  unaffordableColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5529412}
+  towerObj: {fileID: 0}
+  turret: {fileID: 0}
   audioSource: {fileID: -3203710176511972389}
   placeSound: {fileID: 8300000, guid: 47cf293be2345a94eb8fdf7a59f7cd2e, type: 3}
   cantplaceSound: {fileID: 8300000, guid: b51b4d592b3cd124a980ff2033de3b6a, type: 3}

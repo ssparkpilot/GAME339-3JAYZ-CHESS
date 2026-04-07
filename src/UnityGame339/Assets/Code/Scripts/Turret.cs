@@ -19,6 +19,8 @@ public class Turret : DeathEffectObject
     [SerializeField] private int baseUpgradeCost = 100;
     [SerializeField] private float targetingRangeBase;
 
+    public int towerIndex;
+    
     private float bpsBase;
     private float apsBase;
     private float mpsBase;

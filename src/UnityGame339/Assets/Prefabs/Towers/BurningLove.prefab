@@ -424,6 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edb93f56103a944dafbf5de6b3f1e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  EffectPrefab: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
@@ -433,6 +434,11 @@ MonoBehaviour:
   upgradeButton: {fileID: 2085787843895623269}
   targetingRange: 6
   bps: 1
+  aps: 4
+  mps: 4
+  baseUpgradeCost: 100
+  targetingRangeBase: 0
+  timeUntilFire: 0
   audioSource: {fileID: -3606861136716726509}
   placeSound: {fileID: 8300000, guid: fbb5178c9f4c5f24fa82e45efca4abd3, type: 3}
   minPitch: 0.8
