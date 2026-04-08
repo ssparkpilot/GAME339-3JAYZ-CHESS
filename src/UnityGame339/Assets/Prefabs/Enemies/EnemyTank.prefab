@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   rb: {fileID: 2560228358742029892}
   moveSpeed: 1
+  damage: 15
   UpSprite: {fileID: -744504126, guid: 20ffd0173964ec549959207f733b0ce1, type: 3}
   DownSprite: {fileID: 1625431043, guid: 20ffd0173964ec549959207f733b0ce1, type: 3}
   LeftSprite: {fileID: -1044967522443427281, guid: 20ffd0173964ec549959207f733b0ce1, type: 3}
@@ -202,4 +203,6 @@ MonoBehaviour:
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
   hitPoints: 8
   currencyWorth: 50
+  coinDropChance: 0.25
+  coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
   FloatingScorePrefab: {fileID: 8314382623674587284, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
