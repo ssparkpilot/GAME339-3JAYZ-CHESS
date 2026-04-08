@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4766773769910150475}
   - component: {fileID: 6124854123813985992}
   - component: {fileID: 3479567309642932191}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TowerDialogueFloater
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5818800042018071548}
   - component: {fileID: 6173107996845938630}
   - component: {fileID: -4766773769910150475}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ScoreFloater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8314382623674587284}
-  m_Text: + 10
+  m_Text: + 30
   m_OffsetZ: 0
   m_CharacterSize: 0.4
   m_LineSpacing: 1
@@ -142,8 +142,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8314382623674587284}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1709485065
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
