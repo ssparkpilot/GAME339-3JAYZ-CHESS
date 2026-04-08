@@ -187,7 +187,7 @@ MonoBehaviour:
   DownSprite: {fileID: 8327614535933649028, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
   LeftSprite: {fileID: -2109376434188357766, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
   RightSprite: {fileID: -4355761810314988774, guid: 51e517750cfbf5b4a97e837b85db03e6, type: 3}
-  SpawnSound: {fileID: 8300000, guid: 9c4fcaf3c1595fa48a3332f7e6bef458, type: 3}
+  SpawnSound: {fileID: 8300000, guid: 744f842f7830b9f48b7d8d2321fa0fc2, type: 3}
 --- !u!114 &-7404800518361013175
 MonoBehaviour:
   m_ObjectHideFlags: 0

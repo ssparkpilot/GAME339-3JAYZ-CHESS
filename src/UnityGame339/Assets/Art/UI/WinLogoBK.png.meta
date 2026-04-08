@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: d57ed29315c9dcb43a491a3c6c607056
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8702454382233712897
+    second: WinLogoBK_0
+  - first:
+      213: -3205699535228509384
+    second: WinLogoBK_1
+  - first:
+      213: 2529431344946968795
+    second: WinLogoBK_2
+  - first:
+      213: -5679864989263713372
+    second: WinLogoBK_3
+  - first:
+      213: 8431478790670638557
+    second: WinLogoBK_4
+  - first:
+      213: -75075486745660520
+    second: WinLogoBK_5
+  - first:
+      213: -9073600993222475482
+    second: WinLogoBK_6
+  - first:
+      213: -7647028051931332706
+    second: WinLogoBK_7
+  - first:
+      213: -504792857149373064
+    second: WinLogoBK_8
+  - first:
+      213: 8418956021222523768
+    second: WinLogoBK_9
+  - first:
+      213: 6830461622332801148
+    second: WinLogoBK_10
+  - first:
+      213: 7603633759402381215
+    second: WinLogoBK_11
+  - first:
+      213: -8851045692661390633
+    second: WinLogoBK_12
+  - first:
+      213: 5561662252611813740
+    second: WinLogoBK_13
+  - first:
+      213: 551948229688744034
+    second: WinLogoBK_14
+  - first:
+      213: -3039753437962603348
+    second: WinLogoBK_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WinLogoBK_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 39
+        width: 34
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 109f41f272455c870800000000000000
+      internalID: 8702454382233712897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 51
+        width: 28
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 833e11ad1411383d0800000000000000
+      internalID: -3205699535228509384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 49
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd87d4f18685a1320800000000000000
+      internalID: 2529431344946968795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_3
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 49
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ab22cea2e01d21b0800000000000000
+      internalID: -5679864989263713372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_4
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 49
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dddd929c941a20570800000000000000
+      internalID: 8431478790670638557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_5
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 49
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8937f291e3745fef0800000000000000
+      internalID: -75075486745660520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_6
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 49
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 621c75d78f7141280800000000000000
+      internalID: -9073600993222475482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_7
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 48
+        width: 57
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9f7f21a08c40e590800000000000000
+      internalID: -7647028051931332706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_8
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 20
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8750578229d9ef8f0800000000000000
+      internalID: -504792857149373064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_9
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 20
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 873ca9055e326d470800000000000000
+      internalID: 8418956021222523768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_10
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 20
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c70c51bf7acaace50800000000000000
+      internalID: 6830461622332801148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_11
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 20
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9fc85f4e98858960800000000000000
+      internalID: 7603633759402381215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_12
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 20
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d2aa2e56d4ca2580800000000000000
+      internalID: -8851045692661390633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_13
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 20
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6140af0a5efe2d40800000000000000
+      internalID: 5561662252611813740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_14
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 20
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 268d0059df9e8a700800000000000000
+      internalID: 551948229688744034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WinLogoBK_15
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 20
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca4777d7a50a0d5d0800000000000000
+      internalID: -3039753437962603348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      WinLogoBK_0: 8702454382233712897
+      WinLogoBK_1: -3205699535228509384
+      WinLogoBK_10: 6830461622332801148
+      WinLogoBK_11: 7603633759402381215
+      WinLogoBK_12: -8851045692661390633
+      WinLogoBK_13: 5561662252611813740
+      WinLogoBK_14: 551948229688744034
+      WinLogoBK_15: -3039753437962603348
+      WinLogoBK_2: 2529431344946968795
+      WinLogoBK_3: -5679864989263713372
+      WinLogoBK_4: 8431478790670638557
+      WinLogoBK_5: -75075486745660520
+      WinLogoBK_6: -9073600993222475482
+      WinLogoBK_7: -7647028051931332706
+      WinLogoBK_8: -504792857149373064
+      WinLogoBK_9: 8418956021222523768
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
