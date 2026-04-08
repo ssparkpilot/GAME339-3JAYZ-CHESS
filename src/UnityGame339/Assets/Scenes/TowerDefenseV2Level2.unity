@@ -4658,12 +4658,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   enemyPrefabs:
-  - {fileID: 5506774555555138625, guid: 3fb0ce63b036da847bc22a8d231d24ab, type: 3}
-  - {fileID: 5506774555555138625, guid: 3fb0ce63b036da847bc22a8d231d24ab, type: 3}
-  - {fileID: 5506774555555138625, guid: 3fb0ce63b036da847bc22a8d231d24ab, type: 3}
-  - {fileID: 5506774555555138625, guid: 20312ec0fc29ad24ab474202ba34e253, type: 3}
-  - {fileID: 5506774555555138625, guid: 20312ec0fc29ad24ab474202ba34e253, type: 3}
-  - {fileID: 5506774555555138625, guid: f6a802db164d73840bcec6b7c46e78f3, type: 3}
+  - {fileID: 5506774555555138625, guid: a59c92e53e66b99429ebddb3fdd4130c, type: 3}
+  - {fileID: 5506774555555138625, guid: a59c92e53e66b99429ebddb3fdd4130c, type: 3}
+  - {fileID: 5506774555555138625, guid: a59c92e53e66b99429ebddb3fdd4130c, type: 3}
+  - {fileID: 5506774555555138625, guid: 1aee96ffd1ac87b4199280781ed7ffd0, type: 3}
+  - {fileID: 5506774555555138625, guid: 1aee96ffd1ac87b4199280781ed7ffd0, type: 3}
+  - {fileID: 5506774555555138625, guid: 62cf4b6144b15714fb9bfc2b82067e03, type: 3}
   waveText: {fileID: 1675078592}
   baseEnemies: 8
   enemiesPerSecond: 0.25
@@ -13310,7 +13310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9559748, g: 0.38063043, b: 0.06914275, a: 1}
+  m_Color: {r: 1, g: 0.82733834, b: 0.7411765, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
