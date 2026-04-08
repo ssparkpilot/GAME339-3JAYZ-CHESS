@@ -264,4 +264,28 @@ public class Plot : MonoBehaviour
 
         ft.SetText(amount);
     }
+    
+    private void InstantiateDialogueLove()
+    {
+        GameObject DialogueFloater = Instantiate(DialoguePrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        DialogueFloater.GetComponent<FloatLove>().SetTextLove();
+    }
+
+    private void InstantiateDialogueCant()
+    {
+        GameObject DialogueFloater = Instantiate(DialoguePrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        DialogueFloater.GetComponent<FloatLove>().SetTextCant();
+    }
+
+    private void InstantiateDialoguePoor()
+    {
+        GameObject DialogueFloater = Instantiate(DialoguePrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        DialogueFloater.GetComponent<FloatLove>().SetTextPoor();
+    }
+
+    private void InstantiateDialogueNew()
+    {
+        GameObject DialogueFloater = Instantiate(DialoguePrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        DialogueFloater.GetComponent<FloatLove>().SetTextNew();
+    }
 }
