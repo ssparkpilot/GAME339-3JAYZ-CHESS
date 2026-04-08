@@ -119,6 +119,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         currentWave++;
+        UpdateWaveUI();
         
         StartCoroutine(StartWave());
     }
