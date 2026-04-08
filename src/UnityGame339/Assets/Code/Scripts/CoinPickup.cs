@@ -4,6 +4,7 @@ public class CoinPickup : DeathEffectObject
 {
     [SerializeField] private int currencyWorth = 100;
     [SerializeField] private AudioClip pickupSound;
+    [SerializeField] private float autoPickupDelay = 25;
     
     public GameObject FloatingScorePrefab;
 
@@ -21,5 +22,38 @@ public class CoinPickup : DeathEffectObject
             AudioSource.PlayClipAtPoint(pickupSound, transform.position);
         
         Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        Invoke(nameof(AutoPickup), autoPickupDelay);
+    }
+
+    private void AutoPickup()
+    {
+        //LevelManager.main.IncreaseCurrency(currencyWorth);
+        Destroy(gameObject); // for now will destroy when goes offscreen
+    }
+    
+    private void Update()
+    {
+        transform.Translate(0, Time.deltaTime * 1f, 0); // coins float up
+    }
+    
+    private SpriteRenderer sr;
+
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnMouseEnter()
+    {
+        sr.color = Color.yellow; // change color on mouse hover
+    }
+
+    private void OnMouseExit()
+    {
+        sr.color = Color.white;
     }
 }

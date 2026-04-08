@@ -141,7 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8aa58d780294fef8dd0686b0a8c81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinPickup
-  EffectPrefab: {fileID: 0}
+  EffectPrefab: {fileID: 7958507088165050600, guid: 9c114e19f0a8748319a36f50876c44a5, type: 3}
   currencyWorth: 100
   pickupSound: {fileID: 8300000, guid: b327c58b7655b8343992a0f833dd4c4f, type: 3}
+  autoPickupDelay: 25
   FloatingScorePrefab: {fileID: 8314382623674587284, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
