@@ -273,7 +273,6 @@ GameObject:
   - component: {fileID: 6998895783018499933}
   - component: {fileID: 6483270347986825764}
   - component: {fileID: 8308657347356399621}
-  - component: {fileID: 6252860496157796954}
   m_Layer: 5
   m_Name: Upgrade UI
   m_TagString: Untagged
@@ -364,18 +363,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6252860496157796954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5315144331807464256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4c6281f795244229c9dd9da83fc4d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeUIHandler
 --- !u!1 &5759806654379170304
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +419,6 @@ MonoBehaviour:
   firingPoint: {fileID: 8707586273053261682}
   upgradeUI: {fileID: 5315144331807464256}
   upgradeButton: {fileID: 2085787843895623269}
-  dialoguePrefab: {fileID: 8314382623674587284, guid: a231c23a1331d2342a82e928e206f6e3, type: 3}
   targetingRange: 6
   bps: 1
   aps: 4
