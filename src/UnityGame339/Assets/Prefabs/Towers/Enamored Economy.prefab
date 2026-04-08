@@ -554,7 +554,7 @@ MonoBehaviour:
   targetingRange: 3
   bps: 1
   aps: 4
-  mps: 0.5
+  mps: 1
   baseUpgradeCost: 100
   targetingRangeBase: 0
   towerIndex: 0

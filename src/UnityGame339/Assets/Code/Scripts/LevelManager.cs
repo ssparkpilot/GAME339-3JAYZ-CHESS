@@ -6,7 +6,8 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Player Stats")]
     public int playerHealth = 100;
-    public bool isGameOver = false;
+    public bool isGameOver;
+    public int currency = 100;
 
     [Header("UI")]
     [SerializeField] private TMP_Text healthText;
@@ -18,16 +19,14 @@ public class LevelManager : MonoBehaviour
     public Transform startPoint;
     public Transform[] path;
 
-    public int currency;
-
     private void Awake(){
         main = this;
     }
 
     private void Start()
 {
-    playerHealth = 100;
-    currency = 1000;
+    //playerHealth = 100;
+    //currency = 100;
     isGameOver = false;
 
     UpdateHealthUI();
@@ -109,11 +108,12 @@ public class LevelManager : MonoBehaviour
     Time.timeScale = 0f;
 }
 
-    // Had to get a little bit of help from chatGPT since I haven't worked with canvas switching stuff in a hto minute
+    // Had to get a little bit of help from ChatGPT since I haven't worked with canvas switching stuff in a hot minute
     public void RestartGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
         Debug.Log("restart game");
     }
 

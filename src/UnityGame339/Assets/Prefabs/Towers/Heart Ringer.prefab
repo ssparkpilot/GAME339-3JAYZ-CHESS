@@ -478,7 +478,7 @@ MonoBehaviour:
   upgradeButton: {fileID: 8047296925045566966}
   targetingRange: 4
   bps: 1
-  aps: 0.25
+  aps: 0.2
   mps: 4
   baseUpgradeCost: 100
   targetingRangeBase: 0

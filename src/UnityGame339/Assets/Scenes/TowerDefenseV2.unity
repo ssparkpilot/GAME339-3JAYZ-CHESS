@@ -5131,6 +5131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   playerHealth: 100
   isGameOver: 0
+  currency: 300
   healthText: {fileID: 21886188}
   gameOverCanvas: {fileID: 1200047738}
   gameWinCanvas: {fileID: 1389644527}
@@ -5146,7 +5147,6 @@ MonoBehaviour:
   - {fileID: 1957640880}
   - {fileID: 1952271262}
   - {fileID: 273553775}
-  currency: 0
 --- !u!4 &798997877
 Transform:
   m_ObjectHideFlags: 0
@@ -5183,11 +5183,11 @@ MonoBehaviour:
   - {fileID: 5506774555555138625, guid: f6a802db164d73840bcec6b7c46e78f3, type: 3}
   waveText: {fileID: 1675078592}
   baseEnemies: 8
-  enemiesPerSecond: 0.5
+  enemiesPerSecond: 0.25
   timeBetweenWaves: 5
-  difficultyScalingFactor: 0.75
+  difficultyScalingFactor: 2
   enemiesPerSecondCap: 15
-  maxWaves: 1
+  maxWaves: 5
   audioSource: {fileID: 798997880}
   chudSound: {fileID: 8300000, guid: 9385e00179fe1af499de6862cda7f4d7, type: 3}
   startSound: {fileID: 8300000, guid: 87b95e059cfba3f4582c112ad3157b71, type: 3}

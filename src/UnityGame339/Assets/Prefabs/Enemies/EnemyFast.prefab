@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
   hitPoints: 1
-  currencyWorth: 35
-  coinDropChance: 0.25
+  currencyWorth: 20
+  coinDropChance: 0.2
   coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
   FloatingScorePrefab: {fileID: 8314382623674587284, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
