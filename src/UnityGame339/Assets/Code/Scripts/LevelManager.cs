@@ -137,4 +137,9 @@ public class LevelManager : MonoBehaviour
         }
         Time.timeScale = 0f;
     }
+    
+    public void AddCurrency(int amount)
+    {
+        currency += amount;
+    }
 }
