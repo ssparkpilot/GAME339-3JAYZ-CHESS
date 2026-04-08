@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private float difficultyScalingFactor = 0.75f;
     [SerializeField] private float enemiesPerSecondCap = 15;
+    [SerializeField] private int maxWaves = 10;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
@@ -104,14 +105,21 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
-        currentWave++;
-        UpdateWaveUI();
         
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         //make the audiosource play at half the volume
         audioSource.volume = 0.5f;
         //play the place sound at the randomized pitch
         audioSource.PlayOneShot(endSound);
+
+        if (currentWave >= maxWaves)
+        {
+            LevelManager.main.WinGame();
+            return;
+        }
+
+        currentWave++;
+        UpdateWaveUI();
         
         StartCoroutine(StartWave());
     }

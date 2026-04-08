@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameObject gameWinCanvas;
 
     public static LevelManager main;
 
@@ -24,9 +25,25 @@ public class LevelManager : MonoBehaviour
     }
 
     private void Start()
+{
+    playerHealth = 100;
+    currency = 1000;
+    isGameOver = false;
+
+    UpdateHealthUI();
+
+    if (gameOverCanvas != null)
     {
-        currency = 1000;
+        gameOverCanvas.SetActive(false);
     }
+
+    if (gameWinCanvas != null)
+    {
+        gameWinCanvas.SetActive(false);
+    }
+
+    Time.timeScale = 1f;
+}
 
     public void IncreaseCurrency(int amount)
     {
@@ -75,23 +92,51 @@ public class LevelManager : MonoBehaviour
     }
 
     private void GameOver()
+{
+    isGameOver = true;
+    Debug.Log("Game Over!");
+    
+    if (gameOverCanvas != null)
     {
-        isGameOver = true;
-        Debug.Log("Game Over!");
-        
-        if (gameOverCanvas != null)
-        {
-            gameOverCanvas.SetActive(true);
-        }
-
-        Time.timeScale = 0f;
+        gameOverCanvas.SetActive(true);
     }
+
+    if (gameWinCanvas != null)
+    {
+        gameWinCanvas.SetActive(false);
+    }
+
+    Time.timeScale = 0f;
+}
 
     // Had to get a little bit of help from chatGPT since I haven't worked with canvas switching stuff in a hto minute
     public void RestartGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("restart game");
+    }
+
+    public void WinGame()
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+
+        isGameOver = true;
+        Debug.Log("You Win!");
+
+        if (gameWinCanvas != null)
+        {
+            gameWinCanvas.SetActive(true);
+        }
+
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(false);
+        }
+        Time.timeScale = 0f;
     }
     
     public void AddCurrency(int amount)
