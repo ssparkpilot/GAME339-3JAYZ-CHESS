@@ -12,6 +12,11 @@ public class BuildManager : MonoBehaviour
     public static BuildManager main;
     public int TowerCount => towers.Length;
     public int SelectedTowerIndex => selectedTower;
+    
+    [Header("Ghost Previews")]
+    [SerializeField] private GameObject shovelGhostPrefab;
+
+    private GameObject shovelGhost;
 
     private void Awake()
     {
@@ -33,12 +38,18 @@ public class BuildManager : MonoBehaviour
 
     private void Update()
     {
-        if (previewTower == null) return;
+        switch (CurrentMode)
+        {
+            case BuildMode.PlaceTower:
+                if (previewTower != null)
+                    FollowMouse(previewTower);
+                break;
 
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = 0f;
-
-        previewTower.transform.position = mouseWorldPos;
+            case BuildMode.Shovel:
+                if (shovelGhost != null)
+                    FollowMouse(shovelGhost);
+                break;
+        }
     }
     
     public GameObject PlaceTower(Vector3 position)
@@ -94,7 +105,6 @@ public class BuildManager : MonoBehaviour
     
     public BuildMode CurrentMode { get; private set; } = BuildMode.None;
     
-    
     public void SetSelectedTower(int index)
     {
         ClearPreview();
@@ -109,8 +119,12 @@ public class BuildManager : MonoBehaviour
     public void SelectShovel()
     {
         ClearPreview();
+
         selectedTower = -1;
         CurrentMode = BuildMode.Shovel;
+
+        if (shovelGhost == null && shovelGhostPrefab != null)
+            shovelGhost = Instantiate(shovelGhostPrefab);
     }
     
     public void ClearSelection()
@@ -119,11 +133,20 @@ public class BuildManager : MonoBehaviour
         selectedTower = -1;
         CurrentMode = BuildMode.None;
     }
-
+    
     private void ClearPreview()
     {
         if (previewTower != null)
             Destroy(previewTower);
-    }
 
+        if (shovelGhost != null)
+            Destroy(shovelGhost);
+    }
+    
+    private void FollowMouse(GameObject obj)
+    {
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        pos.z = 0f;
+        obj.transform.position = pos;
+    }
 }

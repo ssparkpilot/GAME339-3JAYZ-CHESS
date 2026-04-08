@@ -4781,6 +4781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c0be19ae5c146038accb195e9d4e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  shovelGhostPrefab: {fileID: 7083560848362933106, guid: 6cd7c352f42a143978473201375c1dde, type: 3}
   towers:
   - name: Burning Love
     cost: 100

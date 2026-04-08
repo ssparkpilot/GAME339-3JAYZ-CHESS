@@ -99,6 +99,9 @@ public class Plot : MonoBehaviour
             audioSource.PlayOneShot(digSound);
 
             sr.color = startColor;
+            
+            BuildManager.main.ClearSelection(); // removes shovel ghost
+            
             return;
         }
 
