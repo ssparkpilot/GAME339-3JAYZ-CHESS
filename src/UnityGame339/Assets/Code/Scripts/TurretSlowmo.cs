@@ -20,7 +20,6 @@ public class TurretSlowmo : Turret
 
         if (timeUntilFire >= 1f / aps)
         {
-            Debug.Log("Slowed Enemies");
             FreezeEnemies();
             timeUntilFire = 0f;
         }
