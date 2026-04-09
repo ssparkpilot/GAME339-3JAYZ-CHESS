@@ -172,4 +172,6 @@ MonoBehaviour:
   rb: {fileID: 7900250300773023234}
   bulletSpeed: 5
   bulletDamage: 1
+  rotationOffset: 90
+  rotationSpeed: 2000
   DelayInSeconds: 10
