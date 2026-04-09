@@ -38,7 +38,7 @@ public class Plot : MonoBehaviour
     
     private void OnMouseEnter()
     {
-        if (LevelManager.main.isGameOver) return;
+        if (LevelManager.main.IsGameOver) return;
         
         
         if (BuildManager.main.CurrentMode == BuildMode.Shovel)
@@ -75,7 +75,7 @@ public class Plot : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (LevelManager.main.isGameOver) return;
+        if (LevelManager.main.IsGameOver) return;
         ResetPlotColor();
     }
 
@@ -88,7 +88,7 @@ public class Plot : MonoBehaviour
                 return;
 
             int refund = GetSellValue();
-            LevelManager.main.AddCurrency(refund);
+            LevelManager.main.IncreaseCurrency(refund);
             
             SpawnFloatingText(refund);
 
@@ -105,7 +105,7 @@ public class Plot : MonoBehaviour
             return;
         }
 
-        if (LevelManager.main.isGameOver) return;
+        if (LevelManager.main.IsGameOver) return;
         if (EventSystem.current.IsPointerOverGameObject()) return;
         
         if (BuildManager.main.GetSelectedTower() != null)
@@ -190,7 +190,8 @@ public class Plot : MonoBehaviour
             return;
         }
 
-        LevelManager.main.SpendCurrency(selectedTowerData.cost);
+        if (!LevelManager.main.TrySpendCurrency(selectedTowerData.cost))
+            return;
 
         towerObj = BuildManager.main.PlaceTower(transform.position);
         turret = towerObj.GetComponent<Turret>();
@@ -237,8 +238,9 @@ public class Plot : MonoBehaviour
 
     private bool CanAffordPlacement()
     {
-        return LevelManager.main.currency >= GetRequiredCost();
+        return LevelManager.main.CanAfford(GetRequiredCost());
     }
+
     
     private void ResetPlotColor()
     {

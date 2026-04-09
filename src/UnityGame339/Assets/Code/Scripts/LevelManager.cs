@@ -1,13 +1,15 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Game339.Shared.Services;
+using Game339.Shared.Services.Implementation;
 
 public class LevelManager : MonoBehaviour
 {
     [Header("Player Stats")]
     public int playerHealth = 100;
-    public bool isGameOver;
     public int currency = 100;
+    public bool isGameOver;
 
     [Header("UI")]
     [SerializeField] private TMP_Text healthText;
@@ -19,128 +21,95 @@ public class LevelManager : MonoBehaviour
     public Transform startPoint;
     public Transform[] path;
 
-    private void Awake(){
+    private ILevelService levelService;
+
+    private void Awake()
+    {
         main = this;
+        levelService = new LevelService();
     }
 
     private void Start()
-{
-    //playerHealth = 100;
-    //currency = 100;
-    isGameOver = false;
-
-    UpdateHealthUI();
-
-    if (gameOverCanvas != null)
     {
-        gameOverCanvas.SetActive(false);
-    }
+        isGameOver = false;
+        UpdateHealthUI();
 
-    if (gameWinCanvas != null)
-    {
-        gameWinCanvas.SetActive(false);
-    }
+        gameOverCanvas?.SetActive(false);
+        gameWinCanvas?.SetActive(false);
 
-    Time.timeScale = 1f;
-}
+        Time.timeScale = 1f;
+    }
 
     public void IncreaseCurrency(int amount)
     {
-        currency += amount;
+        currency = levelService.IncreaseCurrency(currency, amount);
     }
 
     public bool SpendCurrency(int amount)
     {
-        if (currency >= amount)
-        {
-            currency -= amount;
-            return true;
-        }
-        else
-        {
-            Debug.Log("Not enough money");
+        if (!levelService.CanSpendCurrency(currency, amount))
             return false;
-        }
+
+        currency = levelService.SpendCurrency(currency, amount);
+        return true;
     }
 
     public void LoseHealth(int amount)
     {
         if (isGameOver)
-        {
             return;
-        } 
 
-        playerHealth = Mathf.Max(playerHealth - amount, 0);
-
+        playerHealth = levelService.LoseHealth(playerHealth, amount);
         UpdateHealthUI();
 
-        Debug.Log("Player Health: " + playerHealth);
-
-        if (playerHealth <= 0)
-        {
+        if (levelService.IsGameOver(playerHealth))
             GameOver();
-        }
     }
 
     private void UpdateHealthUI()
     {
         if (healthText != null)
-        {
             healthText.text = playerHealth.ToString();
-        }
     }
 
     private void GameOver()
-{
-    isGameOver = true;
-    Debug.Log("Game Over!");
-    
-    if (gameOverCanvas != null)
     {
-        gameOverCanvas.SetActive(true);
-    }
-
-    if (gameWinCanvas != null)
-    {
-        gameWinCanvas.SetActive(false);
-    }
-
-    Time.timeScale = 0f;
-}
-
-    // Had to get a little bit of help from ChatGPT since I haven't worked with canvas switching stuff in a hot minute
-    public void RestartGame()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
-        Debug.Log("restart game");
+        isGameOver = true;
+        gameOverCanvas?.SetActive(true);
+        gameWinCanvas?.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void WinGame()
     {
         if (isGameOver)
-        {
             return;
-        }
 
         isGameOver = true;
-        Debug.Log("You Win!");
-
-        if (gameWinCanvas != null)
-        {
-            gameWinCanvas.SetActive(true);
-        }
-
-        if (gameOverCanvas != null)
-        {
-            gameOverCanvas.SetActive(false);
-        }
+        gameWinCanvas?.SetActive(true);
+        gameOverCanvas?.SetActive(false);
         Time.timeScale = 0f;
     }
-    
-    public void AddCurrency(int amount)
+
+    public void RestartGame()
     {
-        currency += amount;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    public bool IsGameOver => isGameOver;
+
+    public bool CanAfford(int amount)
+    {
+        return levelService.CanSpendCurrency(currency, amount);
+    }
+
+    public bool TrySpendCurrency(int amount)
+    {
+        if (!levelService.CanSpendCurrency(currency, amount))
+            return false;
+
+        currency = levelService.SpendCurrency(currency, amount);
+        return true;
     }
 }
