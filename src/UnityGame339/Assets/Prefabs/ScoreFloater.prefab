@@ -93,7 +93,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8314382623674587284}
-  m_Text: + 10
+  m_Text: + 30
   m_OffsetZ: 0
   m_CharacterSize: 0.4
   m_LineSpacing: 1

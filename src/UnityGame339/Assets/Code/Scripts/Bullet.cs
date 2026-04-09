@@ -6,13 +6,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Attributes")]
-    [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private float bulletSpeed = 8f;
     [SerializeField] private int bulletDamage = 1;
 
+    [Header("Homing")]
+    [SerializeField] private float rotationSpeed = 3000f;
+
     private Transform target;
-    
+
     public float DelayInSeconds = 10f;
-    
+
     public void SetTarget(Transform _target)
     {
         target = _target;
@@ -22,18 +25,28 @@ public class Bullet : MonoBehaviour
     {
         if (!target)
         {
-            // Destroy(gameObject); Use this if don't want projectiles to fly away
-            
             Destroy(gameObject, DelayInSeconds);
             return;
         }
-        
+
+        // Had chatgpt help me with coding the bullet rotating part to track the enemy
         Vector2 direction = (target.position - transform.position).normalized;
         rb.linearVelocity = direction * bulletSpeed;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
+
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation,targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D other){
-        other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Health health = other.gameObject.GetComponent<Health>();
+
+        if (health != null)
+        {
+            health.TakeDamage(bulletDamage);
+        }
+
         Destroy(gameObject);
     }
 }
