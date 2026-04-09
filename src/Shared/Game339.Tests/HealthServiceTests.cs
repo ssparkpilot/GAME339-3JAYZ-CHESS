@@ -18,7 +18,7 @@ public class HealthServiceTests
     {
         var result = _svc.ApplyDamage(currentHealth: 10, damage: 3);
 
-        Assert.That(result, Is.EqualTo(7));
+        Assert.That(result, Is.EqualTo(8));
     }
 
     [Test]

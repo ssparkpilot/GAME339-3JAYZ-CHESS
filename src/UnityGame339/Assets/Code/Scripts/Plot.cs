@@ -88,7 +88,7 @@ public class Plot : MonoBehaviour
                 return;
 
             int refund = GetSellValue();
-            LevelManager.main.AddCurrency(refund);
+            //LevelManager.main.AddCurrency(refund);
             
             SpawnFloatingText(refund);
 
