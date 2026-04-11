@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -514835684724846890, guid: c3ec136076059bd4b8b092be7cd1cca9, type: 3}
+  m_Sprite: {fileID: 8957976527492102098, guid: bb48e39136c4da8419be52326f66fc9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -183,10 +183,10 @@ MonoBehaviour:
   rb: {fileID: 2560228358742029892}
   moveSpeed: 2
   damage: 15
-  UpSprite: {fileID: -9209894952358406838, guid: c3ec136076059bd4b8b092be7cd1cca9, type: 3}
-  DownSprite: {fileID: -514835684724846890, guid: c3ec136076059bd4b8b092be7cd1cca9, type: 3}
-  LeftSprite: {fileID: -6644796331580871732, guid: c3ec136076059bd4b8b092be7cd1cca9, type: 3}
-  RightSprite: {fileID: -628299324803298683, guid: c3ec136076059bd4b8b092be7cd1cca9, type: 3}
+  UpSprite: {fileID: 5581422950283379879, guid: bb48e39136c4da8419be52326f66fc9c, type: 3}
+  DownSprite: {fileID: 8957976527492102098, guid: bb48e39136c4da8419be52326f66fc9c, type: 3}
+  LeftSprite: {fileID: 3989029319972695526, guid: bb48e39136c4da8419be52326f66fc9c, type: 3}
+  RightSprite: {fileID: 8815518829646552204, guid: bb48e39136c4da8419be52326f66fc9c, type: 3}
   SpawnSound: {fileID: 8300000, guid: 1d51815838d944c4a95b8dae83138499, type: 3}
 --- !u!114 &-7404800518361013175
 MonoBehaviour:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
-  hitPoints: 2
+  hitPoints: 20
   currencyWorth: 10
   coinDropChance: 0.1
   coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}

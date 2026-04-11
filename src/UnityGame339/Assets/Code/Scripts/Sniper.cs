@@ -117,8 +117,10 @@ public class Sniper : Turret
         if (sniperAudioSource != null && sniperPlaceSound != null)
         {
             sniperAudioSource.pitch = Random.Range(sniperMinPitch, sniperMaxPitch);
-            sniperAudioSource.volume = 0.25f;
-            sniperAudioSource.PlayOneShot(sniperPlaceSound);
+        //make the audiosource play at half the volume
+        sniperAudioSource.volume = 0.25f;
+        //play the place sound at the randomized pitch
+        sniperAudioSource.PlayOneShot(sniperPlaceSound);
         }
     }
 

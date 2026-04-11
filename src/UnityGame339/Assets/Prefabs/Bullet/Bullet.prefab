@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   rb: {fileID: 7900250300773023234}
   bulletSpeed: 10
-  bulletDamage: 1
+  bulletDamage: 10
   rotationOffset: 90
   rotationSpeed: 2000
   DelayInSeconds: 10
