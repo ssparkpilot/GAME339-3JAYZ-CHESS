@@ -1,2 +1,2 @@
 # GAME339-3JAYZ
-Tower Defense + Dating Sim
+Tower Defense + Chess with a Twist
