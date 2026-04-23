@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7392882e5bb314cf0a31f54044be0eb6
+guid: bda820297083cd44182888324d3256a2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6623963105415861948
-    second: ChessPieces_0
+      213: 4274218694053725850
+    second: Tiles_ChessBoard_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -74,7 +74,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChessPieces_0
+      name: Tiles_ChessBoard_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
-        width: 256
-        height: 256
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,20 +115,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb61b9f595b0deb50800000000000000
-      internalID: 6623963105415861948
+      spriteID: a960867a143115b30800000000000000
+      internalID: 4274218694053725850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ChessPieces_1
+      name: Tiles_ChessBoard_1
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
-        width: 256
-        height: 256
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 611de30a9bea84b658b644126d3aa89a
-      internalID: -1319091024
+      spriteID: e49bdb6ad85695149be9a33b7b9b2302
+      internalID: -306132743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ChessPieces_2
+      name: Tiles_ChessBoard_2
       rect:
         serializedVersion: 2
-        x: 512
-        y: 256
-        width: 256
-        height: 256
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +159,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e7c981976902426395623b705fb6da7
-      internalID: -711127545
+      spriteID: 28955adc854be2944919fd8df0e6c078
+      internalID: -903014919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ChessPieces_3
+      name: Tiles_ChessBoard_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9574915aef5b64c83edc5a6e56d0e6
+      internalID: -449159963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tiles_ChessBoard_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa4823678a2604063b60dcb5e2584c1a
-      internalID: -2141116318
+      spriteID: f2079feddbe7c864cb4c51405cb3f844
+      internalID: 1821845495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ChessPieces_4
+      name: Tiles_ChessBoard_5
       rect:
         serializedVersion: 2
-        x: 256
+        x: 32
         y: 0
-        width: 256
-        height: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,30 +225,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61c14136579f042f89634ad9080cdf29
-      internalID: 1373619723
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ChessPieces_5
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf67adc28c7324ad38d2d0ca358ba500
-      internalID: 1947775896
+      spriteID: 6dabd805b6d6f654eab2c92cae9a599c
+      internalID: 1723268857
       vertices: []
       indices: 
       edges: []
@@ -235,7 +235,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 396a5f1f00e2f43dd8c0afcd6a1cf341
+    spriteID: 48641220cfdc8cc478f94e9aaec1c15f
     internalID: 0
     vertices: []
     indices: 
@@ -244,17 +244,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries:
-      - key: SpriteEditor.SliceOnImport
-        value: True
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":true,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      ChessPieces_0: 6623963105415861948
-      ChessPieces_1: -1319091024
-      ChessPieces_2: -711127545
-      ChessPieces_3: -2141116318
-      ChessPieces_4: 1373619723
-      ChessPieces_5: 1947775896
+      Tiles_ChessBoard_0: 4274218694053725850
+      Tiles_ChessBoard_1: -306132743
+      Tiles_ChessBoard_2: -903014919
+      Tiles_ChessBoard_3: -449159963
+      Tiles_ChessBoard_4: 1821845495
+      Tiles_ChessBoard_5: 1723268857
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
