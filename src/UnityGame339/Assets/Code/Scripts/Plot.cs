@@ -1,3 +1,4 @@
+using Game339.Shared.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,6 +31,10 @@ public class Plot : MonoBehaviour
     public float maxPitch = 1.2f;
 
     public GameObject DialoguePrefab;
+    
+    [SerializeField] private int gridX;
+    [SerializeField] private int gridY;
+    public GridPosition GridPos => new GridPosition(gridX, gridY);
 
     private void Start()
     {
