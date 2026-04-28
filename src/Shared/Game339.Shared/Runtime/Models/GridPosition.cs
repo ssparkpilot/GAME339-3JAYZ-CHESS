@@ -1,6 +1,8 @@
+using System;
+
 namespace Game339.Shared.Models
 {
-    public struct GridPosition
+    public readonly struct GridPosition : IEquatable<GridPosition>
     {
         public int X { get; }
         public int Y { get; }
@@ -9,6 +11,31 @@ namespace Game339.Shared.Models
         {
             X = x;
             Y = y;
+        }
+
+        public bool Equals(GridPosition other)
+        {
+            return X == other.X && Y == other.Y;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GridPosition other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
+        }
+
+        public static bool operator ==(GridPosition left, GridPosition right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(GridPosition left, GridPosition right)
+        {
+            return !left.Equals(right);
         }
     }
 }
