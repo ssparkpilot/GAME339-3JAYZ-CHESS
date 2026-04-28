@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 7530872268535750980}
   - component: {fileID: 7523227071624523042}
   - component: {fileID: 33921268400693692}
-  - component: {fileID: 761865088696714526}
-  - component: {fileID: -3203710176511972389}
+  - component: {fileID: -2070145329577740369}
   m_Layer: 0
   m_Name: Plot
   m_TagString: Untagged
@@ -30,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1.6}
+  m_LocalScale: {x: 1, y: 1, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -140,7 +139,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &761865088696714526
+--- !u!114 &-2070145329577740369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,119 +148,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6455910030153953359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983413e9e578d422f99991ab18c783b4, type: 3}
+  m_Script: {fileID: 11500000, guid: d65b5a18fe27b4d5ea349d8ad9026145, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  sr: {fileID: 7523227071624523042}
-  hoverColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 0.19607843}
-  validColor: {r: 0, g: 1, b: 0, a: 0.5529412}
-  invalidColor: {r: 1, g: 0, b: 0, a: 0.5529412}
-  unaffordableColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5529412}
-  floatingTextPrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
-  floatingTextOffset: {x: 0, y: 0.5, z: 0}
-  towerObj: {fileID: 0}
-  turret: {fileID: 0}
-  audioSource: {fileID: -3203710176511972389}
-  placeSound: {fileID: 8300000, guid: c3728a9215d2a6b46b9777a47d4a1337, type: 3}
-  digSound: {fileID: 8300000, guid: 85d59ae152e49eb4ea141c36e33b71db, type: 3}
-  cantplaceSound: {fileID: 8300000, guid: b51b4d592b3cd124a980ff2033de3b6a, type: 3}
-  minPitch: 0.8
-  maxPitch: 1.2
-  DialoguePrefab: {fileID: 8314382623674587284, guid: a231c23a1331d2342a82e928e206f6e3, type: 3}
---- !u!82 &-3203710176511972389
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6455910030153953359}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorClassIdentifier: Assembly-CSharp::ChessPlot
+  gridX: 0
+  gridY: 0
