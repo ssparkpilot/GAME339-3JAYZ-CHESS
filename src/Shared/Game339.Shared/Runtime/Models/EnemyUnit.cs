@@ -1,16 +1,22 @@
-using Game339.Shared.Services;
 using Game339.Shared.Models;
+using Game339.Shared.Services;
 
-namespace Game339.Shared.Models
+public class EnemyUnit : Unit
 {
-    public class EnemyUnit : Unit
-    {
-        public IChessMovementRule MovementRule { get; }
+    public int Health { get; private set; }
+    public IChessMovementRule MovementRule { get; }
 
-        public EnemyUnit(GridPosition startPos, IChessMovementRule rule)
-            : base(startPos)
-        {
-            MovementRule = rule;
-        }
+    public EnemyUnit(GridPosition pos, IChessMovementRule rule, int health)
+        : base(pos)
+    {
+        MovementRule = rule;
+        Health = health;
     }
+
+    public void ApplyDamage(int amount)
+    {
+        Health -= amount;
+    }
+
+    public bool IsDead => Health <= 0;
 }
