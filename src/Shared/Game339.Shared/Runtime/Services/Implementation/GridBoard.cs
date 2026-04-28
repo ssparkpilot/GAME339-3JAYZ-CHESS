@@ -28,5 +28,17 @@ namespace Game339.Shared.Services.Implementation
             return pos.X >= 0 && pos.X < Size
                               && pos.Y >= 0 && pos.Y < Size;
         }
+        
+        public void MoveUnit(Unit unit, GridPosition to)
+        {
+            var fromTile = GetTile(unit.Position);
+            var toTile = GetTile(to);
+
+            if (toTile.IsOccupied)
+                return; // (later: capture logic)
+
+            fromTile.Clear();
+            toTile.Place(unit);
+        }
     }
 }
