@@ -1,14 +1,22 @@
 using UnityEngine;
 using Game339.Shared.Models;
+using System.Collections;
 
 public class EnemyView : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed = 4f;
+
     private EnemyUnit unit;
+    private Coroutine moveRoutine;
 
     public void Init(EnemyUnit enemyUnit)
     {
         unit = enemyUnit;
-        UpdatePosition();
+
+        // Snap instantly on spawn
+        ChessPlot plot = BoardManager.main.GetPlot(unit.Position);
+        if (plot != null)
+            transform.position = plot.transform.position;
     }
 
     public void UpdatePosition()
@@ -16,10 +24,38 @@ public class EnemyView : MonoBehaviour
         if (unit == null)
             return;
 
-        ChessPlot plot = BoardManager.main.GetPlot(unit.Position);
-        if (plot == null)
+        ChessPlot targetPlot = BoardManager.main.GetPlot(unit.Position);
+        if (targetPlot == null)
             return;
 
-        transform.position = plot.transform.position;
+        // Cancel any in-progress move
+        if (moveRoutine != null)
+            StopCoroutine(moveRoutine);
+
+        moveRoutine = StartCoroutine(MoveTo(targetPlot.transform.position));
+    }
+
+    private IEnumerator MoveTo(Vector3 target)
+    {
+        Vector3 start = transform.position;
+        float distance = Vector3.Distance(start, target);
+        float t = 0f;
+
+        // Avoid div-by-zero
+        if (distance < 0.001f)
+        {
+            transform.position = target;
+            yield break;
+        }
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * moveSpeed / distance;
+            float eased = t * t * (3f - 2f * t); // smooth movement
+            transform.position = Vector3.Lerp(start, target, eased);
+            yield return null;
+        }
+
+        transform.position = target;
     }
 }
