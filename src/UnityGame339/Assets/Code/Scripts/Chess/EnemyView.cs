@@ -30,6 +30,9 @@ public class EnemyView : MonoBehaviour
     
     private void ResetColor()
     {
+        if (sr == null)
+            return;
+
         sr.color = baseColor;
     }
 
@@ -105,6 +108,10 @@ public class EnemyView : MonoBehaviour
     
     public void ResetSpeed()
     {
+        
+        if (this == null)
+            return;
+
         moveSpeed = baseSpeed;
         ResetColor();
     }
