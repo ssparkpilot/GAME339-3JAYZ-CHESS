@@ -18,4 +18,11 @@ namespace Game339.Shared.Models
         EnemyMoving,
         EnemyTurnEnd
     }
+
+    public enum TurnNumbers
+    {
+        None
+
+    }
+
 }
