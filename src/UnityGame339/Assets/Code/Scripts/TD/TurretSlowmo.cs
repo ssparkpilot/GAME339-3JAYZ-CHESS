@@ -41,18 +41,25 @@ public class TurretSlowmo : Turret
             for (int i = 0; i < hits.Length; i++)
             {
                 RaycastHit2D hit = hits[i];
-
-                EnemyMovement em = hit.transform.GetComponent<EnemyMovement>();
+                
+                EnemyView em = hit.transform.GetComponent<EnemyView>();
+                if (em == null)
+                    continue;
+                
                 em.UpdateSpeed(0.5f);
+                em.FreezeTint();
 
                 StartCoroutine(ResetEnemySpeed(em));
             }
         }
     }
 
-    private IEnumerator ResetEnemySpeed(EnemyMovement em)
+    private IEnumerator ResetEnemySpeed(EnemyView em)
     {
         yield return new WaitForSeconds(freezeTime);
+        
+        if (em == null)
+            yield break;
         
         em.ResetSpeed();
     }
