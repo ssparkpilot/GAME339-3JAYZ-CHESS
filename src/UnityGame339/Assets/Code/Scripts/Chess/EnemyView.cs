@@ -58,4 +58,19 @@ public class EnemyView : MonoBehaviour
 
         transform.position = target;
     }
+
+    private void OnMouseEnter()
+{
+    if (HoverHealthUI.main == null) return;
+    if (unit == null) return;
+
+    HoverHealthUI.main.Show(transform.position, unit.Health);
+}
+
+private void OnMouseExit()
+{
+    if (HoverHealthUI.main == null) return;
+
+    HoverHealthUI.main.Hide();
+}
 }

@@ -62,22 +62,4 @@ public class ChessPlot : MonoBehaviour
 
         return false;
     }
-
-    private void OnMouseEnter()
-    {
-        if (HoverHealthUI.main == null) return;
-
-        if (TryGetEnemy(out EnemyUnit enemy))
-        {
-            HoverHealthUI.main.Show(transform.position, enemy.Health);
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (HoverHealthUI.main != null)
-        {
-            HoverHealthUI.main.Hide();
-        }
-    }
 }
