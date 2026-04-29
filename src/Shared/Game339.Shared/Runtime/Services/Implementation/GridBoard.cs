@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game339.Shared.Models;
 
 namespace Game339.Shared.Services.Implementation
@@ -39,6 +40,19 @@ namespace Game339.Shared.Services.Implementation
 
             fromTile.Clear();
             toTile.Place(unit);
+        }
+        
+        public IEnumerable<EnemyUnit> Enemies
+        {
+            get
+            {
+                for (int x = 0; x < Size; x++)
+                for (int y = 0; y < Size; y++)
+                {
+                    if (tiles[x, y].Occupant is EnemyUnit enemy)
+                        yield return enemy;
+                }
+            }
         }
     }
 }

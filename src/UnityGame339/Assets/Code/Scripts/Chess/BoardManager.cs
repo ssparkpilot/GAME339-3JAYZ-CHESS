@@ -64,8 +64,6 @@ public class BoardManager : MonoBehaviour
 
         enemyGO.GetComponent<EnemyView>().Init(enemyUnit);
 
-        DebugPawn = enemyUnit; // stores reference
-
         return enemyUnit;
     }
 }

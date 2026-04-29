@@ -11,7 +11,9 @@ namespace Game339.Shared.Services
             IEnumerable<EnemyUnit> enemies,
             GridBoard board)
         {
-            foreach (var enemy in enemies)
+            var enemyList = enemies.ToList();
+                
+            foreach (var enemy in enemyList)
             {
                 var moves = enemy.MovementRule
                     .GetLegalMoves(enemy.Position, board)
