@@ -59,18 +59,32 @@ public class EnemyView : MonoBehaviour
         transform.position = target;
     }
 
-    private void OnMouseEnter()
+private void OnMouseEnter()
 {
-    if (HoverHealthUI.main == null) return;
-    if (unit == null) return;
+    Debug.Log("Mouse entered enemy pawn");
+
+    if (HoverHealthUI.main == null)
+    {
+        Debug.Log("HoverHealthUI.main is NULL");
+        return;
+    }
+
+    if (unit == null)
+    {
+        Debug.Log("Enemy unit is NULL");
+        return;
+    }
 
     HoverHealthUI.main.Show(transform.position, unit.Health);
 }
 
 private void OnMouseExit()
 {
-    if (HoverHealthUI.main == null) return;
+    Debug.Log("Mouse exited enemy pawn");
 
-    HoverHealthUI.main.Hide();
+    if (HoverHealthUI.main != null)
+    {
+        HoverHealthUI.main.Hide();
+    }
 }
 }
