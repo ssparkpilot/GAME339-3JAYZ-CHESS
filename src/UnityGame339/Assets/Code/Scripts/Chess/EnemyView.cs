@@ -3,18 +3,23 @@ using Game339.Shared.Models;
 
 public class EnemyView : MonoBehaviour
 {
-    public EnemyUnit Unit { get; private set; }
+    private EnemyUnit unit;
 
-    public void Init(EnemyUnit unit)
+    public void Init(EnemyUnit enemyUnit)
     {
-        Unit = unit;
+        unit = enemyUnit;
         UpdatePosition();
     }
 
     public void UpdatePosition()
     {
-        ChessPlot plot = BoardManager.main.GetPlot(Unit.Position);
-        if (plot != null)
-            transform.position = plot.transform.position;
+        if (unit == null)
+            return;
+
+        ChessPlot plot = BoardManager.main.GetPlot(unit.Position);
+        if (plot == null)
+            return;
+
+        transform.position = plot.transform.position;
     }
 }
