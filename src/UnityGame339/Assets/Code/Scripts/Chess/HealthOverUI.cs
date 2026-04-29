@@ -12,23 +12,55 @@ public class HoverHealthUI : MonoBehaviour
     {
         main = this;
 
+        Debug.Log("HoverHealthUI Awake called");
+
         if (panel != null)
         {
             panel.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Panel is NULL in Awake");
+        }
+
+        if (healthText == null)
+        {
+            Debug.Log("HealthText is NULL in Awake");
         }
     }
 
     public void Show(Vector3 worldPosition, int health)
     {
+        Debug.Log("Show() was called");
+
+        if (panel == null)
+        {
+            Debug.Log("Panel is NULL in Show()");
+            return;
+        }
+
+        if (healthText == null)
+        {
+            Debug.Log("HealthText is NULL in Show()");
+            return;
+        }
+
         panel.SetActive(true);
         healthText.text = "HP: " + health;
 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPosition);
-        panel.transform.position = screenPos + new Vector3(0, 40, 0);
+        // 🔴 TEMP TEST: force to center of screen
+        panel.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+        Debug.Log("Panel should now be visible in center");
     }
 
     public void Hide()
     {
-        panel.SetActive(false);
+        Debug.Log("Hide() called");
+
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
     }
 }

@@ -28,7 +28,7 @@ public class EnemyView : MonoBehaviour
         if (targetPlot == null)
             return;
 
-        // Cancel any in-progress move
+        // Stop previous movement if still running
         if (moveRoutine != null)
             StopCoroutine(moveRoutine);
 
@@ -41,7 +41,6 @@ public class EnemyView : MonoBehaviour
         float distance = Vector3.Distance(start, target);
         float t = 0f;
 
-        // Avoid div-by-zero
         if (distance < 0.001f)
         {
             transform.position = target;
@@ -51,7 +50,7 @@ public class EnemyView : MonoBehaviour
         while (t < 1f)
         {
             t += Time.deltaTime * moveSpeed / distance;
-            float eased = t * t * (3f - 2f * t); // smooth movement
+            float eased = t * t * (3f - 2f * t);
             transform.position = Vector3.Lerp(start, target, eased);
             yield return null;
         }
@@ -59,32 +58,19 @@ public class EnemyView : MonoBehaviour
         transform.position = target;
     }
 
-private void OnMouseEnter()
-{
-    Debug.Log("Mouse entered enemy pawn");
-
-    if (HoverHealthUI.main == null)
+    private void OnMouseEnter()
     {
-        Debug.Log("HoverHealthUI.main is NULL");
-        return;
+        if (HoverHealthUI.main == null) return;
+        if (unit == null) return;
+
+        HoverHealthUI.main.Show(transform.position + new Vector3(0, 0.5f, 0), unit.Health);
     }
 
-    if (unit == null)
+    private void OnMouseExit()
     {
-        Debug.Log("Enemy unit is NULL");
-        return;
+        if (HoverHealthUI.main != null)
+        {
+            HoverHealthUI.main.Hide();
+        }
     }
-
-    HoverHealthUI.main.Show(transform.position, unit.Health);
-}
-
-private void OnMouseExit()
-{
-    Debug.Log("Mouse exited enemy pawn");
-
-    if (HoverHealthUI.main != null)
-    {
-        HoverHealthUI.main.Hide();
-    }
-}
 }
