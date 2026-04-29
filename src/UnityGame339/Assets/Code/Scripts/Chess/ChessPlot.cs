@@ -65,6 +65,8 @@ public class ChessPlot : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (HoverHealthUI.main == null) return;
+
         if (TryGetEnemy(out EnemyUnit enemy))
         {
             HoverHealthUI.main.Show(transform.position, enemy.Health);
@@ -73,6 +75,9 @@ public class ChessPlot : MonoBehaviour
 
     private void OnMouseExit()
     {
-        HoverHealthUI.main.Hide();
+        if (HoverHealthUI.main != null)
+        {
+            HoverHealthUI.main.Hide();
+        }
     }
 }
