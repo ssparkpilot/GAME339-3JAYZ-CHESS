@@ -22,23 +22,15 @@ public class HoverHealthUI : MonoBehaviour
     }
 
     public void Show(Vector3 worldPosition, int health)
-    {
-        Debug.Log("Show() was called");
+{
+    if (panel == null || healthText == null) return;
 
-        if (panel == null || healthText == null || panelRect == null)
-        {
-            Debug.Log("Hover UI references missing");
-            return;
-        }
+    panel.SetActive(true);
+    healthText.text = "HP: " + health;
 
-        panel.SetActive(true);
-        healthText.text = "HP: " + health;
-
-        // TEMP TEST: center relative to the UI canvas
-        panelRect.anchoredPosition = Vector2.zero;
-
-        Debug.Log("Panel should be visible in UI center");
-    }
+    Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
+    panel.transform.position = screenPosition + new Vector3(0, 0, 0);
+}
 
     public void Hide()
     {

@@ -59,18 +59,18 @@ public class EnemyView : MonoBehaviour
     }
 
     private void OnMouseEnter()
-    {
-        if (HoverHealthUI.main == null) return;
-        if (unit == null) return;
+{
+    if (HoverHealthUI.main == null) return;
+    if (unit == null) return;
 
-        HoverHealthUI.main.Show(transform.position + new Vector3(0, 0.5f, 0), unit.Health);
-    }
+    HoverHealthUI.main.Show(transform.position, unit.Health);
+}
 
-    private void OnMouseExit()
+private void OnMouseExit()
+{
+    if (HoverHealthUI.main != null)
     {
-        if (HoverHealthUI.main != null)
-        {
-            HoverHealthUI.main.Hide();
-        }
+        HoverHealthUI.main.Hide();
     }
+}
 }
