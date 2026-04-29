@@ -8,24 +8,16 @@ public class HoverHealthUI : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private TMP_Text healthText;
 
+    private RectTransform panelRect;
+
     private void Awake()
     {
         main = this;
 
-        Debug.Log("HoverHealthUI Awake called");
-
         if (panel != null)
         {
+            panelRect = panel.GetComponent<RectTransform>();
             panel.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("Panel is NULL in Awake");
-        }
-
-        if (healthText == null)
-        {
-            Debug.Log("HealthText is NULL in Awake");
         }
     }
 
@@ -33,25 +25,19 @@ public class HoverHealthUI : MonoBehaviour
     {
         Debug.Log("Show() was called");
 
-        if (panel == null)
+        if (panel == null || healthText == null || panelRect == null)
         {
-            Debug.Log("Panel is NULL in Show()");
-            return;
-        }
-
-        if (healthText == null)
-        {
-            Debug.Log("HealthText is NULL in Show()");
+            Debug.Log("Hover UI references missing");
             return;
         }
 
         panel.SetActive(true);
         healthText.text = "HP: " + health;
 
-        // 🔴 TEMP TEST: force to center of screen
-        panel.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        // TEMP TEST: center relative to the UI canvas
+        panelRect.anchoredPosition = Vector2.zero;
 
-        Debug.Log("Panel should now be visible in center");
+        Debug.Log("Panel should be visible in UI center");
     }
 
     public void Hide()
