@@ -391,7 +391,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10, y: 2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8336348359864804160}
@@ -476,7 +476,7 @@ MonoBehaviour:
   firingPoint: {fileID: 0}
   upgradeUI: {fileID: 3493066794072906397}
   upgradeButton: {fileID: 8047296925045566966}
-  targetingRange: 4
+  targetingRange: 2
   bps: 1
   aps: 0.2
   mps: 4
@@ -488,7 +488,7 @@ MonoBehaviour:
   placeSound: {fileID: 0}
   minPitch: 0.8
   maxPitch: 1.2
-  freezeTime: 1
+  freezeTime: 5
   fireSound: {fileID: 8300000, guid: 74267a80414580442ac2cf96ec8a8681, type: 3}
 --- !u!82 &3299563007527577936
 AudioSource:

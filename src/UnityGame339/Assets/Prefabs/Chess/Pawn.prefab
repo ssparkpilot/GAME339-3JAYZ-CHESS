@@ -153,6 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyView
   moveSpeed: 4
+  baseSpeed: 4
+  sr: {fileID: 8512346987688035417}
+  FreezeColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &111587814746518501
 MonoBehaviour:
   m_ObjectHideFlags: 0

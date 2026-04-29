@@ -5,9 +5,33 @@ using System.Collections;
 public class EnemyView : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float baseSpeed = 4f;
+    
+    [Header("References")]
+    [SerializeField] private SpriteRenderer sr;
+    
+    [Header("Colors")]
+    [SerializeField] private Color FreezeColor = Color.blue;
+    
+    private Color baseColor;
 
     private EnemyUnit unit;
     private Coroutine moveRoutine;
+    
+    private void Start()
+    {
+        baseColor = sr.color;
+    }
+    
+    public void FreezeTint()
+    {
+        sr.color = FreezeColor;
+    }
+    
+    private void ResetColor()
+    {
+        sr.color = baseColor;
+    }
 
     public void Init(EnemyUnit enemyUnit)
     {
@@ -72,5 +96,16 @@ public class EnemyView : MonoBehaviour
         {
             HoverHealthUI.main.Hide();
         }
+    }
+    
+    public void UpdateSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+    
+    public void ResetSpeed()
+    {
+        moveSpeed = baseSpeed;
+        ResetColor();
     }
 }
