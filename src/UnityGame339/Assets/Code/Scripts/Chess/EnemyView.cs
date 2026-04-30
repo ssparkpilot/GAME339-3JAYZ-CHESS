@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game339.Shared.Models;
 using System.Collections;
+using UnityEngine.Events;
 
 public class EnemyView : MonoBehaviour
 {
@@ -17,11 +18,33 @@ public class EnemyView : MonoBehaviour
 
     private EnemyUnit unit;
     private Coroutine moveRoutine;
+    public AudioClip SpawnSound;
+    public AudioClip MoveSound;
+
+    public AudioSource SoundSpawner;
+
+    public float minPitch = 0.8f;
+    public float maxPitch = 1.2f;
     
     private void Start()
     {
         baseColor = sr.color;
+
+        SoundSpawner.pitch = Random.Range(minPitch, maxPitch);
+        //make the audiosource play at half the volume
+        //SoundSpawner.volume = 0.25f;
+        //play the place sound at the randomized pitch
+
+        if (SoundSpawner != null && SpawnSound != null)
+        {
+            SoundSpawner.PlayOneShot(SpawnSound);
+        }
     }
+
+    
+
+
+    
     
     public void FreezeTint()
     {
@@ -48,6 +71,7 @@ public class EnemyView : MonoBehaviour
 
     public void UpdatePosition()
     {
+        
         if (unit == null)
             return;
 
@@ -56,6 +80,17 @@ public class EnemyView : MonoBehaviour
             return;
 
         // Stop previous movement if still running
+
+        SoundSpawner.pitch = Random.Range(minPitch, maxPitch);
+        //make the audiosource play at half the volume
+        //SoundSpawner.volume = 0.25f;
+        //play the place sound at the randomized pitch
+
+        if (SoundSpawner != null && MoveSound != null)
+        {
+            SoundSpawner.PlayOneShot(MoveSound);
+        }
+
         if (moveRoutine != null)
             StopCoroutine(moveRoutine);
 

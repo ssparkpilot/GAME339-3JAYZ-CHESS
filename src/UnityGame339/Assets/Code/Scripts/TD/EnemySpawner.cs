@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
             timeSinceLastSpawn = 0f;
         }
 
-        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0)
+        if (enemiesAlive <= 0 && enemiesLeftToSpawn <= 0)
         {
             EndWave();
         }
@@ -131,7 +131,7 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
         
         audioSource.pitch = Random.Range(minPitch, maxPitch); //make the audiosource play at half the volume
-        audioSource.volume = 0.75f; //play the place sound at the randomized pitch
+        audioSource.volume = 0.5f; //play the place sound at the randomized pitch
         audioSource.PlayOneShot(prefabToSpawn.GetComponent<EnemyMovement>().SpawnSound);
     }
 
