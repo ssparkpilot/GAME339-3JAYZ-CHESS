@@ -10,6 +10,8 @@ public class EnemyView : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     
+    private Health health;
+    
     [Header("Colors")]
     [SerializeField] private Color FreezeColor = Color.blue;
     
@@ -21,6 +23,11 @@ public class EnemyView : MonoBehaviour
     private void Start()
     {
         baseColor = sr.color;
+    }
+    
+    private void Awake()
+    {
+        health = GetComponent<Health>();
     }
     
     public void FreezeTint()
@@ -90,7 +97,7 @@ public class EnemyView : MonoBehaviour
         if (HoverHealthUI.main == null) return;
         if (unit == null) return;
 
-        HoverHealthUI.main.Show(transform.position, unit.Health);
+        HoverHealthUI.main.Show(transform.position, health.CurrentHP);
     }
 
     private void OnMouseExit()

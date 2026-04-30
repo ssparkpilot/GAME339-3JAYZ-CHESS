@@ -155,7 +155,7 @@ MonoBehaviour:
   moveSpeed: 4
   baseSpeed: 4
   sr: {fileID: 8512346987688035417}
-  FreezeColor: {r: 0, g: 0, b: 1, a: 1}
+  FreezeColor: {r: 0.3915094, g: 0.8213818, b: 1, a: 1}
 --- !u!114 &111587814746518501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
-  hitPoints: 2
+  hitPoints: 20
   currencyWorth: 25
   coinDropChance: 0.25
   coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
