@@ -7,8 +7,7 @@ public class HoverHealthUI : MonoBehaviour
 
     [SerializeField] private GameObject panel;
     [SerializeField] private TMP_Text healthText;
-
-    private RectTransform panelRect;
+    [SerializeField] private Vector3 offset = new Vector3(0, 15, 0);
 
     private void Awake()
     {
@@ -16,26 +15,23 @@ public class HoverHealthUI : MonoBehaviour
 
         if (panel != null)
         {
-            panelRect = panel.GetComponent<RectTransform>();
             panel.SetActive(false);
         }
     }
 
     public void Show(Vector3 worldPosition, int health)
-{
-    if (panel == null || healthText == null) return;
+    {
+        if (panel == null || healthText == null) return;
 
-    panel.SetActive(true);
-    healthText.text = "HP: " + health;
+        panel.SetActive(true);
+        healthText.text = "HP: " + health;
 
-    Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-    panel.transform.position = screenPosition + new Vector3(0, 0, 0);
-}
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
+        panel.transform.position = screenPosition + offset;
+    }
 
     public void Hide()
     {
-        Debug.Log("Hide() called");
-
         if (panel != null)
         {
             panel.SetActive(false);
