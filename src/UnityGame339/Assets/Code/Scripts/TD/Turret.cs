@@ -11,13 +11,19 @@ public class Turret : DeathEffectObject
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
 
-    [Header("Attribute")]
+    [Header("Attributes")]
     [SerializeField] public float targetingRange = 3f;
     [SerializeField] private float bps = 1f; // bullets per second
     [SerializeField] public float aps = 4f; // attacks per second
     [SerializeField] public float mps = 4f; // money per second
     [SerializeField] private int baseUpgradeCost = 100;
     [SerializeField] private float targetingRangeBase;
+
+    [Header("Health")]
+    [SerializeField] private int maxHealth = 5;
+    [SerializeField] private int currentHealth;
+
+    public int CurrentHealth => currentHealth;
 
     public int towerIndex;
     
@@ -28,7 +34,7 @@ public class Turret : DeathEffectObject
     private Transform target;
     public float timeUntilFire;
 
-    private int level = 1; // tower upgrade level
+    private int level = 1;
 
     public AudioSource audioSource;
     public AudioClip placeSound;
@@ -38,6 +44,9 @@ public class Turret : DeathEffectObject
 
     private void Start()
     {
+        // ✅ Initialize health
+        currentHealth = maxHealth;
+
         bpsBase = bps;
         apsBase = aps;
         mpsBase = mps;
@@ -47,22 +56,29 @@ public class Turret : DeathEffectObject
         upgradeButton.onClick.AddListener(Upgrade);
     }
 
-    private void Update(){
-        if (LevelManager.main.isGameOver){
+    private void Update()
+    {
+        if (LevelManager.main.isGameOver)
+        {
             return;
         }
         
-        if(target == null){
+        if (target == null)
+        {
             FindTarget();
             return;
         }
 
-        if (!CheckTargetIsInRange()){
+        if (!CheckTargetIsInRange())
+        {
             target = null;
-        } else {
+        }
+        else
+        {
             timeUntilFire += Time.deltaTime;
 
-            if (timeUntilFire >= 1f / bps){
+            if (timeUntilFire >= 1f / bps)
+            {
                 Shoot();
                 timeUntilFire = 0f;
             }
@@ -76,9 +92,7 @@ public class Turret : DeathEffectObject
         bulletScript.SetTarget(target);
         
         audioSource.pitch = Random.Range(minPitch, maxPitch);
-        //make the audiosource play at half the volume
         audioSource.volume = 0.25f;
-        //play the place sound at the randomized pitch
         audioSource.PlayOneShot(placeSound);
     }
 
@@ -86,14 +100,65 @@ public class Turret : DeathEffectObject
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, Vector2.zero, 0f, enemyMask);
 
-        if (hits.Length > 0){
+        if (hits.Length > 0)
+        {
             target = hits[0].transform;
         }
     }
 
-    private bool CheckTargetIsInRange() {
+    private bool CheckTargetIsInRange()
+    {
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
+
+    // -------------------------
+    // 🔥 DAMAGE SYSTEM
+    // -------------------------
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0);
+
+        Debug.Log("Tower HP: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            DestroyTower();
+        }
+    }
+
+    private void DestroyTower()
+    {
+        CreateDeathEffect();
+        Destroy(gameObject);
+    }
+
+    // -------------------------
+    // 🟢 HOVER UI
+    // -------------------------
+
+    private void OnMouseEnter()
+    {
+        if (HoverHealthUI.main == null) return;
+
+        HoverHealthUI.main.Show(
+            transform.position + new Vector3(0, 0.5f, 0),
+            currentHealth
+        );
+    }
+
+    private void OnMouseExit()
+    {
+        if (HoverHealthUI.main != null)
+        {
+            HoverHealthUI.main.Hide();
+        }
+    }
+
+    // -------------------------
+    // 🔧 UPGRADE SYSTEM
+    // -------------------------
 
     public void OpenUpgradeUI()
     {
@@ -121,6 +186,7 @@ public class Turret : DeathEffectObject
         targetingRange = CalculateRange();
         
         CloseUpgradeUI();
+
         Debug.Log("New level: " + level);
         Debug.Log("New BPS: " + bps);
         Debug.Log("New targeting range: " + targetingRange);
@@ -152,7 +218,8 @@ public class Turret : DeathEffectObject
         return targetingRangeBase * Mathf.Pow(level, 0.4f);
     }
 
-    private void OnDrawGizmosSelected(){
+    private void OnDrawGizmosSelected()
+    {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
