@@ -44,7 +44,6 @@ public class Turret : DeathEffectObject
 
     private void Start()
     {
-        // ✅ Initialize health
         currentHealth = maxHealth;
 
         bpsBase = bps;
@@ -111,9 +110,6 @@ public class Turret : DeathEffectObject
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
-    // -------------------------
-    // 🔥 DAMAGE SYSTEM
-    // -------------------------
 
     public void TakeDamage(int amount)
     {
@@ -134,27 +130,22 @@ public class Turret : DeathEffectObject
         Destroy(gameObject);
     }
 
-    // -------------------------
-    // 🟢 HOVER UI
-    // -------------------------
 
     private void OnMouseEnter()
-    {
-        if (HoverHealthUI.main == null) return;
+{
+    if (HoverHealthUI.main == null) return;
 
-        HoverHealthUI.main.Show(
-            transform.position + new Vector3(0, 0.5f, 0),
-            currentHealth
-        );
-    }
+    Vector3 hoverPosition = transform.position + new Vector3(-0.2f, -0.4f, 0);
+    HoverHealthUI.main.Show(hoverPosition, currentHealth);
+}
 
-    private void OnMouseExit()
+private void OnMouseExit()
+{
+    if (HoverHealthUI.main != null)
     {
-        if (HoverHealthUI.main != null)
-        {
-            HoverHealthUI.main.Hide();
-        }
+        HoverHealthUI.main.Hide();
     }
+}
 
     public void OpenUpgradeUI()
     {
