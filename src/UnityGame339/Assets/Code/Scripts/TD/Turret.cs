@@ -156,10 +156,6 @@ public class Turret : DeathEffectObject
         }
     }
 
-    // -------------------------
-    // 🔧 UPGRADE SYSTEM
-    // -------------------------
-
     public void OpenUpgradeUI()
     {
         upgradeUI.SetActive(true);
