@@ -11,11 +11,14 @@ public class EnemyView : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     
+    private Health health;
+    
     [Header("Colors")]
     [SerializeField] private Color FreezeColor = Color.blue;
     
     private Color baseColor;
 
+    private float baseSpeed;
     private EnemyUnit unit;
     private Coroutine moveRoutine;
     public AudioClip SpawnSound;
@@ -46,6 +49,11 @@ public class EnemyView : MonoBehaviour
 
     
     
+    private void Awake()
+    {
+        health = GetComponent<Health>();
+    }
+    
     public void FreezeTint()
     {
         sr.color = FreezeColor;
@@ -62,11 +70,13 @@ public class EnemyView : MonoBehaviour
     public void Init(EnemyUnit enemyUnit)
     {
         unit = enemyUnit;
+        baseSpeed = moveSpeed;
 
-        // Snap instantly on spawn
         ChessPlot plot = BoardManager.main.GetPlot(unit.Position);
         if (plot != null)
+        {
             transform.position = plot.transform.position;
+        }
     }
 
     public void UpdatePosition()
@@ -76,8 +86,7 @@ public class EnemyView : MonoBehaviour
             return;
 
         ChessPlot targetPlot = BoardManager.main.GetPlot(unit.Position);
-        if (targetPlot == null)
-            return;
+        if (targetPlot == null) return;
 
         // Stop previous movement if still running
 
@@ -92,7 +101,9 @@ public class EnemyView : MonoBehaviour
         }
 
         if (moveRoutine != null)
+        {
             StopCoroutine(moveRoutine);
+        }
 
         moveRoutine = StartCoroutine(MoveTo(targetPlot.transform.position));
     }
@@ -120,12 +131,32 @@ public class EnemyView : MonoBehaviour
         transform.position = target;
     }
 
+    public void UpdateSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+    public void ResetSpeed()
+    {
+        moveSpeed = baseSpeed;
+    }
+
+    public void FreezeTint()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        if (sr != null)
+        {
+            sr.color = Color.cyan;
+        }
+    }
+
     private void OnMouseEnter()
     {
         if (HoverHealthUI.main == null) return;
         if (unit == null) return;
 
-        HoverHealthUI.main.Show(transform.position, unit.Health);
+        HoverHealthUI.main.Show(transform.position, health.CurrentHP);
     }
 
     private void OnMouseExit()
@@ -134,20 +165,5 @@ public class EnemyView : MonoBehaviour
         {
             HoverHealthUI.main.Hide();
         }
-    }
-    
-    public void UpdateSpeed(float newSpeed)
-    {
-        moveSpeed = newSpeed;
-    }
-    
-    public void ResetSpeed()
-    {
-        
-        if (this == null)
-            return;
-
-        moveSpeed = baseSpeed;
-        ResetColor();
     }
 }
