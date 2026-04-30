@@ -7,25 +7,25 @@ namespace Game339.Shared.Services.Implementation
     {
         public TurnOwner CurrentOwner { get; private set; }
         public TurnPhase CurrentPhase { get; private set; }
-        public TurnNumbers CurrentTurnNumber { get; private set; }
+        public readonly ObservableValue<int> CurrentTurnNumber = new ObservableValue<int>(0);
 
         public void StartGame()
         {
             CurrentOwner = TurnOwner.Player;
             CurrentPhase = TurnPhase.PlayerTurnStart;
-            CurrentTurnNumber = 0;
+            CurrentTurnNumber.Value=0;
 
         }
 
         public int GetTurnNumber()
         {
-            return (int)CurrentTurnNumber;
+            return CurrentTurnNumber.Value;
         }
 
 
         public void AdvancePhase()
         {
-            CurrentTurnNumber++;
+            CurrentTurnNumber.Value++;
 
             switch (CurrentPhase)
             {

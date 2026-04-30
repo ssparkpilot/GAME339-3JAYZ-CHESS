@@ -19,10 +19,6 @@ namespace Game339.Shared.Models
         EnemyTurnEnd
     }
 
-    public enum TurnNumbers
-    {
-        None
-
-    }
+    
 
 }

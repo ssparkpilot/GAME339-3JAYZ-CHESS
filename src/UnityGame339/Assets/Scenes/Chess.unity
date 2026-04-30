@@ -2031,7 +2031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &223603083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10949,13 +10949,14 @@ GameObject:
   - component: {fileID: 1518296862}
   - component: {fileID: 1518296861}
   - component: {fileID: 1518296860}
+  - component: {fileID: 1518296863}
   m_Layer: 5
   m_Name: ReadyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1518296859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11058,6 +11059,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518296858}
   m_CullTransparentMesh: 1
+--- !u!114 &1518296863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518296858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131a4eb6fd20ff746b3e2e7cb5d6de4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Runtime.ReadyButton
+  button: {fileID: 1518296860}
 --- !u!1001 &1589898591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11445,6 +11459,7 @@ GameObject:
   - component: {fileID: 1675078591}
   - component: {fileID: 1675078593}
   - component: {fileID: 1675078592}
+  - component: {fileID: 1675078594}
   m_Layer: 5
   m_Name: TurnText
   m_TagString: Untagged
@@ -11571,6 +11586,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675078590}
   m_CullTransparentMesh: 1
+--- !u!114 &1675078594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675078590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8dcf5a8bfa7fa4588c8dd3965922ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Runtime.TurnUIView
+  label: {fileID: 1675078592}
+  prefix: 
 --- !u!1001 &1700886388
 PrefabInstance:
   m_ObjectHideFlags: 0

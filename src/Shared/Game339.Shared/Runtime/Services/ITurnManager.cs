@@ -6,7 +6,6 @@ namespace Game339.Shared.Services
     {
         TurnOwner CurrentOwner { get; }
         TurnPhase CurrentPhase { get; }
-        TurnNumbers CurrentTurnNumber { get; }
 
         void StartGame();
 
