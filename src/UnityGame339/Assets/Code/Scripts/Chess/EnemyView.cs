@@ -5,10 +5,44 @@ using System.Collections;
 public class EnemyView : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float baseSpeed = 4f;
+    
+    [Header("References")]
+    [SerializeField] private SpriteRenderer sr;
+    
+    private Health health;
+    
+    [Header("Colors")]
+    [SerializeField] private Color FreezeColor = Color.blue;
+    
+    private Color baseColor;
 
     private float baseSpeed;
     private EnemyUnit unit;
     private Coroutine moveRoutine;
+    
+    private void Start()
+    {
+        baseColor = sr.color;
+    }
+    
+    private void Awake()
+    {
+        health = GetComponent<Health>();
+    }
+    
+    public void FreezeTint()
+    {
+        sr.color = FreezeColor;
+    }
+    
+    private void ResetColor()
+    {
+        if (sr == null)
+            return;
+
+        sr.color = baseColor;
+    }
 
     public void Init(EnemyUnit enemyUnit)
     {
@@ -85,8 +119,7 @@ public class EnemyView : MonoBehaviour
         if (HoverHealthUI.main == null) return;
         if (unit == null) return;
 
-        Vector3 hoverPosition = transform.position + new Vector3(-0.2f, -0.4f, 0);
-        HoverHealthUI.main.Show(hoverPosition, unit.Health);
+        HoverHealthUI.main.Show(transform.position, health.CurrentHP);
     }
 
     private void OnMouseExit()
