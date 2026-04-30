@@ -17,6 +17,7 @@ public class EnemyView : MonoBehaviour
     
     private Color baseColor;
 
+    private float baseSpeed;
     private EnemyUnit unit;
     private Coroutine moveRoutine;
     
@@ -46,25 +47,26 @@ public class EnemyView : MonoBehaviour
     public void Init(EnemyUnit enemyUnit)
     {
         unit = enemyUnit;
+        baseSpeed = moveSpeed;
 
-        // Snap instantly on spawn
         ChessPlot plot = BoardManager.main.GetPlot(unit.Position);
         if (plot != null)
+        {
             transform.position = plot.transform.position;
+        }
     }
 
     public void UpdatePosition()
     {
-        if (unit == null)
-            return;
+        if (unit == null) return;
 
         ChessPlot targetPlot = BoardManager.main.GetPlot(unit.Position);
-        if (targetPlot == null)
-            return;
+        if (targetPlot == null) return;
 
-        // Stop previous movement if still running
         if (moveRoutine != null)
+        {
             StopCoroutine(moveRoutine);
+        }
 
         moveRoutine = StartCoroutine(MoveTo(targetPlot.transform.position));
     }
@@ -92,6 +94,26 @@ public class EnemyView : MonoBehaviour
         transform.position = target;
     }
 
+    public void UpdateSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+    public void ResetSpeed()
+    {
+        moveSpeed = baseSpeed;
+    }
+
+    public void FreezeTint()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        if (sr != null)
+        {
+            sr.color = Color.cyan;
+        }
+    }
+
     private void OnMouseEnter()
     {
         if (HoverHealthUI.main == null) return;
@@ -106,20 +128,5 @@ public class EnemyView : MonoBehaviour
         {
             HoverHealthUI.main.Hide();
         }
-    }
-    
-    public void UpdateSpeed(float newSpeed)
-    {
-        moveSpeed = newSpeed;
-    }
-    
-    public void ResetSpeed()
-    {
-        
-        if (this == null)
-            return;
-
-        moveSpeed = baseSpeed;
-        ResetColor();
     }
 }
