@@ -159,7 +159,6 @@ MonoBehaviour:
   FreezeColor: {r: 0, g: 0, b: 1, a: 1}
   SpawnSound: {fileID: 8300000, guid: 168eb4fc8f40f8b43a9cf88d2ba408ca, type: 3}
   MoveSound: {fileID: 8300000, guid: ae80d747de4cbf84cbc0d6a06db2417a, type: 3}
-  DeathSound: {fileID: 8300000, guid: c7bfe81a73db6da4eb242bc36b520465, type: 3}
   SoundSpawner: {fileID: 2556180585068858520}
   minPitch: 0.8
   maxPitch: 1.2
@@ -176,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
-  hitPoints: 2
+  hitPoints: 20
   currencyWorth: 25
   coinDropChance: 0.25
   coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}

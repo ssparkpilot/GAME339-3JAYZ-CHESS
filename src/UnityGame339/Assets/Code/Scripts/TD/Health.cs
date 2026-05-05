@@ -1,12 +1,18 @@
+using System;
 using UnityEngine;
 using Game339.Shared.Services;
 using Game339.Shared.Services.Implementation;
+using Random = UnityEngine.Random;
 
 public class Health : DeathEffectObject
 {
     [Header("Attributes")]
     [SerializeField] private int hitPoints = 2;
     [SerializeField] private int currencyWorth = 25;
+    
+    public int CurrentHP => hitPoints;
+  
+    public event Action<int> OnHealthChanged; // Event
 
     [Header("Coin Drop")]
     [SerializeField, Range(0f, 1f)] private float coinDropChance = 0.25f;
@@ -27,9 +33,11 @@ public class Health : DeathEffectObject
     {
         if (isDestroyed)
             return;
-
+        
         hitPoints = healthService.ApplyDamage(hitPoints, damage);
-
+      
+        OnHealthChanged?.Invoke(hitPoints); // Notify listeners
+        
         if (healthService.IsDead(hitPoints))
         {
             Die();

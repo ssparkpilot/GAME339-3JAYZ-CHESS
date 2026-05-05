@@ -8,6 +8,8 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float baseSpeed = 4f;
     
+    private Health health;
+    
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     
@@ -26,6 +28,11 @@ public class EnemyView : MonoBehaviour
     public float minPitch = 0.8f;
     public float maxPitch = 1.2f;
     
+    private void Awake()
+    {
+        health = GetComponent<Health>();
+    }
+    
     private void Start()
     {
         baseColor = sr.color;
@@ -40,11 +47,6 @@ public class EnemyView : MonoBehaviour
             SoundSpawner.PlayOneShot(SpawnSound);
         }
     }
-
-    
-
-
-    
     
     public void FreezeTint()
     {
@@ -124,8 +126,9 @@ public class EnemyView : MonoBehaviour
     {
         if (HoverHealthUI.main == null) return;
         if (unit == null) return;
+        if (health == null) return;
 
-        HoverHealthUI.main.Show(transform.position, unit.Health);
+        HoverHealthUI.main.Show(transform.position, health.CurrentHP);
     }
 
     private void OnMouseExit()
