@@ -701,6 +701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BoardManager
   pawnPrefab: {fileID: 5493552132571610855, guid: 84b562da32ee0491cbbe456a68d3109e, type: 3}
   knightPrefab: {fileID: 6966504729346138767, guid: da25969904a55459d992f2505da5edd3, type: 3}
+  bishopPrefab: {fileID: 3868944714241104306, guid: 688c956f555604ba38ffffba13a7ac62, type: 3}
 --- !u!4 &73424167
 Transform:
   m_ObjectHideFlags: 0
@@ -8312,6 +8313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovementController
   moveInterval: 5
+  delayBetweenEachEnemyMove: 0.2
 --- !u!4 &1105938660
 Transform:
   m_ObjectHideFlags: 0
@@ -12779,7 +12781,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverHealthUI
   panel: {fileID: 927051745}
   healthText: {fileID: 2127417218}
-  worldOffset: {x: 0, y: 1.5, z: 0}
 --- !u!4 &1883123360
 Transform:
   m_ObjectHideFlags: 0
