@@ -9,6 +9,7 @@ public class BoardManager : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject pawnPrefab;
+    [SerializeField] private GameObject knightPrefab;
 
     public GridBoard Board { get; private set; }
 
@@ -50,7 +51,7 @@ public class BoardManager : MonoBehaviour
         var enemyUnit = new EnemyUnit(
             pos,
             new PawnMovementRule(),
-            health: 3
+            health: 20
         );
 
         Board.GetTile(pos).Place(enemyUnit);
@@ -58,6 +59,28 @@ public class BoardManager : MonoBehaviour
         ChessPlot plot = GetPlot(pos);
         GameObject enemyGO = Instantiate(
             pawnPrefab,
+            plot.transform.position,
+            Quaternion.identity
+        );
+
+        enemyGO.GetComponent<EnemyView>().Init(enemyUnit);
+
+        return enemyUnit;
+    }
+    
+    public EnemyUnit SpawnEnemyKnight(GridPosition pos)
+    {
+        var enemyUnit = new EnemyUnit(
+            pos,
+            new KnightMovementRule(),
+            health: 20
+        );
+
+        Board.GetTile(pos).Place(enemyUnit);
+
+        ChessPlot plot = GetPlot(pos);
+        GameObject enemyGO = Instantiate(
+            knightPrefab,
             plot.transform.position,
             Quaternion.identity
         );
