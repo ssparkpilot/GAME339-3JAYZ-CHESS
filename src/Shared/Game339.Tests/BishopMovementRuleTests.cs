@@ -82,4 +82,6 @@ namespace Game339.Tests
 
             Assert.That(moves, Is.Empty);
         }
+    }
+}
 
