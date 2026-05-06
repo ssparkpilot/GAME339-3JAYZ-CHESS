@@ -122,20 +122,26 @@ public class EnemyView : MonoBehaviour
         transform.position = target;
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
+        Debug.Log("Hovering " + gameObject.name);
+        
         if (HoverHealthUI.main == null) return;
         if (unit == null) return;
         if (health == null) return;
-
-        HoverHealthUI.main.Show(transform.position, health.CurrentHP);
+        
+        if (HoverHealthUI.main != null && health != null)
+        {
+            HoverHealthUI.main.Show(health);
+        }
     }
 
     private void OnMouseExit()
     {
-        if (HoverHealthUI.main != null)
+        if (HoverHealthUI.main != null && health != null)
         {
-            HoverHealthUI.main.Hide();
+            Debug.Log("Exit " + gameObject.name);
+            HoverHealthUI.main.Hide(health);
         }
     }
     

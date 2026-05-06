@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoardManager
   pawnPrefab: {fileID: 5493552132571610855, guid: 84b562da32ee0491cbbe456a68d3109e, type: 3}
+  knightPrefab: {fileID: 6966504729346138767, guid: da25969904a55459d992f2505da5edd3, type: 3}
 --- !u!4 &73424167
 Transform:
   m_ObjectHideFlags: 0
@@ -728,7 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWaveSpawner
   spawnInterval: 1
-  pawnsPerWave: 20
+  piecesPerWave: 20
 --- !u!1 &81278308
 GameObject:
   m_ObjectHideFlags: 0
@@ -12778,6 +12779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverHealthUI
   panel: {fileID: 927051745}
   healthText: {fileID: 2127417218}
+  worldOffset: {x: 0, y: 1.5, z: 0}
 --- !u!4 &1883123360
 Transform:
   m_ObjectHideFlags: 0
