@@ -1,18 +1,19 @@
 using UnityEngine;
-using TMPro;
 
 public class PieceHealthUI : MonoBehaviour
 {
     [SerializeField] private Health health;
-    [SerializeField] private TMP_Text healthText;
+    [SerializeField] private RectTransform fillRect;
+
+    private int maxHP;
+    private float fullWidth = 80f;
 
     private void Awake()
     {
         if (health == null)
             health = GetComponentInParent<Health>();
 
-        if (healthText == null)
-            healthText = GetComponentInChildren<TMP_Text>();
+        maxHP = health.CurrentHP;
     }
 
     private void OnEnable()
@@ -20,7 +21,7 @@ public class PieceHealthUI : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged += UpdateHealth;
-            UpdateHealth(health.CurrentHP); // initialize
+            UpdateHealth(health.CurrentHP);
         }
     }
 
@@ -30,9 +31,16 @@ public class PieceHealthUI : MonoBehaviour
             health.OnHealthChanged -= UpdateHealth;
     }
 
-    private void UpdateHealth(int hp)
+    private void UpdateHealth(int currentHP)
     {
-        if (healthText != null)
-            healthText.text = "HP: " + hp;
+        float percent = (float)currentHP / maxHP;
+
+        // Update width
+        if (fillRect != null)
+        {
+            Vector2 size = fillRect.sizeDelta;
+            size.x = fullWidth * percent;
+            fillRect.sizeDelta = size;
+        }
     }
 }
