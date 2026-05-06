@@ -19,22 +19,27 @@ namespace Game339.Tests
         }
 
         [Test]
-        public void Knight_From_Center_Has_Eight_Moves()
+        public void Knight_From_Center_Has_Four_Rightward_Moves()
         {
             var from = new GridPosition(3, 3);
 
             var moves = knightRule.GetLegalMoves(from, board).ToList();
 
-            Assert.That(moves.Count, Is.EqualTo(8));
+            Assert.That(moves.Count, Is.EqualTo(4));
+            Assert.That(moves, Does.Contain(new GridPosition(5, 4)));
+            Assert.That(moves, Does.Contain(new GridPosition(5, 2)));
+            Assert.That(moves, Does.Contain(new GridPosition(4, 5)));
+            Assert.That(moves, Does.Contain(new GridPosition(4, 1)));
         }
 
         [Test]
-        public void Knight_At_Corner_Has_Two_Moves()
+        public void Knight_At_Left_Edge_Has_Limited_Rightward_Moves()
         {
             var from = new GridPosition(0, 0);
 
             var moves = knightRule.GetLegalMoves(from, board).ToList();
 
+            // Only moves that stay in bounds
             Assert.That(moves.Count, Is.EqualTo(2));
             Assert.That(moves, Does.Contain(new GridPosition(2, 1)));
             Assert.That(moves, Does.Contain(new GridPosition(1, 2)));
@@ -50,6 +55,16 @@ namespace Game339.Tests
             Assert.That(moves.All(p =>
                 p.X >= 0 && p.X < 8 &&
                 p.Y >= 0 && p.Y < 8));
+        }
+
+        [Test]
+        public void Knight_Only_Moves_Right()
+        {
+            var from = new GridPosition(3, 3);
+
+            var moves = knightRule.GetLegalMoves(from, board).ToList();
+
+            Assert.That(moves.All(p => p.X > from.X));
         }
 
         [Test]
@@ -70,13 +85,14 @@ namespace Game339.Tests
         {
             var from = new GridPosition(3, 3);
 
-            // Place blocking units arbitrarily (should not matter)
+            // These should not block movement
             board.GetTile(new GridPosition(4, 3)).Place(new TestUnit(new GridPosition(4, 3)));
             board.GetTile(new GridPosition(3, 4)).Place(new TestUnit(new GridPosition(3, 4)));
 
             var moves = knightRule.GetLegalMoves(from, board).ToList();
 
-            Assert.That(moves.Count, Is.EqualTo(8));
+            // Still should allow up to 4 rightward moves
+            Assert.That(moves.Count, Is.EqualTo(4));
         }
     }
 }
