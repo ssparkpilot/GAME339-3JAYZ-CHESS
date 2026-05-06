@@ -19,25 +19,32 @@ namespace Game339.Tests
         }
 
         [Test]
-        public void Bishop_From_Center_Moves_In_Four_Diagonals()
+        public void Bishop_From_Center_Moves_Only_In_Right_Diagonals()
         {
             var from = new GridPosition(3, 3);
 
             var moves = bishopRule.GetLegalMoves(from, board).ToList();
 
+            // Right-up diagonal
             Assert.That(moves, Does.Contain(new GridPosition(4, 4)));
             Assert.That(moves, Does.Contain(new GridPosition(5, 5)));
-            Assert.That(moves, Does.Contain(new GridPosition(2, 2)));
-            Assert.That(moves, Does.Contain(new GridPosition(1, 1)));
+            Assert.That(moves, Does.Contain(new GridPosition(6, 6)));
+            Assert.That(moves, Does.Contain(new GridPosition(7, 7)));
 
+            // Right-down diagonal
             Assert.That(moves, Does.Contain(new GridPosition(4, 2)));
             Assert.That(moves, Does.Contain(new GridPosition(5, 1)));
-            Assert.That(moves, Does.Contain(new GridPosition(2, 4)));
-            Assert.That(moves, Does.Contain(new GridPosition(1, 5)));
+            Assert.That(moves, Does.Contain(new GridPosition(6, 0)));
+
+            // Should NOT include any leftward movement
+            Assert.That(moves, Does.Not.Contain(new GridPosition(2, 2)));
+            Assert.That(moves, Does.Not.Contain(new GridPosition(1, 1)));
+            Assert.That(moves, Does.Not.Contain(new GridPosition(2, 4)));
+            Assert.That(moves, Does.Not.Contain(new GridPosition(1, 5)));
         }
 
         [Test]
-        public void Bishop_Stops_Before_Blocking_Unit()
+        public void Bishop_Stops_Before_Blocking_Unit_On_Right_Up_Diagonal()
         {
             var from = new GridPosition(3, 3);
             var blocker = new GridPosition(5, 5);
@@ -52,7 +59,7 @@ namespace Game339.Tests
         }
 
         [Test]
-        public void Bishop_Cannot_Move_Through_Blockers()
+        public void Bishop_Cannot_Move_Through_Blockers_On_Right_Diagonal()
         {
             var from = new GridPosition(2, 2);
             var blocker = new GridPosition(4, 4);
@@ -61,20 +68,20 @@ namespace Game339.Tests
 
             var moves = bishopRule.GetLegalMoves(from, board).ToList();
 
+            Assert.That(moves, Does.Contain(new GridPosition(3, 3)));
             Assert.That(moves, Does.Not.Contain(blocker));
             Assert.That(moves, Does.Not.Contain(new GridPosition(5, 5)));
         }
 
         [Test]
-        public void Bishop_At_Corner_Has_No_Moves_Outside_Diagonal()
+        public void Bishop_At_Right_Edge_Has_No_Moves()
         {
-            var from = new GridPosition(0, 0);
+            var from = new GridPosition(7, 3);
 
             var moves = bishopRule.GetLegalMoves(from, board).ToList();
 
-            Assert.That(moves.All(p =>
-                p.X >= 0 && p.X < 8 &&
-                p.Y >= 0 && p.Y < 8));
+            Assert.That(moves, Is.Empty);
         }
     }
 }
+

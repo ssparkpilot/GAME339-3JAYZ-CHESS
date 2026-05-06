@@ -10,12 +10,12 @@ namespace Game339.Shared.Services.Implementation
         {
             new GridPosition( 2,  1),
             new GridPosition( 2, -1),
-            new GridPosition(-2,  1),
-            new GridPosition(-2, -1),
+            //new GridPosition(-2,  1),
+            //new GridPosition(-2, -1),
             new GridPosition( 1,  2),
             new GridPosition( 1, -2),
-            new GridPosition(-1,  2),
-            new GridPosition(-1, -2)
+            //new GridPosition(-1,  2),
+            //new GridPosition(-1, -2)
         };
 
         public IEnumerable<GridPosition> GetLegalMoves(
