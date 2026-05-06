@@ -23,7 +23,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private void SpawnRandomPiece()
     {
-        int i = Random.Range(0, 3);
+        int i = Random.Range(0, 4);
 
         if (i == 0)
         {
@@ -37,6 +37,8 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             SpawnBishopInRandomLane();
         }
+        else if (i == 3)
+            SpawnRookInRandomLane();
     }
 
     private void SpawnPawnInRandomLane()
@@ -72,6 +74,18 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             Debug.Log("Spawning bishop in lane: " + pos);
             BoardManager.main.SpawnEnemyBishop(pos);
+        }
+    }
+    
+    private void SpawnRookInRandomLane()
+    {
+        int y = Random.Range(0, 8); // 0 to 7
+        var pos = new GridPosition(0, y);
+
+        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        {
+            Debug.Log("Spawning rook in lane: " + pos);
+            BoardManager.main.SpawnEnemyRook(pos);
         }
     }
 }
