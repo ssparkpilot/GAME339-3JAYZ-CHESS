@@ -702,6 +702,7 @@ MonoBehaviour:
   pawnPrefab: {fileID: 5493552132571610855, guid: 84b562da32ee0491cbbe456a68d3109e, type: 3}
   knightPrefab: {fileID: 6966504729346138767, guid: da25969904a55459d992f2505da5edd3, type: 3}
   bishopPrefab: {fileID: 3868944714241104306, guid: 688c956f555604ba38ffffba13a7ac62, type: 3}
+  rookPrefab: {fileID: 3800991191797246140, guid: 474d8d3c144a7412faa3de18de1bc722, type: 3}
 --- !u!4 &73424167
 Transform:
   m_ObjectHideFlags: 0

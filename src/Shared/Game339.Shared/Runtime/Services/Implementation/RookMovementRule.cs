@@ -9,7 +9,7 @@ namespace Game339.Shared.Services.Implementation
         private static readonly GridPosition[] Directions =
         {
             new GridPosition( 1,  0), // Right
-            new GridPosition(-1,  0), // Left
+            //new GridPosition(-1,  0), // Left
             new GridPosition( 0,  1), // Up
             new GridPosition( 0, -1)  // Down
         };

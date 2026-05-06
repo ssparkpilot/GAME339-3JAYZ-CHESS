@@ -19,7 +19,7 @@ namespace Game339.Tests
         }
 
         [Test]
-        public void Rook_From_Center_Moves_In_Four_Directions()
+        public void Rook_From_Center_Moves_In_Allowed_Directions()
         {
             var from = new GridPosition(3, 3);
 
@@ -27,8 +27,17 @@ namespace Game339.Tests
 
             Assert.That(moves, Does.Contain(new GridPosition(3, 7))); // Up
             Assert.That(moves, Does.Contain(new GridPosition(3, 0))); // Down
-            Assert.That(moves, Does.Contain(new GridPosition(0, 3))); // Left
             Assert.That(moves, Does.Contain(new GridPosition(7, 3))); // Right
+        }
+
+        [Test]
+        public void Rook_Does_Not_Move_Left()
+        {
+            var from = new GridPosition(3, 3);
+
+            var moves = rookRule.GetLegalMoves(from, board).ToList();
+
+            Assert.That(moves.All(p => p.X >= from.X));
         }
 
         [Test]
@@ -50,16 +59,16 @@ namespace Game339.Tests
         public void Rook_Cannot_Move_Through_Blockers()
         {
             var from = new GridPosition(2, 2);
-            var blocker1 = new GridPosition(2, 4);
-            var blocker2 = new GridPosition(2, 1);
+            var blockerUp = new GridPosition(2, 4);
+            var blockerDown = new GridPosition(2, 1);
 
-            board.GetTile(blocker1).Place(new TestUnit(blocker1));
-            board.GetTile(blocker2).Place(new TestUnit(blocker2));
+            board.GetTile(blockerUp).Place(new TestUnit(blockerUp));
+            board.GetTile(blockerDown).Place(new TestUnit(blockerDown));
 
             var moves = rookRule.GetLegalMoves(from, board).ToList();
 
-            Assert.That(moves, Does.Not.Contain(blocker1));
-            Assert.That(moves, Does.Not.Contain(blocker2));
+            Assert.That(moves, Does.Not.Contain(blockerUp));
+            Assert.That(moves, Does.Not.Contain(blockerDown));
             Assert.That(moves, Does.Not.Contain(new GridPosition(2, 5)));
             Assert.That(moves, Does.Not.Contain(new GridPosition(2, 0)));
         }
