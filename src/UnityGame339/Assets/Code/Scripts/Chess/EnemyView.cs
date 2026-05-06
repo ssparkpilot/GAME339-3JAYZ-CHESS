@@ -10,6 +10,8 @@ public class EnemyView : MonoBehaviour
     
     private Health health;
     
+    public EnemyUnit Unit => unit;
+    
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     
