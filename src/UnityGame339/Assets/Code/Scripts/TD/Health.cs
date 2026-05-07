@@ -10,6 +10,7 @@ public class Health : DeathEffectObject
     [Header("Attributes")]
     [SerializeField] private int hitPoints = 2;
     [SerializeField] private int currencyWorth = 25;
+    //type of 0 is enemy, type of 1 is friendly tower
 
     public int CurrentHP => hitPoints;
 

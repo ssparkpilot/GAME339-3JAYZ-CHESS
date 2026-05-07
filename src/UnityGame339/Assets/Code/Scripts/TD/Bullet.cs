@@ -20,6 +20,8 @@ public class Bullet : MonoBehaviour
     public void SetTarget(Transform _target)
     {
         target = _target;
+        Debug.Log("Bullet target set to: " + target.name);
+
     }
 
     public void SetRotationOffset(float offset)
@@ -46,15 +48,18 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         Health health = other.gameObject.GetComponent<Health>();
 
-        if (health != null)
+
+        if (health != null) // Only damage if it's an enemy
         {
+            Debug.Log("Bullet hit: " + other.gameObject.name);
             health.TakeDamage(bulletDamage);
+            Destroy(gameObject);
+
         }
 
-        Destroy(gameObject);
     }
 }
