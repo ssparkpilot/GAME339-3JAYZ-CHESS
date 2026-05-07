@@ -34,8 +34,15 @@ public class LevelManager : MonoBehaviour
         isGameOver = false;
         UpdateHealthUI();
 
-        gameOverCanvas?.SetActive(false);
-        gameWinCanvas?.SetActive(false);
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(false);
+        }
+
+        if (gameWinCanvas != null)
+        {
+            gameWinCanvas.SetActive(false);
+        }
 
         Time.timeScale = 1f;
     }
@@ -75,8 +82,17 @@ public class LevelManager : MonoBehaviour
     private void GameOver()
     {
         isGameOver = true;
-        gameOverCanvas?.SetActive(true);
-        gameWinCanvas?.SetActive(false);
+
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(true);
+        }
+
+        if (gameWinCanvas != null)
+        {
+            gameWinCanvas.SetActive(false);
+        }
+
         Time.timeScale = 0f;
     }
 
@@ -86,8 +102,17 @@ public class LevelManager : MonoBehaviour
             return;
 
         isGameOver = true;
-        gameWinCanvas?.SetActive(true);
-        gameOverCanvas?.SetActive(false);
+
+        if (gameWinCanvas != null)
+        {
+            gameWinCanvas.SetActive(true);
+        }
+
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(false);
+        }
+
         Time.timeScale = 0f;
     }
 
@@ -95,6 +120,18 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("Main menu not hooked up yet.");
+    }
+
+    public void QuitGame()
+    {
+        Time.timeScale = 1f;
+        Application.Quit();
     }
     
     public bool IsGameOver => isGameOver;
