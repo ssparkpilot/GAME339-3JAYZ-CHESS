@@ -551,7 +551,6 @@ MonoBehaviour:
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
   hitPoints: 60
   currencyWorth: 0
-  type: 1
   coinDropChance: 0
   coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
   floatingScorePrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
@@ -667,7 +666,6 @@ MonoBehaviour:
   baseUpgradeCost: 300
   targetingRangeBase: 0
   towerIndex: 0
-  timeUntilFire: 0
   audioSource: {fileID: 6022552260913901854}
   placeSound: {fileID: 8300000, guid: fbb5178c9f4c5f24fa82e45efca4abd3, type: 3}
   minPitch: 0.8
