@@ -24,7 +24,7 @@ public class EnemyWaveSpawner : MonoBehaviour
     
     void SpawnTurnEnemies()
     {
-        int spawnCount = 2; // per turn (change this!!!)
+        int spawnCount = 1; // per turn (change this!!!)
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -34,22 +34,18 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private void SpawnRandomPiece()
     {
-        int i = Random.Range(0, 4);
+        int i = Random.Range(0, 5);
 
         if (i == 0)
-        {
             SpawnPawnInRandomLane();
-        }
         else if (i == 1)
-        {
             SpawnKnightInRandomLane();
-        }
         else if (i == 2)
-        {
             SpawnBishopInRandomLane();
-        }
         else if (i == 3)
             SpawnRookInRandomLane();
+        else if (i == 4)
+            SpawnQueenInRandomLane();
     }
 
     private void SpawnPawnInRandomLane()
@@ -97,6 +93,18 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             Debug.Log("Spawning rook in lane: " + pos);
             BoardManager.main.SpawnEnemyRook(pos);
+        }
+    }
+    
+    private void SpawnQueenInRandomLane()
+    {
+        int y = Random.Range(0, 8); // 0 to 7
+        var pos = new GridPosition(0, y);
+
+        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        {
+            Debug.Log("Spawning queen in lane: " + pos);
+            BoardManager.main.SpawnEnemyQueen(pos);
         }
     }
 }
