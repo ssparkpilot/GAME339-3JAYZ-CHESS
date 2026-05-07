@@ -7,6 +7,10 @@ public class GameInitializer : MonoBehaviour
     private void Start()
     {
         var turnManager = ServiceResolver.Resolve<TurnManager>();
+
         turnManager.StartGame();
+
+        // start at first playable state
+        turnManager.AdvancePhase(); // -> PlayerActing
     }
 }

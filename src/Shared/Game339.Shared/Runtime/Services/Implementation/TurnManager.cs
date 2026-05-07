@@ -23,8 +23,6 @@ namespace Game339.Shared.Services.Implementation
             CurrentTurnNumber.Value=0;
 
             OnTurnStateChanged?.Invoke(CurrentOwner, CurrentPhase);
-            
-            AdvancePhase();
         }
 
         public int GetTurnNumber()
@@ -67,21 +65,6 @@ namespace Game339.Shared.Services.Implementation
 
             OnPhaseChanged?.Invoke(CurrentPhase);
             OnTurnStateChanged?.Invoke(CurrentOwner, CurrentPhase);
-            
-            
-            // automaticly advance non-interactive phases
-            HandleAutoAdvance();
-        }
-        
-        private void HandleAutoAdvance()
-        {
-            // only pause on player input phase
-            if (CurrentPhase == TurnPhase.PlayerActing ||
-                CurrentPhase == TurnPhase.EnemyMoving)
-                return;
-
-            // continue flow
-            AdvancePhase();
         }
 
         public bool CanPlayerAct()
