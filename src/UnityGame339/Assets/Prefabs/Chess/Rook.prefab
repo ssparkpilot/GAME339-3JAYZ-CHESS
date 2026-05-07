@@ -307,6 +307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyView
   moveSpeed: 4
   baseSpeed: 4
+  damageToPlayer: 10
+  finalColumnX: 7
   sr: {fileID: 2942329733358432163}
   FreezeColor: {r: 0, g: 0, b: 1, a: 1}
   SpawnSound: {fileID: 8300000, guid: 168eb4fc8f40f8b43a9cf88d2ba408ca, type: 3}
