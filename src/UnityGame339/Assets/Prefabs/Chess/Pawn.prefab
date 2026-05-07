@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 8524911586139253620}
   m_Layer: 6
   m_Name: Pawn
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,7 +445,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -497,6 +497,7 @@ MonoBehaviour:
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
   hitPoints: 10
   currencyWorth: 25
+  type: 0
   coinDropChance: 0.25
   coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
   floatingScorePrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}

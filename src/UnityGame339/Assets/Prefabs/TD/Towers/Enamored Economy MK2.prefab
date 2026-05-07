@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2230674562529262716}
   - component: {fileID: 8578873822863354007}
   - component: {fileID: 4175658543678070156}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Upgrade Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 5520848034317013375}
   - component: {fileID: 1781193397009243021}
   - component: {fileID: 4237609154156763101}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Upgrade UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,9 +234,13 @@ GameObject:
   - component: {fileID: 8603803726678308629}
   - component: {fileID: 5049921338924324637}
   - component: {fileID: 9211982044765677356}
-  m_Layer: 0
+  - component: {fileID: 4266367801813432272}
+  - component: {fileID: 4376284547335077836}
+  - component: {fileID: 5998459075652091193}
+  - component: {fileID: 5691921734275415387}
+  m_Layer: 2
   m_Name: Enamored Economy MK2
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,6 +354,110 @@ MonoBehaviour:
   maxPitch: 1.2
   currencyWorth: 20
   FloatingScorePrefab: {fileID: 8314382623674587284, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
+--- !u!114 &4266367801813432272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187840636404338716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b146c5a61560654a9b780d761c3d1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
+  hitPoints: 20
+  currencyWorth: 0
+  type: 1
+  coinDropChance: 0
+  coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
+  floatingScorePrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
+--- !u!114 &4376284547335077836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187840636404338716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abee5f5eed2d46458f811da619bd228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionHealth
+--- !u!61 &5998459075652091193
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187840636404338716}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.9, y: 0.9}
+  m_EdgeRadius: 0
+--- !u!50 &5691921734275415387
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187840636404338716}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &7064112852150351792
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +469,7 @@ GameObject:
   - component: {fileID: 1997243286543261992}
   - component: {fileID: 6085677448555809452}
   - component: {fileID: 5496145271593233152}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +608,7 @@ GameObject:
   - component: {fileID: 4834280263607452005}
   - component: {fileID: 3164562382563684106}
   - component: {fileID: 2244110464852663867}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}

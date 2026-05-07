@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8359997397201754013}
   - component: {fileID: 8779932161120856244}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: BurningLove_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8872228625619709754}
   - component: {fileID: 1482380674764847351}
   - component: {fileID: 6772569031225327516}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8707586273053261682}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 6998895783018499933}
   - component: {fileID: 6483270347986825764}
   - component: {fileID: 8308657347356399621}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Upgrade UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,9 +374,13 @@ GameObject:
   - component: {fileID: 7568762167941923156}
   - component: {fileID: 127090505524051334}
   - component: {fileID: -3606861136716726509}
-  m_Layer: 6
+  - component: {fileID: 3909244999908342909}
+  - component: {fileID: 6908739760737986721}
+  - component: {fileID: 3912484218979071484}
+  - component: {fileID: 6689002309829929266}
+  m_Layer: 2
   m_Name: BurningLove
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -528,6 +532,110 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3909244999908342909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759806654379170304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b146c5a61560654a9b780d761c3d1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
+  hitPoints: 20
+  currencyWorth: 0
+  type: 1
+  coinDropChance: 0
+  coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
+  floatingScorePrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
+--- !u!114 &6908739760737986721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759806654379170304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abee5f5eed2d46458f811da619bd228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionHealth
+--- !u!61 &3912484218979071484
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759806654379170304}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.9, y: 1.9}
+  m_EdgeRadius: 0
+--- !u!50 &6689002309829929266
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759806654379170304}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &5797528375117383071
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +648,7 @@ GameObject:
   - component: {fileID: 3454952161079340723}
   - component: {fileID: 2855385005144243022}
   - component: {fileID: 2085787843895623269}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Upgrade Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +768,7 @@ GameObject:
   - component: {fileID: 5075481337635843051}
   - component: {fileID: 502946498838578591}
   - component: {fileID: 3982268247473948975}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,7 +906,7 @@ GameObject:
   - component: {fileID: 5715343816764234744}
   - component: {fileID: 2492891555128661157}
   - component: {fileID: 4992166176445317410}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -901,7 +1009,7 @@ GameObject:
   - component: {fileID: 1876852114894200804}
   - component: {fileID: 412641546571016152}
   - component: {fileID: 2844070493075167935}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Refund
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1040,7 +1148,7 @@ GameObject:
   - component: {fileID: 1684950365962559868}
   - component: {fileID: 655791109651173308}
   - component: {fileID: 3409531357189788963}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
