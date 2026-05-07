@@ -24,7 +24,7 @@ public class EnemyWaveSpawner : MonoBehaviour
     
     void SpawnTurnEnemies()
     {
-        int spawnCount = 1; // per turn (change this!!!)
+        int spawnCount = 8; // per turn (change this!!!)
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -105,6 +105,14 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             Debug.Log("Spawning queen in lane: " + pos);
             BoardManager.main.SpawnEnemyQueen(pos);
+        }
+    }
+    
+    private void OnDestroy()
+    {
+        if (turnManager != null)
+        {
+            turnManager.OnPhaseChanged -= HandlePhase;
         }
     }
 }
