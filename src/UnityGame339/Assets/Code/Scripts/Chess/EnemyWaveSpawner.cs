@@ -1,23 +1,34 @@
 using System.Collections;
+using Game.Runtime;
 using UnityEngine;
 using Game339.Shared.Models;
+using Game339.Shared.Services.Implementation;
 
 public class EnemyWaveSpawner : MonoBehaviour
 {
-    [SerializeField] private float spawnInterval = 1.0f;
-    [SerializeField] private int piecesPerWave = 20;
+    private TurnManager turnManager;
 
-    private void Start()
+    void Start()
     {
-        StartCoroutine(SpawnWave());
+        turnManager = ServiceResolver.Resolve<TurnManager>();
+        turnManager.OnPhaseChanged += HandlePhase;
     }
-
-    private IEnumerator SpawnWave()
+    
+    private void HandlePhase(TurnPhase phase)
     {
-        for (int i = 0; i < piecesPerWave; i++)
+        if (phase == TurnPhase.EnemyTurnStart)
+        {
+            SpawnTurnEnemies();
+        }
+    }
+    
+    void SpawnTurnEnemies()
+    {
+        int spawnCount = 2; // per turn (change this!!!)
+
+        for (int i = 0; i < spawnCount; i++)
         {
             SpawnRandomPiece();
-            yield return new WaitForSeconds(spawnInterval);
         }
     }
 

@@ -75,7 +75,6 @@ public class EnemyView : MonoBehaviour
 
     public void UpdatePosition()
     {
-        
         if (unit == null)
             return;
 
@@ -154,7 +153,6 @@ public class EnemyView : MonoBehaviour
     
     public void ResetSpeed()
     {
-        
         if (this == null)
             return;
 

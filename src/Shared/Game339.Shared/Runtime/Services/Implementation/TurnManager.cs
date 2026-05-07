@@ -1,3 +1,4 @@
+using System;
 using Game339.Shared.Models;
 using Game339.Shared.Services;
 
@@ -7,7 +8,13 @@ namespace Game339.Shared.Services.Implementation
     {
         public TurnOwner CurrentOwner { get; private set; }
         public TurnPhase CurrentPhase { get; private set; }
+        
         public readonly ObservableValue<int> CurrentTurnNumber = new ObservableValue<int>(0);
+        
+        public bool IsBusy { get; private set; }
+        
+        public Action<TurnPhase> OnPhaseChanged;
+        public event Action<TurnOwner, TurnPhase> OnTurnStateChanged;
 
         public void StartGame()
         {
@@ -15,13 +22,15 @@ namespace Game339.Shared.Services.Implementation
             CurrentPhase = TurnPhase.PlayerTurnStart;
             CurrentTurnNumber.Value=0;
 
+            OnTurnStateChanged?.Invoke(CurrentOwner, CurrentPhase);
+            
+            AdvancePhase();
         }
 
         public int GetTurnNumber()
         {
             return CurrentTurnNumber.Value;
         }
-
 
         public void AdvancePhase()
         {
@@ -55,6 +64,24 @@ namespace Game339.Shared.Services.Implementation
                     CurrentPhase = TurnPhase.PlayerTurnStart;
                     break;
             }
+
+            OnPhaseChanged?.Invoke(CurrentPhase);
+            OnTurnStateChanged?.Invoke(CurrentOwner, CurrentPhase);
+            
+            
+            // automaticly advance non-interactive phases
+            HandleAutoAdvance();
+        }
+        
+        private void HandleAutoAdvance()
+        {
+            // only pause on player input phase
+            if (CurrentPhase == TurnPhase.PlayerActing ||
+                CurrentPhase == TurnPhase.EnemyMoving)
+                return;
+
+            // continue flow
+            AdvancePhase();
         }
 
         public bool CanPlayerAct()
@@ -67,6 +94,11 @@ namespace Game339.Shared.Services.Implementation
         {
             return CurrentOwner == TurnOwner.Enemy &&
                    CurrentPhase == TurnPhase.EnemyMoving;
+        }
+        
+        public void SetBusy(bool value)
+        {
+            IsBusy = value;
         }
     }
 }
