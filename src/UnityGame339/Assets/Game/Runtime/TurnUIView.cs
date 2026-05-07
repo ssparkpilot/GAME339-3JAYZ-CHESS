@@ -5,40 +5,54 @@ using Game339.Shared.Services.Implementation;
 using TMPro;
 using UnityEngine;
 
-
 namespace Game.Runtime
 {
     public class TurnUIView : ObserverMonoBehaviour
     {
         [SerializeField] private TMP_Text label;
-        [SerializeField] private string prefix;
-
-
-       
-
 
         protected override void Subscribe()
         {
-
-
             var turnService = ServiceResolver.Resolve<TurnManager>();
-            turnService.CurrentTurnNumber.ChangeEvent += OnChange;
+            turnService.OnTurnStateChanged += OnStateChanged;
+            
+            // initial update
+            OnStateChanged(turnService.CurrentOwner, turnService.CurrentPhase);
         }
-
 
         protected override void Unsubscribe()
         {
             var turnService = ServiceResolver.Resolve<TurnManager>();
-            turnService.CurrentTurnNumber.ChangeEvent -= OnChange;
+            turnService.OnTurnStateChanged -= OnStateChanged;
         }
 
-
-        private void OnChange(int value)
+        private void OnStateChanged(TurnOwner owner, TurnPhase phase)
         {
-            label.text =  ": " + value;
+            label.text = GetDisplayText(owner, phase);
+        }
+
+        private string GetDisplayText(TurnOwner owner, TurnPhase phase)
+        {
+            return owner switch
+            {
+                TurnOwner.Player => $"Player - {FormatPhase(phase)}",
+                TurnOwner.Enemy => $"Enemy - {FormatPhase(phase)}",
+                _ => "Unknown"
+            };
+        }
+
+        private string FormatPhase(TurnPhase phase)
+        {
+            return phase switch
+            {
+                TurnPhase.PlayerTurnStart => "Start",
+                TurnPhase.PlayerActing => "Acting",
+                TurnPhase.PlayerTurnEnd => "Ending",
+                TurnPhase.EnemyTurnStart => "Start",
+                TurnPhase.EnemyMoving => "Moving",
+                TurnPhase.EnemyTurnEnd => "Ending",
+                _ => phase.ToString()
+            };
         }
     }
 }
-
-
-

@@ -75,7 +75,6 @@ public class EnemyView : MonoBehaviour
 
     public void UpdatePosition()
     {
-        
         if (unit == null)
             return;
 
@@ -123,29 +122,6 @@ public class EnemyView : MonoBehaviour
 
         transform.position = target;
     }
-
-    private void OnMouseOver()
-    {
-        Debug.Log("Hovering " + gameObject.name);
-        
-        if (HoverHealthUI.main == null) return;
-        if (unit == null) return;
-        if (health == null) return;
-        
-        if (HoverHealthUI.main != null && health != null)
-        {
-            HoverHealthUI.main.Show(health);
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (HoverHealthUI.main != null && health != null)
-        {
-            Debug.Log("Exit " + gameObject.name);
-            HoverHealthUI.main.Hide(health);
-        }
-    }
     
     public void UpdateSpeed(float newSpeed)
     {
@@ -154,7 +130,6 @@ public class EnemyView : MonoBehaviour
     
     public void ResetSpeed()
     {
-        
         if (this == null)
             return;
 

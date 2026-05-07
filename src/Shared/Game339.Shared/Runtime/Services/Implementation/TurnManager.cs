@@ -1,3 +1,4 @@
+using System;
 using Game339.Shared.Models;
 using Game339.Shared.Services;
 
@@ -7,7 +8,13 @@ namespace Game339.Shared.Services.Implementation
     {
         public TurnOwner CurrentOwner { get; private set; }
         public TurnPhase CurrentPhase { get; private set; }
+        
         public readonly ObservableValue<int> CurrentTurnNumber = new ObservableValue<int>(0);
+        
+        public bool IsBusy { get; private set; }
+        
+        public Action<TurnPhase> OnPhaseChanged;
+        public event Action<TurnOwner, TurnPhase> OnTurnStateChanged;
 
         public void StartGame()
         {
@@ -15,13 +22,13 @@ namespace Game339.Shared.Services.Implementation
             CurrentPhase = TurnPhase.PlayerTurnStart;
             CurrentTurnNumber.Value=0;
 
+            OnTurnStateChanged?.Invoke(CurrentOwner, CurrentPhase);
         }
 
         public int GetTurnNumber()
         {
             return CurrentTurnNumber.Value;
         }
-
 
         public void AdvancePhase()
         {
@@ -55,6 +62,9 @@ namespace Game339.Shared.Services.Implementation
                     CurrentPhase = TurnPhase.PlayerTurnStart;
                     break;
             }
+
+            OnPhaseChanged?.Invoke(CurrentPhase);
+            OnTurnStateChanged?.Invoke(CurrentOwner, CurrentPhase);
         }
 
         public bool CanPlayerAct()
@@ -67,6 +77,11 @@ namespace Game339.Shared.Services.Implementation
         {
             return CurrentOwner == TurnOwner.Enemy &&
                    CurrentPhase == TurnPhase.EnemyMoving;
+        }
+        
+        public void SetBusy(bool value)
+        {
+            IsBusy = value;
         }
     }
 }
