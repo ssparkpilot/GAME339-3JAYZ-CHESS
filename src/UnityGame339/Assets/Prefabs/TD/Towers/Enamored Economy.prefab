@@ -548,7 +548,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   bulletPrefab: {fileID: 0}
-  firingPoint: {fileID: 0}
+  firingPoint: {fileID: 5422638511217261158}
   upgradeUI: {fileID: 2377418273272057217}
   upgradeButton: {fileID: 8399478642337921754}
   targetingRange: 3
@@ -558,7 +558,6 @@ MonoBehaviour:
   baseUpgradeCost: 100
   targetingRangeBase: 0
   towerIndex: 0
-  timeUntilFire: 0
   audioSource: {fileID: 0}
   placeSound: {fileID: 0}
   minPitch: 0.8

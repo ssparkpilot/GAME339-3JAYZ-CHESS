@@ -1,3 +1,6 @@
+using Game.Runtime;
+using Game339.Shared.Models;
+using Game339.Shared.Services.Implementation;
 using UnityEngine;
 
 public class EconomyTower : Turret
@@ -7,28 +10,52 @@ public class EconomyTower : Turret
     
     public GameObject FloatingScorePrefab;
     
-    void Update()
+    private TurnManager turnManager;
+    private bool hasGeneratedThisTurn;
+    
+    protected new void Start()
     {
-        timeUntilFire += Time.deltaTime;
+        base.Start(); // important because it inherits from Turret
+
+        turnManager = ServiceResolver.Resolve<TurnManager>();
+        turnManager.OnTurnStateChanged += HandleTurnChanged;
+    }
+    
+    private void HandleTurnChanged(TurnOwner owner, TurnPhase phase)
+    {
+        if (this == null) return;
         
-        if (timeUntilFire >= 1f / mps)
+        // Reset at start of player turn
+        if (owner == TurnOwner.Player && phase == TurnPhase.PlayerTurnStart)
         {
-            timeUntilFire -= 1f / mps;
-            MakeMoney();
+            hasGeneratedThisTurn = false;
+        }
+
+        // Generate money once when player turn starts
+        if (!hasGeneratedThisTurn && owner == TurnOwner.Player && phase == TurnPhase.PlayerTurnStart)
+        {
+            GenerateOnce();
+            hasGeneratedThisTurn = true;
         }
     }
-
-    private void MakeMoney()
+    
+    private void GenerateOnce()
     {
-        LevelManager.main.IncreaseCurrency(currencyWorth);
-        //Debug.Log("Tower made money " + currencyWorth);
-        timeUntilFire = 0f;
-        
-        CreateDeathEffect();
-        
-        FloatingText floatingText = FloatingScorePrefab.GetComponent<FloatingText>();
-        floatingText.SetText(currencyWorth);
+        // scale money with mps (for upgrades that is not active at this time)
+        int amount = Mathf.RoundToInt(currencyWorth * mps);
 
-        Instantiate(FloatingScorePrefab, transform.position, Quaternion.identity);
+        LevelManager.main.IncreaseCurrency(amount);
+
+        CreateDeathEffect();
+
+        var obj = Instantiate(FloatingScorePrefab, transform.position, Quaternion.identity);
+        var floatingText = obj.GetComponent<FloatingText>();
+        floatingText.SetText(amount);
+    }
+    
+    private void OnDestroy()
+    {
+        if (turnManager != null)
+            turnManager.OnTurnStateChanged -= HandleTurnChanged;
     }
 }

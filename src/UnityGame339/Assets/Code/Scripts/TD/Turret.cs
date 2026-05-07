@@ -1,3 +1,6 @@
+using Game.Runtime;
+using Game339.Shared.Models;
+using Game339.Shared.Services.Implementation;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
@@ -26,7 +29,6 @@ public class Turret : DeathEffectObject
     private float mpsBase;
     
     private Transform target;
-    public float timeUntilFire;
 
     private int level = 1; // tower upgrade level
 
@@ -35,8 +37,11 @@ public class Turret : DeathEffectObject
     
     public float minPitch = 0.8f;
     public float maxPitch = 1.2f;
+    
+    private TurnManager turnManager;
+    private bool hasFiredThisTurn;
 
-    private void Start()
+    public void Start()
     {
         bpsBase = bps;
         apsBase = aps;
@@ -45,32 +50,27 @@ public class Turret : DeathEffectObject
         targetingRangeBase = targetingRange;
         
         upgradeButton.onClick.AddListener(Upgrade);
+        
+        turnManager = ServiceResolver.Resolve<TurnManager>();
+        turnManager.OnTurnStateChanged += HandleTurnChanged;
+
     }
 
-    private void Update(){
-        if (LevelManager.main.isGameOver){
+    private void Update()
+    {
+        if (LevelManager.main.isGameOver)
             return;
-        }
-        
-        if(target == null){
-            FindTarget();
-            return;
-        }
 
-        if (!CheckTargetIsInRange()){
+        if (target != null && !CheckTargetIsInRange())
+        {
             target = null;
-        } else {
-            timeUntilFire += Time.deltaTime;
-
-            if (timeUntilFire >= 1f / bps){
-                Shoot();
-                timeUntilFire = 0f;
-            }
         }
     }
 
     private void Shoot()
     {
+        if (firingPoint == null) return; // prevent crash for slowmo turret
+        
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
@@ -155,5 +155,42 @@ public class Turret : DeathEffectObject
     private void OnDrawGizmosSelected(){
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+    }
+    
+    private void HandleTurnChanged(TurnOwner owner, TurnPhase phase)
+    {
+        // reset at start of player turn
+        if (owner == TurnOwner.Player && phase == TurnPhase.PlayerTurnStart)
+        {
+            hasFiredThisTurn = false;
+        }
+
+        // fire once when player turn ends or the enemy turn starts
+        if (!hasFiredThisTurn && owner == TurnOwner.Enemy && phase == TurnPhase.EnemyTurnStart)
+        {
+            TryFireOnce();
+            hasFiredThisTurn = true;
+        }
+    }
+    
+    private void TryFireOnce()
+    {
+        if (!this || !gameObject.activeInHierarchy)
+            return;
+        
+        FindTarget();
+
+        if (target != null && CheckTargetIsInRange())
+        {
+            Shoot();
+        }
+    }
+    
+    protected virtual void OnDestroy()
+    {
+        if (turnManager != null)
+        {
+            turnManager.OnTurnStateChanged -= HandleTurnChanged;
+        }
     }
 }
