@@ -4,6 +4,6 @@ namespace Game339.Tests
 {
     public class TestUnit : Unit
     {
-        public TestUnit(GridPosition pos) : base(pos) { }
+        public TestUnit(GridPosition pos) : base(pos,true) { }
     }
 }
