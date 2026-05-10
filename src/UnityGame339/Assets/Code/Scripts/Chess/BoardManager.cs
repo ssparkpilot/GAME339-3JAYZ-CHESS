@@ -14,6 +14,10 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject rookPrefab;
     [SerializeField] private GameObject queenPrefab;
 
+    [SerializeField] private GameObject chudPrefab;
+    [SerializeField] private GameObject chudTankPrefab;
+
+
     public GridBoard Board { get; private set; }
 
     private readonly Dictionary<GridPosition, ChessPlot> plotLookup =
@@ -158,4 +162,54 @@ public class BoardManager : MonoBehaviour
 
         return enemyUnit;
     }
+
+
+    public EnemyUnit SpawnChud(GridPosition pos)
+    {
+        Debug.Log("Spawning CHUD at: " + pos);
+
+        var enemyUnit = new EnemyUnit(
+            pos,
+            new ChudMovementRule(),
+            health: 10
+        );
+
+        Board.GetTile(pos).Place(enemyUnit);
+
+        ChessPlot plot = GetPlot(pos);
+        GameObject enemyGO = Instantiate(
+            chudPrefab,
+            plot.transform.position,
+            Quaternion.identity
+        );
+
+        enemyGO.GetComponent<EnemyView>().Init(enemyUnit);
+
+        return enemyUnit;
+    }
+
+    public EnemyUnit SpawnChudTank(GridPosition pos)
+    {
+        Debug.Log("Spawning CHUD Tank at: " + pos);
+
+        var enemyUnit = new EnemyUnit(
+            pos,
+            new ChudMovementRule(),
+            health: 30
+        );
+
+        Board.GetTile(pos).Place(enemyUnit);
+
+        ChessPlot plot = GetPlot(pos);
+        GameObject enemyGO = Instantiate(
+            chudTankPrefab,
+            plot.transform.position,
+            Quaternion.identity
+        );
+
+        enemyGO.GetComponent<EnemyView>().Init(enemyUnit);
+
+        return enemyUnit;
+    }
+
 }

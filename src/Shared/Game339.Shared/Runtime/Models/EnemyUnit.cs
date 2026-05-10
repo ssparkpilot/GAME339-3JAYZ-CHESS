@@ -7,7 +7,7 @@ public class EnemyUnit : Unit
     public IChessMovementRule MovementRule { get; }
 
     public EnemyUnit(GridPosition pos, IChessMovementRule rule, int health)
-        : base(pos)
+        : base(pos, isEnemy: true)
     {
         MovementRule = rule;
         Health = health;

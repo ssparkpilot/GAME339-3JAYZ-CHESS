@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8127632481004135144, guid: 1af0b94d549f5ab4eabc3faabe9d360e, type: 3}
+  m_Sprite: {fileID: 2995403825874342441, guid: fb06a420d88aae040a50dc6b34b93c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -187,7 +187,6 @@ MonoBehaviour:
   baseUpgradeCost: 100
   targetingRangeBase: 0
   towerIndex: 0
-  timeUntilFire: 1
   audioSource: {fileID: 0}
   placeSound: {fileID: 0}
   minPitch: 0.8
@@ -228,7 +227,6 @@ MonoBehaviour:
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
   hitPoints: 20
   currencyWorth: 0
-  type: 1
   coinDropChance: 0
   coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
   floatingScorePrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
@@ -431,7 +429,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6928833005968471333, guid: 1af0b94d549f5ab4eabc3faabe9d360e, type: 3}
+  m_Sprite: {fileID: -4281786904133696553, guid: fb06a420d88aae040a50dc6b34b93c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

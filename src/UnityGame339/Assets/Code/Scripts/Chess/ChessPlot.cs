@@ -25,6 +25,12 @@ public class ChessPlot : MonoBehaviour
         }
         return false;
     }
+
+
+    public GridPosition GetChessGridPosition()
+    {
+        return new GridPosition(gridX-1, gridY);
+    }
     
     private void OnValidate()
     {
@@ -43,10 +49,16 @@ public class ChessPlot : MonoBehaviour
         if (tile?.Occupant is TowerUnit t)
         {
             tower = t;
+            
             return true;
         }
 
         return false;
+    }
+
+    public GridPosition GetGridPosition()
+    {
+        return GridPos;
     }
 
     public bool TryGetEnemy(out EnemyUnit enemy)

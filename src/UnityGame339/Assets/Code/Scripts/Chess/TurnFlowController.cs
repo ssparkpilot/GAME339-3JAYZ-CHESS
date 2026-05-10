@@ -7,6 +7,13 @@ public class TurnFlowController : MonoBehaviour
 {
     private TurnManager turnManager;
 
+    public AudioSource audioSource;
+    public AudioClip yourTurnSound;
+
+     public float minPitch = 0.8f;
+    public float maxPitch = 1.2f;
+
+
     private void Start()
     {
         turnManager = ServiceResolver.Resolve<TurnManager>();
@@ -22,6 +29,11 @@ public class TurnFlowController : MonoBehaviour
     {
         if (phase == TurnPhase.PlayerTurnStart)
         {
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+        //make the audiosource play at half the volume
+        //play the place sound at the randomized pitch
+            audioSource.PlayOneShot(yourTurnSound);
+
             turnManager.AdvancePhase(); // -> PlayerActing
         }
         else if (phase == TurnPhase.PlayerTurnEnd)

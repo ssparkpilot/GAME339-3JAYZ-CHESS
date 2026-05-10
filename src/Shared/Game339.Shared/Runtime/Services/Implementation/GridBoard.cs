@@ -35,7 +35,9 @@ namespace Game339.Shared.Services.Implementation
             var fromTile = GetTile(unit.Position);
             var toTile = GetTile(to);
 
-            if (toTile.IsOccupied)
+            if (!unit.IsEnemy&&toTile.IsOccupied&&toTile.Occupant.IsEnemy==false)
+                return; // (later: capture logic)
+            if (unit.IsEnemy&&toTile.IsOccupied&&toTile.Occupant.IsEnemy==true)
                 return; // (later: capture logic)
 
             fromTile.Clear();
