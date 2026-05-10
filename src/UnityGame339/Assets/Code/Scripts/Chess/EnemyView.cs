@@ -12,7 +12,8 @@ public class EnemyView : MonoBehaviour
     [Header("End Board Settings")]
     [SerializeField] private int damageToPlayer = 10;
     [SerializeField] private int finalColumnX = 7;
-    
+    [SerializeField] private bool isEnemy = true;
+
     private Health health;
     
     public EnemyUnit Unit => unit;
@@ -31,6 +32,7 @@ public class EnemyView : MonoBehaviour
     public AudioClip MoveSound;
 
     public AudioSource SoundSpawner;
+    private bool canMakeSound = true;
 
     public float minPitch = 0.8f;
     public float maxPitch = 1.2f;
@@ -43,16 +45,9 @@ public class EnemyView : MonoBehaviour
     private void Start()
     {
         baseColor = sr.color;
+        
 
-        SoundSpawner.pitch = Random.Range(minPitch, maxPitch);
-        //make the audiosource play at half the volume
-        //SoundSpawner.volume = 0.25f;
-        //play the place sound at the randomized pitch
-
-        if (SoundSpawner != null && SpawnSound != null)
-        {
-            SoundSpawner.PlayOneShot(SpawnSound);
-        }
+        
     }
     
     public void FreezeTint()
@@ -71,12 +66,24 @@ public class EnemyView : MonoBehaviour
     public void Init(EnemyUnit enemyUnit)
     {
         unit = enemyUnit;
+        unit.SetIsEnemy(isEnemy);
 
         // Snap instantly on spawn
         ChessPlot plot = BoardManager.main.GetPlot(unit.Position);
         if (plot != null){
             transform.position = plot.transform.position;
         }
+
+        SoundSpawner.pitch = Random.Range(minPitch, maxPitch);
+    //make the audiosource play at half the volume
+    //SoundSpawner.volume = 0.25f;
+    //play the place sound at the randomized pitch
+
+        if (SoundSpawner != null && SpawnSound != null)
+        {
+            SoundSpawner.PlayOneShot(SpawnSound);
+        }
+
     }
 
     public void UpdatePosition()
@@ -98,15 +105,7 @@ public class EnemyView : MonoBehaviour
 
     // Stop previous movement if still running
 
-    SoundSpawner.pitch = Random.Range(minPitch, maxPitch);
-    //make the audiosource play at half the volume
-    //SoundSpawner.volume = 0.25f;
-    //play the place sound at the randomized pitch
-
-    if (SoundSpawner != null && MoveSound != null)
-    {
-        SoundSpawner.PlayOneShot(MoveSound);
-    }
+    
 
     if (moveRoutine != null)
         StopCoroutine(moveRoutine);
@@ -120,9 +119,18 @@ public class EnemyView : MonoBehaviour
         float distance = Vector3.Distance(start, target);
         float t = 0f;
 
+        if (SoundSpawner != null && MoveSound != null&&canMakeSound)
+            {
+                SoundSpawner.PlayOneShot(MoveSound);
+                Debug.Log("MOVIEMIVIE");
+                canMakeSound = false;
+            }
+
         if (distance < 0.001f)
         {
             transform.position = target;
+
+
             yield break;
         }
 

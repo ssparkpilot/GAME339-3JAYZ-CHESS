@@ -84,6 +84,11 @@ public class Plot : MonoBehaviour
         ResetPlotColor();
     }
 
+    private GridPosition GetGridPosition()
+    {
+        return gameObject.GetComponent<ChessPlot>().GetChessGridPosition();
+    }
+
     private void OnMouseDown()
     {
         // shovel logic
@@ -173,6 +178,11 @@ public class Plot : MonoBehaviour
                 towerObj = BuildManager.main.PlaceTower(transform.position);
                 turret = towerObj.GetComponent<Turret>();
 
+                if(turret.GetComponent<SummonTower>() != null)
+                {
+                    turret.GetComponent<SummonTower>().GridPos = GetGridPosition();
+                }
+
                 audioSource.PlayOneShot(placeSound);
                 //this plays when the tower is upgraded
                 InstantiateDialogueLove();
@@ -200,6 +210,10 @@ public class Plot : MonoBehaviour
 
         towerObj = BuildManager.main.PlaceTower(transform.position);
         turret = towerObj.GetComponent<Turret>();
+        if(turret.GetComponent<SummonTower>() != null)
+        {
+            turret.GetComponent<SummonTower>().GridPos = GetGridPosition();
+        }
         //this plays when the tower is initially placed down
         InstantiateDialogueNew();
 

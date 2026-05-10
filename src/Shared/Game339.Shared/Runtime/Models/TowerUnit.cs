@@ -6,7 +6,7 @@ namespace Game339.Shared.Models
         public int Damage { get; }
         public bool HasActed { get; private set; }
 
-        public TowerUnit(GridPosition position, int range, int damage) : base(position) 
+        public TowerUnit(GridPosition position, int range, int damage) : base(position, isEnemy: false)
         {
             Range = range;
             Damage = damage;
