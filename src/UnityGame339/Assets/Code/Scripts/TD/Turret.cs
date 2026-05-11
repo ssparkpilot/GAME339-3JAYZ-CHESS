@@ -29,7 +29,6 @@ public class Turret : DeathEffectObject
     private float mpsBase;
     
     private Transform target;
-    private LaneTargetingService targetingService;
 
     private int level = 1; // tower upgrade level
 
@@ -49,19 +48,19 @@ public class Turret : DeathEffectObject
         mpsBase = mps;
         
         targetingRangeBase = targetingRange;
-
-        targetingService = new LaneTargetingService();
         
-        upgradeButton.onClick.AddListener(Upgrade);
+        if (upgradeButton != null)
+        {
+            upgradeButton.onClick.AddListener(Upgrade);
+        }
         
         turnManager = ServiceResolver.Resolve<TurnManager>();
         turnManager.OnTurnStateChanged += HandleTurnChanged;
-
     }
 
     private void Update()
     {
-        if (LevelManager.main.isGameOver)
+        if (LevelManager.main != null && LevelManager.main.isGameOver)
             return;
 
         if (target != null && !CheckTargetIsInRange())
@@ -78,24 +77,103 @@ public class Turret : DeathEffectObject
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
         
-        audioSource.pitch = Random.Range(minPitch, maxPitch);
-        //make the audiosource play at half the volume
-        audioSource.volume = 0.25f;
-        //play the place sound at the randomized pitch
-        audioSource.PlayOneShot(placeSound);
+        if (audioSource != null && placeSound != null)
+        {
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+            //make the audiosource play at half the volume
+            audioSource.volume = 0.25f;
+            //play the place sound at the randomized pitch
+            audioSource.PlayOneShot(placeSound);
+        }
     }
 
     private void FindTarget()
     {
-        target = targetingService.FindBestTarget(
-        transform.position,
-        targetingRange,
-        enemyMask
-    );
-}
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
+            transform.position,
+            targetingRange,
+            Vector2.zero,
+            0f,
+            enemyMask
+        );
 
-    private bool CheckTargetIsInRange() {
-        return Vector2.Distance(target.position, transform.position) <= targetingRange;
+        if (hits.Length == 0)
+        {
+            target = null;
+            return;
+        }
+
+        ChessPlot turretPlot = FindClosestPlot(transform.position);
+
+        Transform closestSameLaneTarget = null;
+        float closestSameLaneDistance = float.MaxValue;
+
+        Transform closestAnyLaneTarget = null;
+        float closestAnyLaneDistance = float.MaxValue;
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            Transform enemyTransform = hit.transform;
+            float distance = Vector2.Distance(transform.position, enemyTransform.position);
+
+            if (distance < closestAnyLaneDistance)
+            {
+                closestAnyLaneDistance = distance;
+                closestAnyLaneTarget = enemyTransform;
+            }
+
+            if (turretPlot == null)
+                continue;
+
+            EnemyView enemyView = enemyTransform.GetComponentInParent<EnemyView>();
+
+            if (enemyView == null || enemyView.Unit == null)
+                continue;
+
+            if (enemyView.Unit.Position.Y == turretPlot.GridPos.Y)
+            {
+                if (distance < closestSameLaneDistance)
+                {
+                    closestSameLaneDistance = distance;
+                    closestSameLaneTarget = enemyTransform;
+                }
+            }
+        }
+
+        if (closestSameLaneTarget != null)
+        {
+            target = closestSameLaneTarget;
+        }
+        else
+        {
+            target = closestAnyLaneTarget;
+        }
+    }
+
+    private ChessPlot FindClosestPlot(Vector3 worldPosition)
+    {
+        ChessPlot[] plots = Object.FindObjectsByType<ChessPlot>(FindObjectsSortMode.None);
+
+        ChessPlot closestPlot = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (ChessPlot plot in plots)
+        {
+            float distance = Vector2.Distance(worldPosition, plot.transform.position);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlot = plot;
+            }
+        }
+
+        return closestPlot;
+    }
+
+    private bool CheckTargetIsInRange()
+    {
+        return target != null && Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
     public void OpenUpgradeUI()
@@ -155,7 +233,8 @@ public class Turret : DeathEffectObject
         return targetingRangeBase * Mathf.Pow(level, 0.4f);
     }
 
-    private void OnDrawGizmosSelected(){
+    private void OnDrawGizmosSelected()
+    {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
