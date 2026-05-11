@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
-public class Turret : DeathEffectObject
+public class SmartTurret : DeathEffectObject
 {
     [Header("References")]
     [SerializeField] public LayerMask enemyMask;
@@ -16,29 +16,28 @@ public class Turret : DeathEffectObject
 
     [Header("Attribute")]
     [SerializeField] public float targetingRange = 3f;
-    [SerializeField] private float bps = 1f; // bullets per second
-    [SerializeField] public float aps = 4f; // attacks per second
-    [SerializeField] public float mps = 4f; // money per second
+    [SerializeField] private float bps = 1f;
+    [SerializeField] public float aps = 4f;
+    [SerializeField] public float mps = 4f;
     [SerializeField] private int baseUpgradeCost = 100;
     [SerializeField] private float targetingRangeBase;
 
     public int towerIndex;
-    
+
     private float bpsBase;
     private float apsBase;
     private float mpsBase;
-    
-    private Transform target;
-    private LaneTargetingService targetingService;
 
-    private int level = 1; // tower upgrade level
+    private Transform target;
+
+    private int level = 1;
 
     public AudioSource audioSource;
     public AudioClip placeSound;
-    
+
     public float minPitch = 0.8f;
     public float maxPitch = 1.2f;
-    
+
     private TurnManager turnManager;
     private bool hasFiredThisTurn;
 
@@ -47,21 +46,21 @@ public class Turret : DeathEffectObject
         bpsBase = bps;
         apsBase = aps;
         mpsBase = mps;
-        
+
         targetingRangeBase = targetingRange;
 
-        targetingService = new LaneTargetingService();
-        
-        upgradeButton.onClick.AddListener(Upgrade);
-        
+        if (upgradeButton != null)
+        {
+            upgradeButton.onClick.AddListener(Upgrade);
+        }
+
         turnManager = ServiceResolver.Resolve<TurnManager>();
         turnManager.OnTurnStateChanged += HandleTurnChanged;
-
     }
 
     private void Update()
     {
-        if (LevelManager.main.isGameOver)
+        if (LevelManager.main != null && LevelManager.main.isGameOver)
             return;
 
         if (target != null && !CheckTargetIsInRange())
@@ -72,47 +71,135 @@ public class Turret : DeathEffectObject
 
     private void Shoot()
     {
-        if (firingPoint == null) return; // prevent crash for slowmo turret
-        
+        if (firingPoint == null) return;
+
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
-        
-        audioSource.pitch = Random.Range(minPitch, maxPitch);
-        //make the audiosource play at half the volume
-        audioSource.volume = 0.25f;
-        //play the place sound at the randomized pitch
-        audioSource.PlayOneShot(placeSound);
+
+        if (audioSource != null && placeSound != null)
+        {
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+            audioSource.volume = 0.25f;
+            audioSource.PlayOneShot(placeSound);
+        }
     }
 
     private void FindTarget()
     {
-        target = targetingService.FindBestTarget(
-        transform.position,
-        targetingRange,
-        enemyMask
-    );
-}
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
+            transform.position,
+            targetingRange,
+            Vector2.zero,
+            0f,
+            enemyMask
+        );
 
-    private bool CheckTargetIsInRange() {
-        return Vector2.Distance(target.position, transform.position) <= targetingRange;
+        if (hits.Length == 0)
+        {
+            target = null;
+            return;
+        }
+
+        ChessPlot turretPlot = FindClosestPlot(transform.position);
+
+        Transform closestSameLaneTarget = null;
+        float closestSameLaneDistance = float.MaxValue;
+
+        Transform closestAnyLaneTarget = null;
+        float closestAnyLaneDistance = float.MaxValue;
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            Transform enemyTransform = hit.transform;
+            float distance = Vector2.Distance(transform.position, enemyTransform.position);
+
+            if (distance < closestAnyLaneDistance)
+            {
+                closestAnyLaneDistance = distance;
+                closestAnyLaneTarget = enemyTransform;
+            }
+
+            if (turretPlot == null)
+                continue;
+
+            EnemyView enemyView = enemyTransform.GetComponentInParent<EnemyView>();
+
+            if (enemyView == null || enemyView.Unit == null)
+                continue;
+
+            if (enemyView.Unit.Position.Y == turretPlot.GridPos.Y)
+            {
+                if (distance < closestSameLaneDistance)
+                {
+                    closestSameLaneDistance = distance;
+                    closestSameLaneTarget = enemyTransform;
+                }
+            }
+        }
+
+        if (closestSameLaneTarget != null)
+        {
+            target = closestSameLaneTarget;
+        }
+        else
+        {
+            target = closestAnyLaneTarget;
+        }
+    }
+
+    private ChessPlot FindClosestPlot(Vector3 worldPosition)
+    {
+        ChessPlot[] plots = Object.FindObjectsByType<ChessPlot>(FindObjectsSortMode.None);
+
+        ChessPlot closestPlot = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (ChessPlot plot in plots)
+        {
+            float distance = Vector2.Distance(worldPosition, plot.transform.position);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlot = plot;
+            }
+        }
+
+        return closestPlot;
+    }
+
+    private bool CheckTargetIsInRange()
+    {
+        return target != null && Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
     public void OpenUpgradeUI()
     {
-        upgradeUI.SetActive(true);
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(true);
+        }
     }
 
     public void CloseUpgradeUI()
     {
-        upgradeUI.SetActive(false);
-        UIManager.main.SetHoveringState(false);
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(false);
+        }
+
+        if (UIManager.main != null)
+        {
+            UIManager.main.SetHoveringState(false);
+        }
     }
 
     public void Upgrade()
     {
+        if (LevelManager.main == null) return;
         if (CalculateCost() > LevelManager.main.currency) return;
-        
+
         LevelManager.main.SpendCurrency(CalculateCost());
 
         level++;
@@ -120,10 +207,11 @@ public class Turret : DeathEffectObject
         bps = CalculateBPS();
         aps = CalculateAPS();
         mps = CalculateMPS();
-        
+
         targetingRange = CalculateRange();
-        
+
         CloseUpgradeUI();
+
         Debug.Log("New level: " + level);
         Debug.Log("New BPS: " + bps);
         Debug.Log("New targeting range: " + targetingRange);
@@ -139,12 +227,12 @@ public class Turret : DeathEffectObject
     {
         return bpsBase * Mathf.Pow(level, 0.6f);
     }
-    
+
     private float CalculateAPS()
     {
         return apsBase * Mathf.Pow(level, 0.6f);
     }
-    
+
     private float CalculateMPS()
     {
         return mpsBase * Mathf.Pow(level, 0.6f);
@@ -155,32 +243,31 @@ public class Turret : DeathEffectObject
         return targetingRangeBase * Mathf.Pow(level, 0.4f);
     }
 
-    private void OnDrawGizmosSelected(){
+    private void OnDrawGizmosSelected()
+    {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
-    
+
     private void HandleTurnChanged(TurnOwner owner, TurnPhase phase)
     {
-        // reset at start of player turn
         if (owner == TurnOwner.Player && phase == TurnPhase.PlayerTurnStart)
         {
             hasFiredThisTurn = false;
         }
 
-        // fire once when player turn ends or the enemy turn starts
         if (!hasFiredThisTurn && owner == TurnOwner.Enemy && phase == TurnPhase.EnemyTurnStart)
         {
             TryFireOnce();
             hasFiredThisTurn = true;
         }
     }
-    
+
     private void TryFireOnce()
     {
         if (!this || !gameObject.activeInHierarchy)
             return;
-        
+
         FindTarget();
 
         if (target != null && CheckTargetIsInRange())
@@ -188,7 +275,7 @@ public class Turret : DeathEffectObject
             Shoot();
         }
     }
-    
+
     protected virtual void OnDestroy()
     {
         if (turnManager != null)
