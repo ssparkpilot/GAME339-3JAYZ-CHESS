@@ -35,7 +35,7 @@ namespace Game.Runtime
             var stringService = new StringService(logger);
             container.RegisterSingletonInstance<IStringService>(stringService);
 
-            var turnManager = new TurnManager();
+            var turnManager = new TurnManager(logger);
             container.RegisterSingletonInstance(turnManager);
             
             return container;

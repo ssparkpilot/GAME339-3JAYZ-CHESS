@@ -1,6 +1,8 @@
 using System;
 using Game339.Shared.Models;
 using Game339.Shared.Services;
+using System.Linq;
+using Game339.Shared.Diagnostics;
 
 namespace Game339.Shared.Services.Implementation
 {
@@ -15,6 +17,13 @@ namespace Game339.Shared.Services.Implementation
         
         public Action<TurnPhase> OnPhaseChanged;
         public event Action<TurnOwner, TurnPhase> OnTurnStateChanged;
+
+        private readonly IGameLog _log;
+
+        public TurnManager(IGameLog log)
+        {
+            _log = log;
+        }
 
         public void StartGame()
         {
@@ -32,6 +41,7 @@ namespace Game339.Shared.Services.Implementation
 
         public void AdvancePhase()
         {
+            _log.Info($"{nameof(TurnManager)}.{nameof(AdvancePhase)} - Advancing phase");
             CurrentTurnNumber.Value++;
 
             switch (CurrentPhase)
