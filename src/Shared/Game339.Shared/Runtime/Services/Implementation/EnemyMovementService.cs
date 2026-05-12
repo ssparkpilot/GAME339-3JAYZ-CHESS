@@ -2,6 +2,7 @@ using System.Linq;
 using Game339.Shared.Models;
 using Game339.Shared.Services;
 using Game339.Shared.Services.Implementation;
+using UnityEngine;
 
 public class EnemyMovementService
 {
@@ -15,7 +16,7 @@ public class EnemyMovementService
         if (legalMoves.Count == 0)
             return;
 
-        var moveTo = legalMoves[0];
+        var moveTo = legalMoves[Random.Range(0, legalMoves.Count)];
         board.MoveUnit(enemy, moveTo);
     }
 }

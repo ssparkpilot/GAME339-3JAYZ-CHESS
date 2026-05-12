@@ -45,9 +45,6 @@ public class EnemyView : MonoBehaviour
     private void Start()
     {
         baseColor = sr.color;
-        
-
-        
     }
     
     public void FreezeTint()
@@ -83,11 +80,14 @@ public class EnemyView : MonoBehaviour
         {
             SoundSpawner.PlayOneShot(SpawnSound);
         }
-
     }
 
     public void UpdatePosition()
 {
+    
+    if (this == null || gameObject == null)
+        return;
+
     if (unit == null)
     {
         return;
