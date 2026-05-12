@@ -12,7 +12,7 @@ namespace Game339.Tests
         [SetUp]
         public void Setup()
         {
-            turnManager = new TurnManager();
+            turnManager = new TurnManager(EmptyGameLog.Instance);
             turnManager.StartGame();
         }
 
