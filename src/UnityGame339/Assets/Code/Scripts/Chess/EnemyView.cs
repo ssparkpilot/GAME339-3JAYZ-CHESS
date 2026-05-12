@@ -13,6 +13,8 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private int damageToPlayer = 10;
     [SerializeField] private int finalColumnX = 7;
     [SerializeField] private bool isEnemy = true;
+    [SerializeField] private float delayBeforeDeath = 3f;
+    private bool isDying = false;
 
     private Health health;
     
@@ -84,18 +86,11 @@ public class EnemyView : MonoBehaviour
 
     public void UpdatePosition()
 {
-    
     if (this == null || gameObject == null)
         return;
 
     if (unit == null)
     {
-        return;
-    }
-
-    if (unit.Position.X >= finalColumnX)
-    {
-        ReachEndOfBoard();
         return;
     }
 
@@ -111,6 +106,16 @@ public class EnemyView : MonoBehaviour
         StopCoroutine(moveRoutine);
 
     moveRoutine = StartCoroutine(MoveTo(targetPlot.transform.position));
+    
+    if (unit.Position.X >= finalColumnX)
+    {
+        if (!isDying)
+        {
+            isDying = true;
+            StartCoroutine(ReachEndOfBoard());
+        }
+        return;
+    }
 }
 
     private IEnumerator MoveTo(Vector3 target)
@@ -145,12 +150,14 @@ public class EnemyView : MonoBehaviour
         transform.position = target;
     }
 
-    private void ReachEndOfBoard()
+    private IEnumerator ReachEndOfBoard()
     {
         if (LevelManager.main != null)
         {
             LevelManager.main.LoseHealth(damageToPlayer);
         }
+        
+        yield return new WaitForSeconds(delayBeforeDeath);
 
         if (BoardManager.main != null && unit != null)
         {
