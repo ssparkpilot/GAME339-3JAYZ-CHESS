@@ -8,7 +8,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 {
     private TurnManager turnManager;
 
-    private int kingCountDown = 0;
+    private int kingCountDown = 1;
 
     void Start()
     {
