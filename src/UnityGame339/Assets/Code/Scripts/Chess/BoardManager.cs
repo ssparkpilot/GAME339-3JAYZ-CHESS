@@ -34,7 +34,7 @@ public class BoardManager : MonoBehaviour
 
     private void RegisterPlots()
     {
-        ChessPlot[] plots = FindObjectsOfType<ChessPlot>();
+        ChessPlot[] plots = FindObjectsByType<ChessPlot>(FindObjectsSortMode.None);
 
         foreach (var plot in plots)
         {
@@ -211,5 +211,4 @@ public class BoardManager : MonoBehaviour
 
         return enemyUnit;
     }
-
 }

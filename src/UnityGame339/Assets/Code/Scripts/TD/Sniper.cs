@@ -38,7 +38,7 @@ public class Sniper : Turret
     public float sniperMinPitch = 0.8f;
     public float sniperMaxPitch = 1.2f;
 
-    private void Start()
+    private new void Start()
     {
         sniperBpsBase = sniperBps;
         sniperApsBase = sniperAps;
@@ -51,7 +51,7 @@ public class Sniper : Turret
             sniperUpgradeButton.onClick.AddListener(Upgrade);
         }
     }
-
+    
     private void Update()
     {
         if (LevelManager.main.isGameOver)
@@ -150,7 +150,7 @@ public class Sniper : Turret
         return Vector2.Distance(sniperTarget.position, transform.position) <= sniperTargetingRange;
     }
 
-    public void OpenUpgradeUI()
+    public new void OpenUpgradeUI()
     {
         if (sniperUpgradeUI != null)
         {
@@ -158,7 +158,7 @@ public class Sniper : Turret
         }
     }
 
-    public void CloseUpgradeUI()
+    public new void CloseUpgradeUI()
     {
         if (sniperUpgradeUI != null)
         {
@@ -168,7 +168,7 @@ public class Sniper : Turret
         UIManager.main.SetHoveringState(false);
     }
 
-    public void Upgrade()
+    public new void Upgrade()
     {
         if (CalculateCost() > LevelManager.main.currency)
         {

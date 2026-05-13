@@ -90,9 +90,7 @@ public class EnemyView : MonoBehaviour
         return;
 
     if (unit == null)
-    {
         return;
-    }
 
     ChessPlot targetPlot = BoardManager.main.GetPlot(unit.Position);
     if (targetPlot == null)
@@ -101,7 +99,6 @@ public class EnemyView : MonoBehaviour
     // Stop previous movement if still running
 
     
-
     if (moveRoutine != null)
         StopCoroutine(moveRoutine);
 
@@ -114,7 +111,6 @@ public class EnemyView : MonoBehaviour
             isDying = true;
             StartCoroutine(ReachEndOfBoard());
         }
-        return;
     }
 }
 
@@ -134,8 +130,6 @@ public class EnemyView : MonoBehaviour
         if (distance < 0.001f)
         {
             transform.position = target;
-
-
             yield break;
         }
 

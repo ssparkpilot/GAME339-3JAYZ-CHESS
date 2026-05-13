@@ -77,7 +77,7 @@ public class TurretSlowmo : Turret
         }
     }
     
-    private void OnDestroy()
+    private new void OnDestroy()
     {
         if (turnManager != null)
             turnManager.OnTurnStateChanged -= HandleTurnChanged;
