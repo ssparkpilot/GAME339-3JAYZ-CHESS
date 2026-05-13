@@ -13,7 +13,7 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private int damageToPlayer = 10;
     [SerializeField] private int finalColumnX = 7;
     [SerializeField] private bool isEnemy = true;
-    [SerializeField] private float delayBeforeDeath = 3f;
+    [SerializeField] private float delayBeforeDeath = 0.5f;
     private bool isDying = false;
 
     private Health health;
@@ -152,11 +152,6 @@ public class EnemyView : MonoBehaviour
 
     private IEnumerator ReachEndOfBoard()
     {
-        if (LevelManager.main != null)
-        {
-            LevelManager.main.LoseHealth(damageToPlayer);
-        }
-        
         yield return new WaitForSeconds(delayBeforeDeath);
 
         if (BoardManager.main != null && unit != null)
@@ -167,6 +162,11 @@ public class EnemyView : MonoBehaviour
             {
                 tile.Clear();
             }
+        }
+        
+        if (LevelManager.main != null)
+        {
+            LevelManager.main.LoseHealth(damageToPlayer);
         }
 
         Destroy(gameObject);
