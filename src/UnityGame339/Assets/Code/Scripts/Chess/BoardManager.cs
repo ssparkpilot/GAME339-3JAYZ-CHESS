@@ -13,6 +13,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject bishopPrefab;
     [SerializeField] private GameObject rookPrefab;
     [SerializeField] private GameObject queenPrefab;
+    [SerializeField] private GameObject kingPrefab;
 
     [SerializeField] private GameObject chudPrefab;
     [SerializeField] private GameObject chudTankPrefab;
@@ -34,7 +35,7 @@ public class BoardManager : MonoBehaviour
 
     private void RegisterPlots()
     {
-        ChessPlot[] plots = FindObjectsOfType<ChessPlot>();
+        ChessPlot[] plots = FindObjectsByType<ChessPlot>(FindObjectsSortMode.None);
 
         foreach (var plot in plots)
         {
@@ -162,7 +163,28 @@ public class BoardManager : MonoBehaviour
 
         return enemyUnit;
     }
+    
+    public EnemyUnit SpawnEnemyKing(GridPosition pos)
+    {
+        var enemyUnit = new EnemyUnit(
+            pos,
+            new PawnMovementRule(),
+            health: 2000
+        );
 
+        Board.GetTile(pos).Place(enemyUnit);
+
+        ChessPlot plot = GetPlot(pos);
+        GameObject enemyGO = Instantiate(
+            kingPrefab,
+            plot.transform.position,
+            Quaternion.identity
+        );
+
+        enemyGO.GetComponent<EnemyView>().Init(enemyUnit);
+
+        return enemyUnit;
+    }
 
     public EnemyUnit SpawnChud(GridPosition pos)
     {
@@ -211,5 +233,4 @@ public class BoardManager : MonoBehaviour
 
         return enemyUnit;
     }
-
 }

@@ -9,10 +9,8 @@ using UnityEngine.UI;
 
 public class TurretSlowmo : Turret
 {
-    [Header("References")]
-    
     [Header("Attribute")]
-    [SerializeField] private float freezeTime = 1f;
+    [SerializeField] private int bellDamage = 5;
     
     public AudioClip fireSound;
     
@@ -48,28 +46,14 @@ public class TurretSlowmo : Turret
 
         foreach (var hit in hits)
         {
-            EnemyView em = hit.transform.GetComponent<EnemyView>();
-            if (em == null)
+            Health health = hit.transform.gameObject.GetComponent<Health>();
+            //EnemyView em = hit.transform.GetComponent<EnemyView>();
+            if (health == null)
                 continue;
 
-            em.UpdateSpeed(0.5f);
-            em.FreezeTint();
-
-            StartCoroutine(ResetEnemySpeedTurnBased(em, 1)); // freeze for 1 turn
+            // damage here
+            health.TakeDamage(bellDamage);
         }
-    }
-
-    private IEnumerator ResetEnemySpeedTurnBased(EnemyView em, int turns)
-    {
-        int startTurn = turnManager.GetTurnNumber();
-
-        while (turnManager.GetTurnNumber() < startTurn + turns)
-        {
-            yield return null;
-        }
-
-        if (em != null)
-            em.ResetSpeed();
     }
     
     private void OnDrawGizmosSelected(){
@@ -93,7 +77,7 @@ public class TurretSlowmo : Turret
         }
     }
     
-    private void OnDestroy()
+    private new void OnDestroy()
     {
         if (turnManager != null)
             turnManager.OnTurnStateChanged -= HandleTurnChanged;

@@ -8,6 +8,8 @@ public class EnemyWaveSpawner : MonoBehaviour
 {
     private TurnManager turnManager;
 
+    private int kingCountDown = 0;
+
     void Start()
     {
         turnManager = ServiceResolver.Resolve<TurnManager>();
@@ -18,7 +20,18 @@ public class EnemyWaveSpawner : MonoBehaviour
     {
         if (phase == TurnPhase.EnemyTurnStart)
         {
-            SpawnTurnEnemies();
+            if (kingCountDown <= 10 && kingCountDown > 0)
+            {
+                SpawnTurnEnemies();
+            }
+            else
+            {
+                if (kingCountDown != 0)
+                {
+                    SpawnKingIn();
+                    kingCountDown = 0;
+                }
+            }
         }
     }
     
@@ -29,6 +42,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         for (int i = 0; i < spawnCount; i++)
         {
             SpawnRandomPiece();
+            kingCountDown++;
         }
     }
 
@@ -105,6 +119,17 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             Debug.Log("Spawning queen in lane: " + pos);
             BoardManager.main.SpawnEnemyQueen(pos);
+        }
+    }
+    
+    private void SpawnKingIn()
+    {
+        var pos = new GridPosition(0, 4);
+
+        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        {
+            Debug.Log("Spawning KING in lane: " + pos);
+            BoardManager.main.SpawnEnemyKing(pos);
         }
     }
     

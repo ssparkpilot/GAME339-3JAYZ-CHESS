@@ -18,7 +18,7 @@ public class EnemyMovementService
         if (legalMoves.Count == 0)
             return;
 
-        var moveTo = legalMoves[rng.Next(legalMoves.Count)]; // random runs outside of unity
+        var moveTo = legalMoves[rng.Next(legalMoves.Count)]; // random function runs outside of unity
         board.MoveUnit(enemy, moveTo);
     }
 }

@@ -61,7 +61,7 @@ public class EnemyMovementController : MonoBehaviour
 
             movementService.ExecuteEnemyMove(enemy, board);
 
-            foreach (var view in FindObjectsOfType<EnemyView>())
+            foreach (var view in FindObjectsByType<EnemyView>(FindObjectsSortMode.None))
             {
                 if (view == null) continue;
                 view.UpdatePosition();
@@ -98,7 +98,7 @@ public class EnemyMovementController : MonoBehaviour
 
                 movementService.ExecuteEnemyMove(enemy, board);
 
-                foreach (var view in FindObjectsOfType<EnemyView>())
+                foreach (var view in FindObjectsByType<EnemyView>(FindObjectsSortMode.None))
                 {
                     view.UpdatePosition();
                 }

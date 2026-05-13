@@ -6,7 +6,7 @@ using UnityEngine;
 public class SummonTower : Turret
 {
     [Header("Attribute")]
-    [SerializeField] private int currencyWorth = 10;
+    //[SerializeField] private int currencyWorth = 10;
     [SerializeField] private int cooldownTurns=1;
 
     public GridPosition GridPos;
@@ -82,7 +82,7 @@ public class SummonTower : Turret
 
     }
     
-    private void OnDestroy()
+    private new void OnDestroy()
     {
         if (turnManager != null)
             turnManager.OnTurnStateChanged -= HandleTurnChanged;

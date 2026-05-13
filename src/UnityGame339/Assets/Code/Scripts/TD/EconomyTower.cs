@@ -53,7 +53,7 @@ public class EconomyTower : Turret
         floatingText.SetText(amount);
     }
     
-    private void OnDestroy()
+    private new void OnDestroy()
     {
         if (turnManager != null)
             turnManager.OnTurnStateChanged -= HandleTurnChanged;

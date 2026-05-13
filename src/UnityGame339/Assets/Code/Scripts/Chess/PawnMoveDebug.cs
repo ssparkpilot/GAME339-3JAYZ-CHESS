@@ -28,7 +28,7 @@ public class PawnMoveDebug : MonoBehaviour
         board.MoveUnit(pawn, target);
 
         // Update visual
-        FindObjectOfType<EnemyView>().UpdatePosition();
+        FindFirstObjectByType<EnemyView>().UpdatePosition();
 
         Debug.Log($"Pawn moved to {target.X},{target.Y}");
     }

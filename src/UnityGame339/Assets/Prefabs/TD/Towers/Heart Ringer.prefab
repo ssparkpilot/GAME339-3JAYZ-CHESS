@@ -746,7 +746,7 @@ MonoBehaviour:
   placeSound: {fileID: 0}
   minPitch: 0.8
   maxPitch: 1.2
-  freezeTime: 5
+  bellDamage: 5
   fireSound: {fileID: 8300000, guid: 74267a80414580442ac2cf96ec8a8681, type: 3}
 --- !u!82 &3299563007527577936
 AudioSource:
