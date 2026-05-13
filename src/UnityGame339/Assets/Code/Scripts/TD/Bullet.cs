@@ -21,7 +21,6 @@ public class Bullet : MonoBehaviour
     {
         target = _target;
         Debug.Log("Bullet target set to: " + target.name);
-
     }
 
     public void SetRotationOffset(float offset)
@@ -51,15 +50,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Health health = other.gameObject.GetComponent<Health>();
-
-
+        
         if (health != null) // Only damage if it's an enemy
         {
             Debug.Log("Bullet hit: " + other.gameObject.name);
             health.TakeDamage(bulletDamage);
             Destroy(gameObject);
-
         }
-
     }
 }
