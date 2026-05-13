@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Game339.Shared.Models;
 using Game339.Shared.Services;
 using Game339.Shared.Services.Implementation;
@@ -11,6 +12,10 @@ namespace Game.Runtime
     public class ReadyButton : ObserverMonoBehaviour
     {
         [SerializeField] private Button button;
+        
+        private float delayBeforePress = 1f;
+        
+        private bool isOnCooldown = false;
 
         private TurnManager turnManager;
 
@@ -36,14 +41,26 @@ namespace Game.Runtime
 
         private void OnClick()
         {
-            if (!button.interactable)
-                return; // extra safety
+            if (!button.interactable || isOnCooldown)
+                return;
 
             turnManager.AdvancePhase();
 
-            // immediately disable so player can't spam
             button.interactable = false;
+            isOnCooldown = true;
+
+            StartCoroutine(WaitBeforePress());
         }
+
+        private IEnumerator WaitBeforePress()
+        {
+            yield return new WaitForSeconds(delayBeforePress);
+
+            isOnCooldown = false;
+
+            UpdateButtonState();
+        }
+
 
         private void OnStateChanged(TurnOwner owner, TurnPhase phase)
         {
@@ -53,6 +70,7 @@ namespace Game.Runtime
         private void UpdateButtonState()
         {
             button.interactable =
+                !isOnCooldown && // cooldown check
                 turnManager.CurrentPhase == TurnPhase.PlayerActing &&
                 !turnManager.IsBusy;
         }

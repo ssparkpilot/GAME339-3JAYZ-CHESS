@@ -8453,7 +8453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03da378e895ed4aafb21209c0b690e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovementController
-  delayBetweenEachEnemyMove: 0.2
+  delayBetweenEachEnemyMove: 0.01
 --- !u!4 &1105938660
 Transform:
   m_ObjectHideFlags: 0

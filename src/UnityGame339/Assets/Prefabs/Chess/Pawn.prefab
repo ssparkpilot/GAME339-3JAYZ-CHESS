@@ -337,6 +337,8 @@ MonoBehaviour:
   baseSpeed: 4
   damageToPlayer: 5
   finalColumnX: 7
+  isEnemy: 1
+  delayBeforeDeath: 0.5
   sr: {fileID: 8512346987688035417}
   FreezeColor: {r: 0, g: 0, b: 1, a: 1}
   SpawnSound: {fileID: 8300000, guid: 168eb4fc8f40f8b43a9cf88d2ba408ca, type: 3}

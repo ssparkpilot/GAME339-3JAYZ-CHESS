@@ -8,10 +8,12 @@ using Game339.Shared.Services.Implementation;
 
 public class EnemyMovementController : MonoBehaviour
 {
-    [SerializeField] private float delayBetweenEachEnemyMove = 0.2f;
+    [SerializeField] private float delayBetweenEachEnemyMove = 0.0f;
 
     private EnemyMovementService movementService;
     private TurnManager turnManager;
+    
+    private int listSize;
 
     private void Awake()
     {
@@ -40,7 +42,7 @@ public class EnemyMovementController : MonoBehaviour
     private IEnumerator RunEnemyTurn()
     {
         turnManager.SetBusy(true);
-            
+
         var board = BoardManager.main.Board;
 
         var enemies = board.Enemies
@@ -61,13 +63,13 @@ public class EnemyMovementController : MonoBehaviour
 
             foreach (var view in FindObjectsOfType<EnemyView>())
             {
+                if (view == null) continue;
                 view.UpdatePosition();
             }
 
             yield return new WaitForSeconds(delayBetweenEachEnemyMove);
         }
 
-        // end enemy turn after all enemies move
         turnManager.SetBusy(false);
         turnManager.AdvancePhase();
     }

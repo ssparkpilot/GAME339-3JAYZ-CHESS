@@ -24,7 +24,7 @@ public class EnemyWaveSpawner : MonoBehaviour
     
     void SpawnTurnEnemies()
     {
-        int spawnCount = 8; // per turn (change this!!!)
+        int spawnCount = 2; // per turn (change this!!!)
 
         for (int i = 0; i < spawnCount; i++)
         {
