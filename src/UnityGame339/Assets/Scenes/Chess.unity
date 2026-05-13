@@ -3099,7 +3099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &371377433
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12636,6 +12636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurnFlowController
   audioSource: {fileID: 798997880}
   yourTurnSound: {fileID: 8300000, guid: da5facf69203cf348a7e75c2e29c6068, type: 3}
+  menu: {fileID: 1393865135}
   minPitch: 0.8
   maxPitch: 1.2
 --- !u!4 &1818579018

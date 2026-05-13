@@ -71,7 +71,7 @@ namespace Game.Runtime
         {
             button.interactable =
                 !isOnCooldown && // cooldown check
-                turnManager.CurrentPhase == TurnPhase.PlayerActing &&
+                
                 !turnManager.IsBusy;
         }
     }

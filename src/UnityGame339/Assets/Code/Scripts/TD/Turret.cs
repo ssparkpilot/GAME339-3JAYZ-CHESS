@@ -1,3 +1,4 @@
+using System.Collections;
 using Game.Runtime;
 using Game339.Shared.Models;
 using Game339.Shared.Services.Implementation;
@@ -71,20 +72,9 @@ public class Turret : DeathEffectObject
 
     private void Shoot()
     {
-        if (firingPoint == null) return; // prevent crash for slowmo turret
-        
-        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        Bullet bulletScript = bulletObj.GetComponent<Bullet>();
-        bulletScript.SetTarget(target);
-        
-        if (audioSource != null && placeSound != null)
-        {
-            audioSource.pitch = Random.Range(minPitch, maxPitch);
-            //make the audiosource play at half the volume
-            audioSource.volume = 0.25f;
-            //play the place sound at the randomized pitch
-            audioSource.PlayOneShot(placeSound);
-        }
+        if (firingPoint == null) return;
+
+        StartCoroutine(WaitBeforeShooting());
     }
 
     private void FindTarget()
@@ -248,10 +238,29 @@ public class Turret : DeathEffectObject
         }
 
         // fire once when player turn ends or the enemy turn starts
-        if (!hasFiredThisTurn && owner == TurnOwner.Enemy && phase == TurnPhase.EnemyTurnStart)
+        if (!hasFiredThisTurn && owner == TurnOwner.Player && phase == TurnPhase.PlayerActing)
         {
             TryFireOnce();
             hasFiredThisTurn = true;
+        }
+    }
+
+    private IEnumerator WaitBeforeShooting()
+    {
+        yield return new WaitForSeconds(Random.Range(0.0f, 0.75f));
+
+        if (target == null || !CheckTargetIsInRange())
+            yield break;
+
+        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+        Bullet bulletScript = bulletObj.GetComponent<Bullet>();
+        bulletScript.SetTarget(target);
+
+        if (audioSource != null && placeSound != null)
+        {
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+            audioSource.volume = 0.25f;
+            audioSource.PlayOneShot(placeSound);
         }
     }
     
