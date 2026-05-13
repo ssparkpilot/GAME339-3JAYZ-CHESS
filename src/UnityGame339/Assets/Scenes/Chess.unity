@@ -748,6 +748,7 @@ MonoBehaviour:
   bishopPrefab: {fileID: 3868944714241104306, guid: 688c956f555604ba38ffffba13a7ac62, type: 3}
   rookPrefab: {fileID: 3800991191797246140, guid: 474d8d3c144a7412faa3de18de1bc722, type: 3}
   queenPrefab: {fileID: 216831434342193738, guid: 7c3c141548c6344ab8f2a4ba2cf2d650, type: 3}
+  kingPrefab: {fileID: 3434443183035982806, guid: b409005297e5d4e64bf488597e3592c9, type: 3}
   chudPrefab: {fileID: 5493552132571610855, guid: 5648fcc601dee434aac2fd313b65ecb2, type: 3}
   chudTankPrefab: {fileID: 5493552132571610855, guid: 69f0867d46fee184e873504e1474a061, type: 3}
 --- !u!4 &73424167
