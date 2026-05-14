@@ -22,6 +22,7 @@ public class Turret : DeathEffectObject
     [SerializeField] public float mps = 4f; // money per second
     [SerializeField] private int baseUpgradeCost = 100;
     [SerializeField] private float targetingRangeBase;
+    [SerializeField] private int bulletsPerShot = 1;
 
     public int towerIndex;
     
@@ -249,18 +250,30 @@ public class Turret : DeathEffectObject
     {
         yield return new WaitForSeconds(Random.Range(0.0f, 0.75f));
 
-        if (target == null || !CheckTargetIsInRange())
-            yield break;
-
-        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        Bullet bulletScript = bulletObj.GetComponent<Bullet>();
-        bulletScript.SetTarget(target);
-
-        if (audioSource != null && placeSound != null)
+        for (int i = 0; i < bulletsPerShot; i++)
         {
-            audioSource.pitch = Random.Range(minPitch, maxPitch);
-            audioSource.volume = 0.25f;
-            audioSource.PlayOneShot(placeSound);
+            // If target is invalid, try to get a new one
+            if (!target || !CheckTargetIsInRange())
+            {
+                FindTarget();
+
+                // Still no valid target? Skip this bullet
+                if (!target || !CheckTargetIsInRange())
+                    continue;
+            }
+
+            GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+            Bullet bulletScript = bulletObj.GetComponent<Bullet>();
+            bulletScript.SetTarget(target);
+
+            if (audioSource != null && placeSound != null)
+            {
+                audioSource.pitch = Random.Range(minPitch, maxPitch);
+                audioSource.volume = 0.25f;
+                audioSource.PlayOneShot(placeSound);
+            }
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
     

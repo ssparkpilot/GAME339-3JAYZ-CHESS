@@ -13,7 +13,7 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private int damageToPlayer = 10;
     [SerializeField] private int finalColumnX = 7;
     [SerializeField] private bool isEnemy = true;
-    [SerializeField] private float delayBeforeDeath = 0.5f;
+    [SerializeField] private float delayBeforeDeath = 1f;
     private bool isDying = false;
 
     private Health health;
@@ -123,7 +123,7 @@ public class EnemyView : MonoBehaviour
         if (SoundSpawner != null && MoveSound != null&&canMakeSound)
             {
                 SoundSpawner.PlayOneShot(MoveSound);
-                Debug.Log("MOVIEMIVIE");
+                //Debug.Log("MOVIEMIVIE");
                 canMakeSound = false;
             }
 
