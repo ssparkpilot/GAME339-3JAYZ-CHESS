@@ -306,6 +306,10 @@ public class Sniper : Turret
 
         CloseUpgradeUI();
 
+        Debug.Log("New sniper level: " + sniperLevel);
+        Debug.Log("New sniper BPS: " + sniperBps);
+        Debug.Log("New sniper targeting range: " + sniperTargetingRange);
+        Debug.Log("New sniper cost: " + CalculateCost());
     }
 
     private int CalculateCost()
