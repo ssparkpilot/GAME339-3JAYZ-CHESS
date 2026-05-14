@@ -35,19 +35,19 @@ public class TurnFlowController : MonoBehaviour
         //play the place sound at the randomized pitch
             audioSource.PlayOneShot(yourTurnSound);
 
-            //turnManager.AdvancePhase(); // -> PlayerActing
+            turnManager.AdvancePhase(); // -> PlayerActing
 
             menu.ToggleMenu();
         }
         else if (phase == TurnPhase.PlayerTurnEnd)
         {
-            //turnManager.AdvancePhase(); // -> EnemyTurnStart
+            turnManager.AdvancePhase(); // -> EnemyTurnStart
             
             menu.ToggleMenu();
         }
         else if (phase == TurnPhase.EnemyTurnStart)
         {
-            //turnManager.AdvancePhase(); // -> EnemyMoving
+            turnManager.AdvancePhase(); // -> EnemyMoving
         }
         else if (phase == TurnPhase.EnemyTurnEnd)
         {

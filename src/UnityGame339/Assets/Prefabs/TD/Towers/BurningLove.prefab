@@ -609,6 +609,7 @@ MonoBehaviour:
   mps: 4
   baseUpgradeCost: 100
   targetingRangeBase: 0
+  bulletsPerShot: 2
   towerIndex: 0
   audioSource: {fileID: -3606861136716726509}
   placeSound: {fileID: 8300000, guid: fbb5178c9f4c5f24fa82e45efca4abd3, type: 3}
