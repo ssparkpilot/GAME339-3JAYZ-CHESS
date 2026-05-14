@@ -11,8 +11,8 @@ public class EnemyWaveSpawner : MonoBehaviour
     private TurnManager turnManager;
 
     [Header("Enemy Spawn Settings")]
-    [SerializeField] private int enemiesPerTurn = 2;
-    [SerializeField] private int enemiesDefeatedToSpawnKing = 10;
+    [SerializeField] private int enemiesPerTurn = 7;
+    [SerializeField] private int enemiesDefeatedToSpawnKing = 18;
 
     [Header("King Position")]
     [SerializeField] private int kingSpawnX = 0;
@@ -34,7 +34,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         main = this;
     }
 
-    void Start()
+    private void Start()
     {
         turnManager = ServiceResolver.Resolve<TurnManager>();
 
@@ -61,7 +61,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
         Debug.Log("Enemy defeated count: " + enemiesDefeated + "/" + enemiesDefeatedToSpawnKing);
     }
-    
+
     private void HandlePhase(TurnPhase phase)
     {
         Debug.Log("EnemyWaveSpawner saw phase: " + phase +
@@ -78,11 +78,13 @@ public class EnemyWaveSpawner : MonoBehaviour
             {
                 bool spawnedKing = SpawnKingIn();
 
-                if (!spawnedKing)
+                if (spawnedKing)
                 {
-                    Debug.Log("King failed to spawn this turn. Will try again next enemy turn.");
+                    return;
                 }
 
+                Debug.Log("King failed to spawn this turn. Normal enemies will keep spawning.");
+                SpawnTurnEnemies();
                 return;
             }
 
@@ -104,8 +106,8 @@ public class EnemyWaveSpawner : MonoBehaviour
             Debug.Log("King is not spawning this turn.");
         }
     }
-    
-    void SpawnTurnEnemies()
+
+    private void SpawnTurnEnemies()
     {
         int spawned = 0;
         int attempts = 0;
@@ -211,7 +213,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("Could not spawn pawn. Tile occupied/reserved: " + pos);
         return false;
     }
-    
+
     private bool SpawnKnightInRandomLane()
     {
         int y = Random.Range(0, 8);
@@ -227,7 +229,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("Could not spawn knight. Tile occupied/reserved: " + pos);
         return false;
     }
-    
+
     private bool SpawnBishopInRandomLane()
     {
         int y = Random.Range(0, 8);
@@ -243,7 +245,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("Could not spawn bishop. Tile occupied/reserved: " + pos);
         return false;
     }
-    
+
     private bool SpawnRookInRandomLane()
     {
         int y = Random.Range(0, 8);
@@ -259,7 +261,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("Could not spawn rook. Tile occupied/reserved: " + pos);
         return false;
     }
-    
+
     private bool SpawnQueenInRandomLane()
     {
         int y = Random.Range(0, 8);
@@ -275,7 +277,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("Could not spawn queen. Tile occupied/reserved: " + pos);
         return false;
     }
-    
+
     private bool SpawnKingIn()
     {
         var pos = new GridPosition(kingSpawnX, kingSpawnY);
@@ -339,7 +341,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
         Debug.Log("King spawn attempt ended. Spawned: " + spawned);
     }
-    
+
     private void OnDestroy()
     {
         if (turnManager != null)

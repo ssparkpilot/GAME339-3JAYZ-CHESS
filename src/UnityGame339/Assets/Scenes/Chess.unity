@@ -778,8 +778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e67f5bb704c41fbbb17846b53f7f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWaveSpawner
-  enemiesPerTurn: 9
-  enemiesDefeatedToSpawnKing: 10
+  enemiesPerTurn: 7
+  enemiesDefeatedToSpawnKing: 14
   kingSpawnX: 0
   kingSpawnY: 4
   kingSpawnEveryTurns: 2
