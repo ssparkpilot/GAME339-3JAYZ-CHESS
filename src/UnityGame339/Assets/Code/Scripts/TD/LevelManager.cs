@@ -116,6 +116,14 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    public void KingDefeated()
+    {
+        if (isGameOver)
+            return;
+
+        WinGame();
+    }
+
     public void RestartGame()
     {
         Time.timeScale = 1f;
