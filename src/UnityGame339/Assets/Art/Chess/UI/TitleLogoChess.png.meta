@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: d705ff22f0abd6c4eb5314ab923c1c60
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4838999443028281734
+    second: TitleLogoChess_0
+  - first:
+      213: 6865740482746672415
+    second: TitleLogoChess_1
+  - first:
+      213: 6445715895676124837
+    second: TitleLogoChess_2
+  - first:
+      213: 2191862328729756178
+    second: TitleLogoChess_3
+  - first:
+      213: -1667628923173873268
+    second: TitleLogoChess_4
+  - first:
+      213: 4958555204346171558
+    second: TitleLogoChess_5
+  - first:
+      213: -9207144554333337374
+    second: TitleLogoChess_6
+  - first:
+      213: -4900875683647870810
+    second: TitleLogoChess_7
+  - first:
+      213: -3706647090175472891
+    second: TitleLogoChess_8
+  - first:
+      213: 5967126239713272146
+    second: TitleLogoChess_9
+  - first:
+      213: -1448934936079358289
+    second: TitleLogoChess_10
+  - first:
+      213: -1756728744534897304
+    second: TitleLogoChess_11
+  - first:
+      213: -8671413855336406479
+    second: TitleLogoChess_12
+  - first:
+      213: -4934412485555416216
+    second: TitleLogoChess_13
+  - first:
+      213: 3749068788758619990
+    second: TitleLogoChess_14
+  - first:
+      213: -8966510924739082613
+    second: TitleLogoChess_15
+  - first:
+      213: 6156498777607091610
+    second: TitleLogoChess_16
+  - first:
+      213: 4173733665820585867
+    second: TitleLogoChess_17
+  - first:
+      213: 7111798401496896171
+    second: TitleLogoChess_18
+  - first:
+      213: -626565360087609745
+    second: TitleLogoChess_19
+  - first:
+      213: -1097056853221869445
+    second: TitleLogoChess_20
+  - first:
+      213: 1010981738823385715
+    second: TitleLogoChess_21
+  - first:
+      213: -7331018639105495367
+    second: TitleLogoChess_22
+  - first:
+      213: -2454991399187353497
+    second: TitleLogoChess_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TitleLogoChess_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 36
+        width: 46
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a767cf905ab68dcb0800000000000000
+      internalID: -4838999443028281734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_1
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 40
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f156222c792084f50800000000000000
+      internalID: 6865740482746672415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 40
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ae3ddcc478c37950800000000000000
+      internalID: 6445715895676124837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_3
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 40
+        width: 14
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2126f7ccc2f0b6e10800000000000000
+      internalID: 2191862328729756178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_4
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 40
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c89dd0174546bd8e0800000000000000
+      internalID: -1667628923173873268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_5
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 40
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a0d732dfa350d440800000000000000
+      internalID: 4958555204346171558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_6
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 40
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e80a433fc6a93080800000000000000
+      internalID: -9207144554333337374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_7
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 40
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a8a1db18879cfbb0800000000000000
+      internalID: -4900875683647870810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_8
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 40
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b0b523c185f8cc0800000000000000
+      internalID: -3706647090175472891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_9
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 40
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251a50823bd7fc250800000000000000
+      internalID: 5967126239713272146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_10
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 40
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa626583a5954ebe0800000000000000
+      internalID: -1448934936079358289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_11
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 40
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86d874fa388de97e0800000000000000
+      internalID: -1756728744534897304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_12
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 7
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 132e54caa03f8a780800000000000000
+      internalID: -8671413855336406479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 7
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 863973fecf1758bb0800000000000000
+      internalID: -4934412485555416216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_14
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 7
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6572670333e570430800000000000000
+      internalID: 3749068788758619990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_15
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 7
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b86844012dd809380800000000000000
+      internalID: -8966510924739082613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_16
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 7
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a95b56b0507407550800000000000000
+      internalID: 6156498777607091610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_17
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 7
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8f235ad7a41ce930800000000000000
+      internalID: 4173733665820585867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_18
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 7
+        width: 14
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2d96b57fe22b260800000000000000
+      internalID: 7111798401496896171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_19
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 7
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6ec96bef1efd47f0800000000000000
+      internalID: -626565360087609745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_20
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 7
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b787d4dba9876c0f0800000000000000
+      internalID: -1097056853221869445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_21
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 7
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37289f8f88ab70e00800000000000000
+      internalID: 1010981738823385715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_22
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 7
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be695e936df24a90800000000000000
+      internalID: -7331018639105495367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TitleLogoChess_23
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 7
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7607ccc545e1eedd0800000000000000
+      internalID: -2454991399187353497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TitleLogoChess_0: -4838999443028281734
+      TitleLogoChess_1: 6865740482746672415
+      TitleLogoChess_10: -1448934936079358289
+      TitleLogoChess_11: -1756728744534897304
+      TitleLogoChess_12: -8671413855336406479
+      TitleLogoChess_13: -4934412485555416216
+      TitleLogoChess_14: 3749068788758619990
+      TitleLogoChess_15: -8966510924739082613
+      TitleLogoChess_16: 6156498777607091610
+      TitleLogoChess_17: 4173733665820585867
+      TitleLogoChess_18: 7111798401496896171
+      TitleLogoChess_19: -626565360087609745
+      TitleLogoChess_2: 6445715895676124837
+      TitleLogoChess_20: -1097056853221869445
+      TitleLogoChess_21: 1010981738823385715
+      TitleLogoChess_22: -7331018639105495367
+      TitleLogoChess_23: -2454991399187353497
+      TitleLogoChess_3: 2191862328729756178
+      TitleLogoChess_4: -1667628923173873268
+      TitleLogoChess_5: 4958555204346171558
+      TitleLogoChess_6: -9207144554333337374
+      TitleLogoChess_7: -4900875683647870810
+      TitleLogoChess_8: -3706647090175472891
+      TitleLogoChess_9: 5967126239713272146
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
