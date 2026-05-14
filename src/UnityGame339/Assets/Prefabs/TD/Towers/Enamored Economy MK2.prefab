@@ -457,7 +457,7 @@ MonoBehaviour:
   placeSound: {fileID: 0}
   minPitch: 0.8
   maxPitch: 1.2
-  currencyWorth: 20
+  currencyWorth: 300
   FloatingScorePrefab: {fileID: 8314382623674587284, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
 --- !u!114 &4266367801813432272
 MonoBehaviour:

@@ -47,7 +47,7 @@ public class TurnFlowController : MonoBehaviour
         }
         else if (phase == TurnPhase.EnemyTurnStart)
         {
-            turnManager.AdvancePhase(); // -> EnemyMoving
+            //turnManager.AdvancePhase(); // -> EnemyMoving
         }
         else if (phase == TurnPhase.EnemyTurnEnd)
         {

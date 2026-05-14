@@ -741,12 +741,13 @@ MonoBehaviour:
   mps: 4
   baseUpgradeCost: 100
   targetingRangeBase: 0
+  bulletsPerShot: 1
   towerIndex: 0
   audioSource: {fileID: 3299563007527577936}
   placeSound: {fileID: 0}
   minPitch: 0.8
   maxPitch: 1.2
-  bellDamage: 5
+  bellDamage: 3
   fireSound: {fileID: 8300000, guid: 74267a80414580442ac2cf96ec8a8681, type: 3}
 --- !u!82 &3299563007527577936
 AudioSource:
@@ -858,11 +859,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
-  hitPoints: 20
+  maxHP: 20
+  currentHP: 0
   currencyWorth: 0
-  coinDropChance: 0
-  coinPrefab: {fileID: 1486824661629240266, guid: 1785385fee4034b5d9573a7bdd228509, type: 3}
-  floatingScorePrefab: {fileID: 5818800042018071548, guid: a488bb93b9dff4317b7afb0ce4ae2e34, type: 3}
 --- !u!114 &-6837826831310640511
 MonoBehaviour:
   m_ObjectHideFlags: 0

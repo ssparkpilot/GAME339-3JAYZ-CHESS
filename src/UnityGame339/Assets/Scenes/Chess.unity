@@ -782,8 +782,8 @@ MonoBehaviour:
   enemiesDefeatedToSpawnKing: 14
   kingSpawnX: 0
   kingSpawnY: 4
-  kingSpawnEveryTurns: 1
-  kingPiecesPerSpawn: 16
+  kingSpawnEveryTurns: 2
+  kingPiecesPerSpawn: 10
   kingLeftSpawnColumnX: 2
   kingRightSpawnColumnX: 4
   kingTopSpawnY: 7
@@ -9242,7 +9242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1200047739
 MonoBehaviour:
   m_ObjectHideFlags: 0
