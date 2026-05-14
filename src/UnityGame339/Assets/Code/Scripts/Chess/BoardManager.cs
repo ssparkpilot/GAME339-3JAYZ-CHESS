@@ -168,8 +168,8 @@ public class BoardManager : MonoBehaviour
     {
         var enemyUnit = new EnemyUnit(
             pos,
-            new PawnMovementRule(),
-            health: 2000
+            new KingMovementRule(),
+            health: 1000
         );
 
         Board.GetTile(pos).Place(enemyUnit);

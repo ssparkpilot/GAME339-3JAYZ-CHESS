@@ -42,11 +42,37 @@ public class EnemyView : MonoBehaviour
     private void Awake()
     {
         health = GetComponent<Health>();
+
+        if (health != null)
+        {
+            health.OnDied += HandleDeath;
+        }
     }
     
     private void Start()
     {
         baseColor = sr.color;
+    }
+    
+    private void HandleDeath()
+    {
+        if (BoardManager.main != null && unit != null)
+        {
+            GridTile tile = BoardManager.main.GetTile(unit.Position);
+
+            if (tile != null && tile.Occupant == unit)
+            {
+                tile.Clear();
+            }
+        }
+    }
+    
+    private void OnDestroy()
+    {
+        if (health != null)
+        {
+            health.OnDied -= HandleDeath;
+        }
     }
     
     public void FreezeTint()
