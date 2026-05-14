@@ -1,3 +1,6 @@
+using Game.Runtime;
+using Game339.Shared.Models;
+using Game339.Shared.Services.Implementation;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
@@ -15,9 +18,9 @@ public class Sniper : Turret
     [Header("Sniper Attributes")]
     [SerializeField] private float sniperTargetingRange = 3f;
     [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float sniperBps = 1f; // bullets per second
-    [SerializeField] private float sniperAps = 4f; // attacks per second
-    [SerializeField] private float sniperMps = 4f; // money per second
+    [SerializeField] private float sniperBps = 1f;
+    [SerializeField] private float sniperAps = 4f;
+    [SerializeField] private float sniperMps = 4f;
     [SerializeField] private int sniperBaseUpgradeCost = 100;
     [SerializeField] private float sniperTargetingRangeBase;
 
@@ -28,7 +31,6 @@ public class Sniper : Turret
     private float sniperMpsBase;
 
     private Transform sniperTarget;
-    public float sniperTimeUntilFire;
 
     private int sniperLevel = 1;
 
@@ -37,6 +39,9 @@ public class Sniper : Turret
 
     public float sniperMinPitch = 0.8f;
     public float sniperMaxPitch = 1.2f;
+
+    private TurnManager turnManager;
+    private bool hasFiredThisTurn;
 
     private new void Start()
     {
@@ -50,36 +55,58 @@ public class Sniper : Turret
         {
             sniperUpgradeButton.onClick.AddListener(Upgrade);
         }
+
+        turnManager = ServiceResolver.Resolve<TurnManager>();
+
+        if (turnManager != null)
+        {
+            turnManager.OnTurnStateChanged += HandleTurnChanged;
+        }
     }
-    
+
     private void Update()
     {
-        if (LevelManager.main.isGameOver)
+        if (LevelManager.main != null && LevelManager.main.isGameOver)
         {
             return;
         }
 
-        if (sniperTarget == null)
-        {
-            FindTarget();
-            return;
-        }
-
-        RotateTowardsTarget();
-
-        if (!CheckTargetIsInRange())
+        if (sniperTarget != null && !CheckTargetIsInRange())
         {
             sniperTarget = null;
         }
-        else
-        {
-            sniperTimeUntilFire += Time.deltaTime;
 
-            if (sniperTimeUntilFire >= 1f / sniperBps)
-            {
-                Shoot();
-                sniperTimeUntilFire = 0f;
-            }
+        if (sniperTarget != null)
+        {
+            RotateTowardsTarget();
+        }
+    }
+
+    private void HandleTurnChanged(TurnOwner owner, TurnPhase phase)
+    {
+        if (owner == TurnOwner.Player && phase == TurnPhase.PlayerTurnStart)
+        {
+            hasFiredThisTurn = false;
+        }
+
+        if (!hasFiredThisTurn && owner == TurnOwner.Player && phase == TurnPhase.PlayerActing)
+        {
+            TryFireOnce();
+            hasFiredThisTurn = true;
+        }
+    }
+
+    private void TryFireOnce()
+    {
+        if (!this || !gameObject.activeInHierarchy)
+            return;
+
+        FindTarget();
+
+        if (sniperTarget != null && CheckTargetIsInRange())
+        {
+            RotateTowardsTarget();
+            Shoot();
         }
     }
 
@@ -96,7 +123,11 @@ public class Sniper : Turret
         ) * Mathf.Rad2Deg - 90f;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        turretRotationPoint.rotation = Quaternion.RotateTowards(
+            turretRotationPoint.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
     }
 
     private void Shoot()
@@ -117,10 +148,10 @@ public class Sniper : Turret
         if (sniperAudioSource != null && sniperPlaceSound != null)
         {
             sniperAudioSource.pitch = Random.Range(sniperMinPitch, sniperMaxPitch);
-        //make the audiosource play at half the volume
-        sniperAudioSource.volume = 0.25f;
-        //play the place sound at the randomized pitch
-        sniperAudioSource.PlayOneShot(sniperPlaceSound);
+            //make the audiosource play at half the volume
+            sniperAudioSource.volume = 0.25f;
+            //play the place sound at the randomized pitch
+            sniperAudioSource.PlayOneShot(sniperPlaceSound);
         }
     }
 
@@ -134,10 +165,91 @@ public class Sniper : Turret
             sniperEnemyMask
         );
 
-        if (hits.Length > 0)
+        if (hits.Length == 0)
         {
-            sniperTarget = hits[0].transform;
+            sniperTarget = null;
+            return;
         }
+
+        ChessPlot sniperPlot = FindClosestPlot(transform.position);
+
+        Transform bestSameLaneTarget = null;
+        int bestSameLaneHP = -1;
+        float bestSameLaneDistance = float.MaxValue;
+
+        Transform bestAnyLaneTarget = null;
+        int bestAnyLaneHP = -1;
+        float bestAnyLaneDistance = float.MaxValue;
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            EnemyView enemyView = hit.transform.GetComponentInParent<EnemyView>();
+            Health enemyHealth = hit.transform.GetComponentInParent<Health>();
+            KingDeathWatcher king = hit.transform.GetComponentInParent<KingDeathWatcher>();
+
+            if (king != null)
+                continue;
+
+            if (enemyView == null || enemyView.Unit == null)
+                continue;
+
+            if (enemyHealth == null)
+                continue;
+
+            Transform enemyTransform = enemyView.transform;
+            int enemyHP = enemyHealth.CurrentHP;
+            float distance = Vector2.Distance(transform.position, enemyTransform.position);
+
+            if (enemyHP > bestAnyLaneHP || enemyHP == bestAnyLaneHP && distance < bestAnyLaneDistance)
+            {
+                bestAnyLaneHP = enemyHP;
+                bestAnyLaneDistance = distance;
+                bestAnyLaneTarget = enemyTransform;
+            }
+
+            if (sniperPlot == null)
+                continue;
+
+            if (enemyView.Unit.Position.Y == sniperPlot.GridPos.Y)
+            {
+                if (enemyHP > bestSameLaneHP || enemyHP == bestSameLaneHP && distance < bestSameLaneDistance)
+                {
+                    bestSameLaneHP = enemyHP;
+                    bestSameLaneDistance = distance;
+                    bestSameLaneTarget = enemyTransform;
+                }
+            }
+        }
+
+        if (bestSameLaneTarget != null)
+        {
+            sniperTarget = bestSameLaneTarget;
+        }
+        else
+        {
+            sniperTarget = bestAnyLaneTarget;
+        }
+    }
+
+    private ChessPlot FindClosestPlot(Vector3 worldPosition)
+    {
+        ChessPlot[] plots = Object.FindObjectsByType<ChessPlot>(FindObjectsSortMode.None);
+
+        ChessPlot closestPlot = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (ChessPlot plot in plots)
+        {
+            float distance = Vector2.Distance(worldPosition, plot.transform.position);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlot = plot;
+            }
+        }
+
+        return closestPlot;
     }
 
     private bool CheckTargetIsInRange()
@@ -165,11 +277,19 @@ public class Sniper : Turret
             sniperUpgradeUI.SetActive(false);
         }
 
-        UIManager.main.SetHoveringState(false);
+        if (UIManager.main != null)
+        {
+            UIManager.main.SetHoveringState(false);
+        }
     }
 
     public new void Upgrade()
     {
+        if (LevelManager.main == null)
+        {
+            return;
+        }
+
         if (CalculateCost() > LevelManager.main.currency)
         {
             return;
@@ -186,10 +306,6 @@ public class Sniper : Turret
 
         CloseUpgradeUI();
 
-        Debug.Log("New sniper level: " + sniperLevel);
-        Debug.Log("New sniper BPS: " + sniperBps);
-        Debug.Log("New sniper targeting range: " + sniperTargetingRange);
-        Debug.Log("New sniper cost: " + CalculateCost());
     }
 
     private int CalculateCost()
@@ -221,5 +337,13 @@ public class Sniper : Turret
     {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, sniperTargetingRange);
+    }
+
+    protected override void OnDestroy()
+    {
+        if (turnManager != null)
+        {
+            turnManager.OnTurnStateChanged -= HandleTurnChanged;
+        }
     }
 }
