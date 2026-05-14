@@ -6,9 +6,17 @@ using Game339.Shared.Services.Implementation;
 
 public class EnemyWaveSpawner : MonoBehaviour
 {
+    public static EnemyWaveSpawner main;
+
     private TurnManager turnManager;
 
-    private int kingCountDown = 1;
+    [Header("Enemy Spawn Settings")]
+    [SerializeField] private int enemiesPerTurn = 2;
+    [SerializeField] private int enemiesDefeatedToSpawnKing = 10;
+
+    [Header("King Position")]
+    [SerializeField] private int kingSpawnX = 0;
+    [SerializeField] private int kingSpawnY = 4;
 
     [Header("King Spawn Settings")]
     [SerializeField] private int kingSpawnEveryTurns = 2;
@@ -19,6 +27,12 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private bool kingHasSpawned;
     private int kingTurnCounter;
+    private int enemiesDefeated;
+
+    private void Awake()
+    {
+        main = this;
+    }
 
     void Start()
     {
@@ -34,33 +48,45 @@ public class EnemyWaveSpawner : MonoBehaviour
             Debug.Log("EnemyWaveSpawner could not find TurnManager.");
         }
     }
+
+    public void RegisterEnemyDefeated(GameObject defeatedEnemy)
+    {
+        if (kingHasSpawned)
+            return;
+
+        if (defeatedEnemy.GetComponent<KingDeathWatcher>() != null)
+            return;
+
+        enemiesDefeated++;
+
+        Debug.Log("Enemy defeated count: " + enemiesDefeated + "/" + enemiesDefeatedToSpawnKing);
+    }
     
     private void HandlePhase(TurnPhase phase)
     {
         Debug.Log("EnemyWaveSpawner saw phase: " + phase +
-                  " | kingHasSpawned: " + kingHasSpawned + " | kingTurnCounter: " + kingTurnCounter +
-                  " | kingCountDown: " + kingCountDown);
+                  " | kingHasSpawned: " + kingHasSpawned +
+                  " | kingTurnCounter: " + kingTurnCounter +
+                  " | enemiesDefeated: " + enemiesDefeated);
 
         if (phase != TurnPhase.EnemyTurnStart)
             return;
 
         if (!kingHasSpawned)
         {
-            Debug.Log("King has not spawned yet. King countdown: " + kingCountDown);
+            if (enemiesDefeated >= enemiesDefeatedToSpawnKing)
+            {
+                bool spawnedKing = SpawnKingIn();
 
-            if (kingCountDown <= 1 && kingCountDown > 0)
-            {
-                SpawnTurnEnemies();
-            }
-            else
-            {
-                if (kingCountDown != 0)
+                if (!spawnedKing)
                 {
-                    SpawnKingIn();
-                    kingCountDown = 0;
+                    Debug.Log("King failed to spawn this turn. Will try again next enemy turn.");
                 }
+
+                return;
             }
 
+            SpawnTurnEnemies();
             return;
         }
 
@@ -81,33 +107,41 @@ public class EnemyWaveSpawner : MonoBehaviour
     
     void SpawnTurnEnemies()
     {
-        int spawnCount = 2;
+        int spawned = 0;
+        int attempts = 0;
+        int maxAttempts = enemiesPerTurn * 20;
 
-        Debug.Log("Spawning normal turn enemies. Spawn count: " + spawnCount);
+        Debug.Log("Spawning normal turn enemies. Target spawn count: " + enemiesPerTurn);
 
-        for (int i = 0; i < spawnCount; i++)
+        while (spawned < enemiesPerTurn && attempts < maxAttempts)
         {
-            SpawnRandomPiece();
-            kingCountDown++;
+            if (SpawnRandomPiece())
+            {
+                spawned++;
+            }
+
+            attempts++;
         }
 
-        Debug.Log("King countdown after normal spawns: " + kingCountDown);
+        Debug.Log("Finished spawning enemies. Actually spawned: " + spawned);
     }
 
-    private void SpawnRandomPiece()
+    private bool SpawnRandomPiece()
     {
         int i = Random.Range(0, 5);
 
         if (i == 0)
-            SpawnPawnInRandomLane();
+            return SpawnPawnInRandomLane();
         else if (i == 1)
-            SpawnKnightInRandomLane();
+            return SpawnKnightInRandomLane();
         else if (i == 2)
-            SpawnBishopInRandomLane();
+            return SpawnBishopInRandomLane();
         else if (i == 3)
-            SpawnRookInRandomLane();
+            return SpawnRookInRandomLane();
         else if (i == 4)
-            SpawnQueenInRandomLane();
+            return SpawnQueenInRandomLane();
+
+        return false;
     }
 
     private void SpawnRandomPieceAt(GridPosition pos)
@@ -141,91 +175,119 @@ public class EnemyWaveSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnPawnInRandomLane()
+    private bool IsReservedKingTile(GridPosition pos)
+    {
+        return !kingHasSpawned && pos.X == kingSpawnX && pos.Y == kingSpawnY;
+    }
+
+    private bool CanSpawnAt(GridPosition pos)
+    {
+        var tile = BoardManager.main.Board.GetTile(pos);
+
+        if (tile == null)
+            return false;
+
+        if (tile.IsOccupied)
+            return false;
+
+        if (IsReservedKingTile(pos))
+            return false;
+
+        return true;
+    }
+
+    private bool SpawnPawnInRandomLane()
     {
         int y = Random.Range(0, 8);
         var pos = new GridPosition(0, y);
 
-        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        if (CanSpawnAt(pos))
         {
             Debug.Log("Spawning pawn in lane: " + pos);
             BoardManager.main.SpawnEnemyPawn(pos);
+            return true;
         }
-        else
-        {
-            Debug.Log("Could not spawn pawn. Tile occupied: " + pos);
-        }
+
+        Debug.Log("Could not spawn pawn. Tile occupied/reserved: " + pos);
+        return false;
     }
     
-    private void SpawnKnightInRandomLane()
+    private bool SpawnKnightInRandomLane()
     {
         int y = Random.Range(0, 8);
         var pos = new GridPosition(0, y);
 
-        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        if (CanSpawnAt(pos))
         {
             Debug.Log("Spawning knight in lane: " + pos);
             BoardManager.main.SpawnEnemyKnight(pos);
+            return true;
         }
-        else
-        {
-            Debug.Log("Could not spawn knight. Tile occupied: " + pos);
-        }
+
+        Debug.Log("Could not spawn knight. Tile occupied/reserved: " + pos);
+        return false;
     }
     
-    private void SpawnBishopInRandomLane()
+    private bool SpawnBishopInRandomLane()
     {
         int y = Random.Range(0, 8);
         var pos = new GridPosition(0, y);
 
-        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        if (CanSpawnAt(pos))
         {
             Debug.Log("Spawning bishop in lane: " + pos);
             BoardManager.main.SpawnEnemyBishop(pos);
+            return true;
         }
-        else
-        {
-            Debug.Log("Could not spawn bishop. Tile occupied: " + pos);
-        }
+
+        Debug.Log("Could not spawn bishop. Tile occupied/reserved: " + pos);
+        return false;
     }
     
-    private void SpawnRookInRandomLane()
+    private bool SpawnRookInRandomLane()
     {
         int y = Random.Range(0, 8);
         var pos = new GridPosition(0, y);
 
-        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        if (CanSpawnAt(pos))
         {
             Debug.Log("Spawning rook in lane: " + pos);
             BoardManager.main.SpawnEnemyRook(pos);
+            return true;
         }
-        else
-        {
-            Debug.Log("Could not spawn rook. Tile occupied: " + pos);
-        }
+
+        Debug.Log("Could not spawn rook. Tile occupied/reserved: " + pos);
+        return false;
     }
     
-    private void SpawnQueenInRandomLane()
+    private bool SpawnQueenInRandomLane()
     {
         int y = Random.Range(0, 8);
         var pos = new GridPosition(0, y);
 
-        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        if (CanSpawnAt(pos))
         {
             Debug.Log("Spawning queen in lane: " + pos);
             BoardManager.main.SpawnEnemyQueen(pos);
+            return true;
         }
-        else
-        {
-            Debug.Log("Could not spawn queen. Tile occupied: " + pos);
-        }
+
+        Debug.Log("Could not spawn queen. Tile occupied/reserved: " + pos);
+        return false;
     }
     
-    private void SpawnKingIn()
+    private bool SpawnKingIn()
     {
-        var pos = new GridPosition(0, 4);
+        var pos = new GridPosition(kingSpawnX, kingSpawnY);
+        var tile = BoardManager.main.Board.GetTile(pos);
 
-        if (!BoardManager.main.Board.GetTile(pos).IsOccupied)
+        if (tile == null)
+        {
+            Debug.Log("Could not spawn KING. No tile at: " + pos);
+            return false;
+        }
+
+        if (!tile.IsOccupied)
         {
             Debug.Log("Spawning KING in lane: " + pos);
             BoardManager.main.SpawnEnemyKing(pos);
@@ -234,11 +296,11 @@ public class EnemyWaveSpawner : MonoBehaviour
             kingTurnCounter = 0;
 
             Debug.Log("King has spawned. kingHasSpawned set to true.");
+            return true;
         }
-        else
-        {
-            Debug.Log("Could not spawn KING. Tile occupied: " + pos);
-        }
+
+        Debug.Log("Could not spawn KING. Tile occupied: " + pos);
+        return false;
     }
 
     private void SpawnKingColumnPieces()
