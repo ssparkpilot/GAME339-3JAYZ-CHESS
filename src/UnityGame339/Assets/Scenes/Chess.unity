@@ -782,9 +782,10 @@ MonoBehaviour:
   enemiesDefeatedToSpawnKing: 14
   kingSpawnX: 0
   kingSpawnY: 4
-  kingSpawnEveryTurns: 2
-  kingPiecesPerSpawn: 8
-  kingSpawnColumnX: 2
+  kingSpawnEveryTurns: 1
+  kingPiecesPerSpawn: 16
+  kingLeftSpawnColumnX: 2
+  kingRightSpawnColumnX: 4
   kingTopSpawnY: 7
   kingBottomSpawnY: 0
 --- !u!1 &81278308

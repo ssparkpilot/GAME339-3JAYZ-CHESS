@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   EffectPrefab: {fileID: 1726579543103812077, guid: 1f03080132b204d098741d09417e767f, type: 3}
-  maxHP: 1000
+  maxHP: 3000
   currentHP: 0
   currencyWorth: 10000
 --- !u!82 &4676458629400252684

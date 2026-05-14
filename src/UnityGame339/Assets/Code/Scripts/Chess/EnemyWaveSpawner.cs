@@ -20,8 +20,9 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     [Header("King Spawn Settings")]
     [SerializeField] private int kingSpawnEveryTurns = 2;
-    [SerializeField] private int kingPiecesPerSpawn = 8;
-    [SerializeField] private int kingSpawnColumnX = 2;
+    [SerializeField] private int kingPiecesPerSpawn = 16;
+    [SerializeField] private int kingLeftSpawnColumnX = 4;
+    [SerializeField] private int kingRightSpawnColumnX = 2;
     [SerializeField] private int kingTopSpawnY = 7;
     [SerializeField] private int kingBottomSpawnY = 0;
 
@@ -309,34 +310,35 @@ public class EnemyWaveSpawner : MonoBehaviour
     {
         int spawned = 0;
 
-        Debug.Log("King spawn attempt started. Column X: " + kingSpawnColumnX);
-
         for (int y = kingTopSpawnY; y >= kingBottomSpawnY; y--)
         {
-            if (spawned >= kingPiecesPerSpawn)
+            for (int x = kingLeftSpawnColumnX; x <= kingRightSpawnColumnX; x++)
             {
-                Debug.Log("King finished spawning. Spawned: " + spawned);
-                return;
+                if (spawned >= kingPiecesPerSpawn)
+                {
+                    Debug.Log("King finished spawning. Spawned: " + spawned);
+                    return;
+                }
+
+                var pos = new GridPosition(x, y);
+                var tile = BoardManager.main.Board.GetTile(pos);
+
+                if (tile == null)
+                {
+                    Debug.Log("No tile found at: " + x + "," + y);
+                    continue;
+                }
+
+                if (tile.IsOccupied)
+                {
+                    Debug.Log("King spawn tile occupied at: " + x + "," + y);
+                    continue;
+                }
+
+                Debug.Log("King spawning piece at: " + x + "," + y);
+                SpawnRandomPieceAt(pos);
+                spawned++;
             }
-
-            var pos = new GridPosition(kingSpawnColumnX, y);
-            var tile = BoardManager.main.Board.GetTile(pos);
-
-            if (tile == null)
-            {
-                Debug.Log("No tile found at: " + kingSpawnColumnX + "," + y);
-                continue;
-            }
-
-            if (tile.IsOccupied)
-            {
-                Debug.Log("King spawn tile occupied at: " + kingSpawnColumnX + "," + y);
-                continue;
-            }
-
-            Debug.Log("King spawning piece at: " + kingSpawnColumnX + "," + y);
-            SpawnRandomPieceAt(pos);
-            spawned++;
         }
 
         Debug.Log("King spawn attempt ended. Spawned: " + spawned);
